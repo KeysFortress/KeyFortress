@@ -38,23 +38,23 @@ class IdentityCard extends StatelessWidget {
             ),
             Column(
               children: [
+                SvgPicture.asset(
+                  'assets/images/certificate.svg',
+                  package: 'domain',
+                  width: 90,
+                  height: 90,
+                  colorFilter: ColorFilter.mode(
+                    ThemeStyles.theme.primary300,
+                    BlendMode.srcIn,
+                  ),
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      'assets/images/website-password.svg',
-                      package: 'domain',
-                      width: 40,
-                      height: 40,
-                      colorFilter: ColorFilter.mode(
-                        ThemeStyles.theme.primary300,
-                        BlendMode.srcIn,
-                      ),
-                    ),
                     Expanded(
                       flex: 1,
                       child: Text(
-                        "secret.name",
+                        identity.name,
                         style: ThemeStyles.regularParagraphOv(
                           size: 16,
                           color: ThemeStyles.theme.primary300,
@@ -67,7 +67,7 @@ class IdentityCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: PasswordStrenght(
-                    initial: "secret.content",
+                    initial: identity.publicKey,
                   ),
                 ),
                 Row(

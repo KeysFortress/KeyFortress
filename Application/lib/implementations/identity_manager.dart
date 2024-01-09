@@ -1,4 +1,5 @@
-import 'package:application/implementations/signature_service.dart';
+import 'dart:convert';
+
 import 'package:domain/models/stored_identity.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
 import 'package:infrastructure/interfaces/ilocal_storage.dart';
@@ -28,20 +29,63 @@ class IdentityManager implements IIdentityManager {
   }
 
   @override
-  Future<List<StoredIdentity>> getSecrets() {
-    // TODO: implement getSecrets
-    throw UnimplementedError();
+  Future<List<StoredIdentity>> getSecrets() async {
+    var secretsData = await _localStorage.get("identities");
+    if (secretsData == null) return [];
+
+    List<dynamic> data = jsonDecode(secretsData);
+    List<StoredIdentity> result = [];
+    data.forEach((element) {
+      var current = StoredIdentity.fromJson(element);
+      result.add(current);
+    });
+
+    return result;
   }
 
   @override
-  Future<bool> importSecrets(List<StoredIdentity> secrets) {
-    // TODO: implement importSecrets
-    throw UnimplementedError();
+  Future<bool> importSecrets(List<StoredIdentity> secrets) async {
+    var secretsData = await _localStorage.get("identities");
+    if (secretsData == null) return false;
+
+    List<dynamic> data = jsonDecode(secretsData);
+    List<StoredIdentity> result = [];
+    data.forEach((element) {
+      var current = StoredIdentity.fromJson(element);
+      result.add(current);
+    });
+    secrets.forEach((element) {
+      result.add(element);
+    });
+    var json = result.map((e) => e.toJson());
+    var jsonData = jsonEncode(json);
+    await _localStorage.set("identities", jsonData);
+    return true;
   }
 
   @override
-  Future<bool> setSecret(StoredIdentity secret) {
-    // TODO: implement setSecret
-    throw UnimplementedError();
+  Future<bool> setSecret(StoredIdentity secret) async {
+    var secretsData = await _localStorage.get("identities");
+    if (secretsData == null) {
+      List<StoredIdentity> result = [];
+      result.add(secret);
+      var json = result.map((e) => e.toJson()).toList();
+      var jsonData = jsonEncode(json);
+      await _localStorage.set("identities", jsonData);
+      return true;
+    }
+
+    List<dynamic> data = jsonDecode(secretsData);
+    List<StoredIdentity> result = [];
+    data.forEach((element) {
+      var current = StoredIdentity.fromJson(element);
+      result.add(current);
+    });
+
+    result.add(secret);
+    var json = result.map((e) => e.toJson());
+    var jsonData = jsonEncode(json);
+    await _localStorage.set("identities", jsonData);
+    return true;
   }
 }
