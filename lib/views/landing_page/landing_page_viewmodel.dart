@@ -2,6 +2,7 @@ import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_secret.dart';
 import 'package:flutter/material.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
+import 'package:presentation/components/identity_entry_box/identity_entry_box.dart';
 import 'package:presentation/components/password_entry_box/password_entry_box.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
 import 'package:presentation/page_view_model.dart';
@@ -71,5 +72,12 @@ class LandingPageViewModel extends PageViewModel {
     var result = await _identityManager.generateIdentity();
     print(result.publicKey);
     print(result.privateKey);
+    router.openBar(
+      IdentityEntryBox(
+        keyData: result,
+        onSave: onSave,
+      ),
+      pageContext,
+    );
   }
 }
