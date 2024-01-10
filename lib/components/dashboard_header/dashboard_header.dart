@@ -19,7 +19,7 @@ class DashboardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => DashboardHeaderViewModel(context),
+      viewModelBuilder: () => DashboardHeaderViewModel(context, type),
       builder: (context, viewModel, child) => Container(
         width: double.infinity,
         padding: EdgeInsets.all(5),
@@ -56,7 +56,7 @@ class DashboardHeader extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Last used: ",
+                      "Last used: ${viewModel.lastUsed}",
                       style: ThemeStyles.regularParagraphOv(
                         size: 19,
                         color: ThemeStyles.theme.accent100,

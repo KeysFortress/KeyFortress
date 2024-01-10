@@ -1,4 +1,5 @@
 import 'package:domain/models/enums.dart';
+import 'package:domain/models/stored_identity.dart';
 import 'package:domain/models/stored_secret.dart';
 import 'package:flutter/material.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
@@ -13,7 +14,8 @@ class LandingPageViewModel extends PageViewModel {
   List<StoredSecret> _secrets = [];
   List<StoredSecret> get secrets => _secrets;
 
-  get identities => [];
+  List<StoredIdentity> _identities = [];
+  List<StoredIdentity> get identities => _identities;
 
   ActiveNavigationPage _activeNavigationPage = ActiveNavigationPage.passwords;
   get activePage => _activeNavigationPage;
@@ -37,7 +39,8 @@ class LandingPageViewModel extends PageViewModel {
     if (_activeNavigationPage == ActiveNavigationPage.passwords)
       _secrets = await _secretManger.getSecrets();
     if (_activeNavigationPage == ActiveNavigationPage.identities)
-      notifyListeners();
+      _identities = await _identityManager.getSecrets();
+    notifyListeners();
   }
 
   onGenerateNewPassword() async {
@@ -47,8 +50,10 @@ class LandingPageViewModel extends PageViewModel {
       await generateIdentity();
   }
 
-  onPageChanged(ActiveNavigationPage page) {
+  onPageChanged(ActiveNavigationPage page) async {
     _activeNavigationPage = page;
+    observer.getObserver("active_page_changed", page);
+    await loadData();
     notifyListeners();
   }
 

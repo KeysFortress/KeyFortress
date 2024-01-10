@@ -3,6 +3,7 @@ import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:presentation/components/custom_button/custom_button.dart';
+import 'package:presentation/components/custom_icon_button/custom_icon_button.dart';
 import 'package:presentation/components/identity_card/identity_card.viewmodel.dart';
 import 'package:presentation/components/password_strenght/password_strenght.dart';
 import 'package:stacked/stacked.dart';
@@ -14,7 +15,7 @@ class IdentityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => IdentityCardViewModel(context),
+      viewModelBuilder: () => IdentityCardViewModel(context, identity),
       builder: (context, viewModel, child) => Container(
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
@@ -25,10 +26,22 @@ class IdentityCard extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
+              left: 0,
+              child: CustomButton(
+                widget: SvgPicture.asset(
+                  "assets/images/history.svg",
+                  package: 'domain',
+                  width: 20,
+                  height: 20,
+                ),
+                callback: () {},
+              ),
+            ),
+            Positioned(
               right: 0,
               child: CustomButton(
                 widget: SvgPicture.asset(
-                  "assets/images/copy.svg",
+                  "assets/images/scan.svg",
                   package: 'domain',
                   width: 20,
                   height: 20,
@@ -64,28 +77,95 @@ class IdentityCard extends StatelessWidget {
                     )
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: PasswordStrenght(
-                    initial: identity.publicKey,
+                Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: ThemeStyles.theme.primary300,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.public,
+                        color: ThemeStyles.theme.text300,
+                        size: 35,
+                      ),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Text(
+                              identity.publicKey,
+                              style: ThemeStyles.regularParagraphOv(
+                                size: 14,
+                                color: ThemeStyles.theme.text300,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.copy,
+                        color: ThemeStyles.theme.text300,
+                        size: 35,
+                      ),
+                      const SizedBox(width: 8),
+                    ],
                   ),
                 ),
+                const SizedBox(height: 8),
+                Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: ThemeStyles.theme.primary300,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.privacy_tip_outlined,
+                        color: ThemeStyles.theme.text300,
+                        size: 35,
+                      ),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Text(
+                              "*********************************",
+                              style: ThemeStyles.regularParagraphOv(
+                                size: 14,
+                                color: ThemeStyles.theme.text300,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.copy,
+                        color: ThemeStyles.theme.text300,
+                        size: 35,
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Text(
-                    //   secret.username,
-                    //   style: ThemeStyles.regularParagraphOv(
-                    //     size: 12,
-                    //     color: ThemeStyles.theme.primary300,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   "Last used: ${secret.lastUsed.day}/${secret.lastUsed.month}/${secret.lastUsed.year}",
-                    //   style: ThemeStyles.regularParagraphOv(
-                    //     size: 12,
-                    //     color: ThemeStyles.theme.primary300,
-                    //   ),
+                    CustomIconButton(
+                      height: 40,
+                      expand: true,
+                      label: "Sign",
+                      callback: viewModel.onConnectPressed,
+                    )
                   ],
                 )
               ],

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:application/extensions/string_extensions.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:infrastructure/interfaces/isignature_service.dart';
+import 'package:domain/converters/binary_converter.dart';
 
 class SignatureService implements ISignatureService {
   Future<SimpleKeyPair> generatePrivateKey() async {
@@ -40,6 +41,21 @@ class SignatureService implements ISignatureService {
       message,
       signature: signature,
     );
+  }
+
+  @override
+  Future<SimpleKeyPair> importKeyPair(
+      String publicKey, String privateKey) async {
+    var publicData = BianaryConverter.hexStringToList(publicKey);
+    var privateData = BianaryConverter.hexStringToList(privateKey);
+
+    var kpData = SimpleKeyPairData(
+      privateData,
+      publicKey: SimplePublicKey(publicData, type: KeyPairType.ed25519),
+      type: KeyPairType.ed25519,
+    );
+
+    return kpData;
   }
 }
 
