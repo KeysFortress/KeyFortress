@@ -6,13 +6,14 @@ import 'package:infrastructure/interfaces/isecret_manager.dart';
 class DashboardHeaderViewModel extends PageViewModel {
   late ISecretManager _secretManager;
   late IIdentityManager _identityManager;
-  DashboardHeaderViewModel(super.context) {
+  DashboardHeaderViewModel(super.context, ActiveNavigationPage type) {
     observer.subscribe("active_page_changed", pageChanged);
     _secretManager = getIt.get<ISecretManager>();
     _identityManager = getIt.get<IIdentityManager>();
+    pageChanged(type);
   }
 
-  int _totalSaved = 20;
+  int _totalSaved = 0;
   get saved => _totalSaved;
 
   String _lastUsed = "--";
@@ -30,11 +31,11 @@ class DashboardHeaderViewModel extends PageViewModel {
   }
 
   void loadIdentities() async {
-    var secrets = await _secretManager.getSecrets();
+    var secrets = await _identityManager.getSecrets();
     _totalSaved = secrets.length;
-    secrets.sort((a, b) => a.lastUsed.isAfter(b.lastUsed) == true ? 1 : 0);
-    var lastDate = secrets.first.lastUsed;
-    _lastUsed = "${lastDate.day}/${lastDate.month}/${lastDate.year}";
+
+    _lastUsed =
+        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}";
     notifyListeners();
   }
 

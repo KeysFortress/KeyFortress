@@ -87,6 +87,7 @@ flutter:
     - packages/domain/assets/images/sync.svg
     - packages/domain/assets/images/website-password.svg
     - packages/domain/assets/images/copy.svg
+    - packages/domain/assets/images/history.svg
 
     #Configs
     - packages/domain/config.json
