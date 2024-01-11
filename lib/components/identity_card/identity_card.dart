@@ -45,7 +45,7 @@ class IdentityCard extends StatelessWidget {
                   width: 20,
                   height: 20,
                 ),
-                callback: () {},
+                callback: viewModel.onConnectPressed,
               ),
             ),
             Column(
@@ -163,7 +163,7 @@ class IdentityCard extends StatelessWidget {
                       height: 40,
                       expand: true,
                       label: "Sign",
-                      callback: viewModel.onConnectPressed,
+                      callback: viewModel.onManualSignPressed,
                     )
                   ],
                 )

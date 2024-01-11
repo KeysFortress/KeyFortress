@@ -44,7 +44,7 @@ dependencies:
     path: "domain"
   flutter_svg: ^2.0.4
   gradient_borders: ^1.0.0
-
+  qr_code_scanner: ^1.0.1
   go_router: ^6.4.0
   another_flushbar: ^1.12.30
   http: ^1.1.0
@@ -88,6 +88,9 @@ flutter:
     - packages/domain/assets/images/website-password.svg
     - packages/domain/assets/images/copy.svg
     - packages/domain/assets/images/history.svg
+    - packages/domain/assets/images/arrow-back.svg
+    - packages/domain/assets/images/flash.svg
+    - packages/domain/assets/images/flip-camera.svg
 
     #Configs
     - packages/domain/config.json

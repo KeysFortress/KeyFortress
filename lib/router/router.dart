@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/landing_page/landing_page_view.dart';
+import 'package:presentation/views/start_auth/start_auth_view.dart';
 
 class ApplicationRouter {
   //Animations Handles
@@ -61,12 +62,12 @@ class ApplicationRouter {
   }
 
   static final List<(String, dynamic, int, Duration)> _routes = [
-    // (
-    //   "map-builder",
-    //   MapBuilder(),
-    //   1,
-    //   Duration(milliseconds: 500),
-    // ),
+    (
+      "start-auth",
+      StartAuthView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
 
   static const Duration animationDuration = Duration(milliseconds: 500);
