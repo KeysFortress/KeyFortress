@@ -46,21 +46,13 @@ class HttpProvider<T> implements IHttpProviderService {
     bool dontCast = false,
   }) async {
     try {
-      request = await checkAuthStatus(
-        isAuthenticated,
-        request,
-        tokenType,
-        header,
-        prefix,
-      );
-
       return await http.post(
         Uri.parse(request.url),
         headers: {
           ...request.headers,
           'Content-Type': 'application/json', // Set the Content-Type header
         },
-        body: request.params != null ? jsonEncode(request.params) : null,
+        body: request.params,
       );
     } catch (ex) {
       return null;

@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:presentation/components/custom_button/custom_button.dart';
 import 'package:presentation/components/custom_icon_button/custom_icon_button.dart';
 import 'package:presentation/components/identity_card/identity_card.viewmodel.dart';
-import 'package:presentation/components/password_strenght/password_strenght.dart';
 import 'package:stacked/stacked.dart';
 
 class IdentityCard extends StatelessWidget {
