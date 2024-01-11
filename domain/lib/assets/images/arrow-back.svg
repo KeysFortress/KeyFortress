@@ -1,0 +1,16 @@
+<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1398_13049" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="16" y="5" width="26" height="46">
+<rect x="16" y="5.48291" width="25.7348" height="45.0359" fill="url(#paint0_radial_1398_13049)"/>
+</mask>
+<g mask="url(#mask0_1398_13049)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.355 27.9835L40.0221 9.31641L40.5165 9.81085L22.3439 27.9835L40.5165 46.1562L40.0221 46.6506L21.355 27.9835Z" fill="white"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M24.3573 27.9993L33.6117 18.745L32.4549 17.5882L22.0437 27.9993L32.4549 38.4104L33.6117 37.2536L24.3573 27.9993Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M32.4549 16.8994L34.3004 18.745L25.0461 27.9993L34.3004 37.2536L32.4549 39.0992L21.355 27.9993L32.4549 16.8994ZM32.4549 18.2769L22.7325 27.9993L32.4549 37.7217L32.9229 37.2536L23.6686 27.9993L32.9229 18.745L32.4549 18.2769Z" fill="white"/>
+<defs>
+<radialGradient id="paint0_radial_1398_13049" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(28.8674 28.0009) rotate(90) scale(25.8294 14.7597)">
+<stop stop-color="#D9D9D9"/>
+<stop offset="1" stop-color="#D9D9D9" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
