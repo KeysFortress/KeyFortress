@@ -68,6 +68,12 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "identity-history",
+      StartAuthView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
 
   static const Duration animationDuration = Duration(milliseconds: 500);
