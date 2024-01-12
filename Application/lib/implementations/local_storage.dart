@@ -1,19 +1,37 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:infrastructure/interfaces/ilocal_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage implements IlocalStorage {
-  SharedPreferences? _prefs;
-
+  late FlutterSecureStorage _prefs;
+  late IOSOptions _iosOptions;
+  late AndroidOptions _androidOptions;
+  late WindowsOptions _windowsOptions;
+  late LinuxOptions _linuxOptions;
+  late MacOsOptions _macOsOptions;
   LocalStorage() {
-    SharedPreferences.getInstance().then(
-      (value) => _prefs = value,
+    _prefs = new FlutterSecureStorage();
+    _iosOptions = IOSOptions(
+      accessibility: KeychainAccessibility.first_unlock,
     );
+    _androidOptions = const AndroidOptions(
+      encryptedSharedPreferences: true,
+    );
+    _windowsOptions = WindowsOptions();
+    _linuxOptions = LinuxOptions();
+    _macOsOptions = MacOsOptions.defaultOptions;
   }
 
   @override
   Future<dynamic> get(String key) async {
     try {
-      return _prefs!.get(key);
+      return await _prefs.read(
+        key: key,
+        aOptions: _androidOptions,
+        iOptions: _iosOptions,
+        lOptions: _linuxOptions,
+        mOptions: _macOsOptions,
+        wOptions: _windowsOptions,
+      );
     } catch (ex) {
       //TODO add logging
       return null;
@@ -21,18 +39,16 @@ class LocalStorage implements IlocalStorage {
   }
 
   @override
-  Future<SharedPreferences?> getSharedPreferences() async {
-    if (_prefs != null) {
-      return _prefs;
-    } else {
-      return await SharedPreferences.getInstance();
-    }
-  }
-
-  @override
   Future<bool> remove(String key) async {
     try {
-      await _prefs!.remove(key);
+      await _prefs.delete(
+        key: key,
+        aOptions: _androidOptions,
+        iOptions: _iosOptions,
+        lOptions: _linuxOptions,
+        mOptions: _macOsOptions,
+        wOptions: _windowsOptions,
+      );
       return true;
     } catch (ex) {
       //TODO add loggin
@@ -45,43 +61,21 @@ class LocalStorage implements IlocalStorage {
     try {
       var isSet = false;
       if (value is String) {
-        await _prefs!.setString(key, value);
-        isSet = true;
-      }
-      if (value is bool) {
-        await _prefs!.setBool(key, value);
-        isSet = true;
-      }
-
-      if (value is int) {
-        await _prefs!.setInt(key, value);
-        isSet = true;
-      }
-
-      if (value is double) {
-        await _prefs!.setDouble(key, value);
-        isSet = true;
-      }
-
-      if (value is List<String>) {
-        await _prefs!.setStringList(key, value);
+        await _prefs.write(
+          key: key,
+          value: value,
+          aOptions: _androidOptions,
+          iOptions: _iosOptions,
+          lOptions: _linuxOptions,
+          mOptions: _macOsOptions,
+          wOptions: _windowsOptions,
+        );
         isSet = true;
       }
 
       return isSet;
     } catch (ex) {
       //TODO add Logging in case of an exception
-      return false;
-    }
-  }
-
-  @override
-  Future<bool> reloadStorage() async {
-    try {
-      await _prefs!.reload();
-      return true;
-    } catch (ex) {
-      //TODO add custom exception, and logging
       return false;
     }
   }
