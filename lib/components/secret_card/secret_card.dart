@@ -14,7 +14,7 @@ class SecretCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => SecretCardViewModel(context),
+      viewModelBuilder: () => SecretCardViewModel(context, secret),
       builder: (context, viewModel, child) => Container(
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
@@ -22,76 +22,79 @@ class SecretCard extends StatelessWidget {
           color: ThemeStyles.theme.background200,
           borderRadius: BorderRadius.circular(4),
         ),
-        child: Stack(
-          children: [
-            Positioned(
-              right: 0,
-              child: CustomButton(
-                widget: SvgPicture.asset(
-                  "assets/images/copy.svg",
-                  package: 'domain',
-                  width: 20,
-                  height: 20,
+        child: CustomButton(
+          callback: viewModel.onCopyPressed,
+          widget: Stack(
+            children: [
+              Positioned(
+                right: 0,
+                child: CustomButton(
+                  widget: SvgPicture.asset(
+                    "assets/images/copy.svg",
+                    package: 'domain',
+                    width: 20,
+                    height: 20,
+                  ),
+                  callback: () {},
                 ),
-                callback: () {},
               ),
-            ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/website-password.svg',
-                      package: 'domain',
-                      width: 40,
-                      height: 40,
-                      colorFilter: ColorFilter.mode(
-                        ThemeStyles.theme.primary300,
-                        BlendMode.srcIn,
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/website-password.svg',
+                        package: 'domain',
+                        width: 40,
+                        height: 40,
+                        colorFilter: ColorFilter.mode(
+                          ThemeStyles.theme.primary300,
+                          BlendMode.srcIn,
+                        ),
                       ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          secret.name,
+                          style: ThemeStyles.regularParagraphOv(
+                            size: 16,
+                            color: ThemeStyles.theme.primary300,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PasswordStrenght(
+                      initial: secret.content,
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        secret.name,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        secret.username,
                         style: ThemeStyles.regularParagraphOv(
-                          size: 16,
+                          size: 12,
                           color: ThemeStyles.theme.primary300,
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: PasswordStrenght(
-                    initial: secret.content,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      secret.username,
-                      style: ThemeStyles.regularParagraphOv(
-                        size: 12,
-                        color: ThemeStyles.theme.primary300,
+                      Text(
+                        "Last used: ${secret.lastUsed.day}/${secret.lastUsed.month}/${secret.lastUsed.year}",
+                        style: ThemeStyles.regularParagraphOv(
+                          size: 12,
+                          color: ThemeStyles.theme.primary300,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Last used: ${secret.lastUsed.day}/${secret.lastUsed.month}/${secret.lastUsed.year}",
-                      style: ThemeStyles.regularParagraphOv(
-                        size: 12,
-                        color: ThemeStyles.theme.primary300,
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ],
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

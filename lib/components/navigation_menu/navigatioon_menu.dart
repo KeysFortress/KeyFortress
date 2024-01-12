@@ -18,7 +18,6 @@ class NavigationMenu extends StatelessWidget {
       builder: (context, viewModel, child) => Container(
         margin: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: ThemeStyles.theme.background100,
           borderRadius: BorderRadius.circular(8),
         ),
         height: 50,
@@ -26,6 +25,7 @@ class NavigationMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomIconButton(
+              buttonColor: ThemeStyles.theme.primary300,
               btnRadius: 0,
               expand: true,
               icon: SvgPicture.asset(
@@ -35,7 +35,7 @@ class NavigationMenu extends StatelessWidget {
                 colorFilter: ColorFilter.mode(
                   viewModel.selected == ActiveNavigationPage.passwords
                       ? ThemeStyles.theme.accent100
-                      : ThemeStyles.theme.primary300,
+                      : ThemeStyles.theme.accent200,
                   BlendMode.srcIn,
                 ),
               ),
@@ -46,6 +46,7 @@ class NavigationMenu extends StatelessWidget {
               },
             ),
             CustomIconButton(
+              buttonColor: ThemeStyles.theme.primary300,
               btnRadius: 0,
               expand: true,
               icon: SvgPicture.asset(
@@ -54,7 +55,7 @@ class NavigationMenu extends StatelessWidget {
                 colorFilter: ColorFilter.mode(
                   viewModel.selected == ActiveNavigationPage.syncMode
                       ? ThemeStyles.theme.accent100
-                      : ThemeStyles.theme.primary300,
+                      : ThemeStyles.theme.accent200,
                   BlendMode.srcIn,
                 ),
                 width: 50,
@@ -63,6 +64,7 @@ class NavigationMenu extends StatelessWidget {
               callback: viewModel.onSyncPressed,
             ),
             CustomIconButton(
+              buttonColor: ThemeStyles.theme.primary300,
               btnRadius: 0,
               expand: true,
               icon: SvgPicture.asset(
@@ -71,7 +73,7 @@ class NavigationMenu extends StatelessWidget {
                 colorFilter: ColorFilter.mode(
                   viewModel.selected == ActiveNavigationPage.identities
                       ? ThemeStyles.theme.accent100
-                      : ThemeStyles.theme.primary300,
+                      : ThemeStyles.theme.accent200,
                   BlendMode.srcIn,
                 ),
                 width: 50,

@@ -18,7 +18,7 @@ class PasswordStrenght extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: viewModel.strenght >= 1
-                    ? ThemeStyles.theme.primary100
+                    ? ThemeStyles.theme.primary300
                     : ThemeStyles.theme.background100,
                 borderRadius: BorderRadius.circular(2),
               ),
@@ -33,7 +33,7 @@ class PasswordStrenght extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: viewModel.strenght >= 2
-                    ? ThemeStyles.theme.primary100
+                    ? ThemeStyles.theme.primary300
                     : ThemeStyles.theme.accent200,
                 borderRadius: BorderRadius.circular(2),
               ),
@@ -48,7 +48,7 @@ class PasswordStrenght extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: viewModel.strenght >= 3
-                    ? ThemeStyles.theme.primary100
+                    ? ThemeStyles.theme.primary300
                     : ThemeStyles.theme.accent200,
                 borderRadius: BorderRadius.circular(2),
               ),
@@ -63,7 +63,7 @@ class PasswordStrenght extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: viewModel.strenght >= 4
-                    ? ThemeStyles.theme.primary100
+                    ? ThemeStyles.theme.primary300
                     : ThemeStyles.theme.accent200,
                 borderRadius: BorderRadius.circular(2),
               ),
