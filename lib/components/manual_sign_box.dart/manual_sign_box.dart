@@ -6,6 +6,7 @@ import 'package:presentation/components/custom_button/custom_button.dart';
 import 'package:presentation/components/custom_icon_button/custom_icon_button.dart';
 import 'package:presentation/components/custom_text_field/custom_text_field.dart';
 import 'package:presentation/components/manual_sign_box.dart/manual_sign_box.viewmodel.dart';
+import 'package:presentation/components/secret_container/secret_container.dart';
 import 'package:stacked/stacked.dart';
 
 class ManualSignBox extends StatelessWidget {
@@ -111,90 +112,17 @@ class ManualSignBox extends StatelessWidget {
                   style: ThemeStyles.regularHeading,
                 ),
                 const SizedBox(height: 8),
-                CustomButton(
-                  callback: viewModel.onCopySignature,
-                  widget: Container(
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: ThemeStyles.theme.primary300,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.fingerprint,
-                          color: ThemeStyles.theme.text300,
-                          size: 35,
-                        ),
-                        const SizedBox(width: 8),
-                        Flexible(
-                          child: Column(
-                            children: [
-                              Text(
-                                "*********************************",
-                                style: ThemeStyles.regularParagraphOv(
-                                  size: 14,
-                                  color: ThemeStyles.theme.text300,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.copy,
-                          color: ThemeStyles.theme.text300,
-                          size: 35,
-                        ),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
+                if (viewModel.signature != null)
+                  SecretContainer(
+                    display: identity.publicKey,
+                    icon: Icons.fingerprint,
+                    value: BianaryConverter.toHex(viewModel.signature!.bytes),
                   ),
-                ),
                 const SizedBox(height: 8),
-                CustomButton(
-                  callback: viewModel.onCopyPublic,
-                  widget: Container(
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: ThemeStyles.theme.primary300,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.public,
-                          color: ThemeStyles.theme.text300,
-                          size: 35,
-                        ),
-                        const SizedBox(width: 8),
-                        Flexible(
-                          child: Column(
-                            children: [
-                              Text(
-                                identity.publicKey,
-                                style: ThemeStyles.regularParagraphOv(
-                                  size: 14,
-                                  color: ThemeStyles.theme.text300,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.copy,
-                          color: ThemeStyles.theme.text300,
-                          size: 35,
-                        ),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
-                  ),
+                SecretContainer(
+                  display: identity.publicKey,
+                  icon: Icons.public,
+                  value: identity.publicKey,
                 ),
                 const SizedBox(height: 8),
                 CustomTextField(

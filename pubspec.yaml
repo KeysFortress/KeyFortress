@@ -92,6 +92,7 @@ flutter:
     - packages/domain/assets/images/arrow-back.svg
     - packages/domain/assets/images/flash.svg
     - packages/domain/assets/images/flip-camera.svg
+    - packages/domain/assets/images/cpu.svg
 
     #Configs
     - packages/domain/config.json

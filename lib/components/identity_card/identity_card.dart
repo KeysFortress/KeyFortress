@@ -33,7 +33,7 @@ class IdentityCard extends StatelessWidget {
                   width: 20,
                   height: 20,
                 ),
-                callback: () {},
+                callback: viewModel.viewHistory,
               ),
             ),
             Positioned(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
+import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/landing_page/landing_page_view.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
 
@@ -70,7 +71,7 @@ class ApplicationRouter {
     ),
     (
       "identity-history",
-      StartAuthView(),
+      IdentityHistoryView(),
       1,
       Duration(milliseconds: 500),
     ),
