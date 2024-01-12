@@ -3,8 +3,15 @@ class SignatureEvent {
   String signature;
   String message;
   String data;
+  String? url;
 
-  SignatureEvent(this.publicKey, this.signature, this.message, this.data);
+  SignatureEvent(
+    this.publicKey,
+    this.signature,
+    this.message,
+    this.data,
+    this.url,
+  );
 
   // Convert a JSON object to a SignatureEvent instance
   factory SignatureEvent.fromJson(Map<String, dynamic> json) {
@@ -13,6 +20,7 @@ class SignatureEvent {
       json['signature'] as String,
       json['message'] as String,
       json['data'] as String,
+      json['url'] as String?,
     );
   }
 
@@ -23,6 +31,7 @@ class SignatureEvent {
       'signature': signature,
       'message': message,
       'data': data,
+      'url': url,
     };
   }
 }

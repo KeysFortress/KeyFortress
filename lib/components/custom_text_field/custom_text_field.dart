@@ -77,124 +77,122 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          if (!enabled)
-            Center(
-              child: Text(
-                controller?.text ?? "",
-                style: TextStyle(
-                  color: textColor,
-                  fontFamily: textFontFamily,
-                  fontSize: fontSize,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          TextField(
-            onSubmitted: (str) {
-              submitted?.call(str);
-            },
-            focusNode: textFocusNode,
-            keyboardType: restricted,
-            controller:
-                !enabled ? TextEditingController(text: " ") : controller,
-            onChanged: (value) => onChange.call(value),
-            textAlign: TextAlign.center,
-            cursorColor: cursorColor,
-            cursorWidth: 1,
-            obscureText: isObscured,
-            enabled: enabled,
-            textAlignVertical: TextAlignVertical.center,
-            inputFormatters: formatters,
-            style: TextStyle(
-              color: textColor,
-              fontFamily: textFontFamily,
-              fontSize: fontSize,
-              fontWeight: FontWeight.w400,
-            ),
-            decoration: InputDecoration(
-              isDense: true,
-              floatingLabelAlignment: FloatingLabelAlignment.center,
-              disabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: isClickable
-                      ? ThemeStyles.theme.accent100
-                      : ThemeStyles.theme.text200.withAlpha(60),
-                ),
-                borderRadius: BorderRadius.circular(borderRadius),
-              ),
-              hintText: hint,
-              prefixIcon: prefixIcon != null && textAlign != TextAlign.center
-                  ? prefixIcon
-                  : null,
-              suffixIcon: innerButon,
-              filled: true,
-              fillColor: backgroundC1,
-              label: !isClickable
-                  ? Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (prefixIcon != null)
-                            Row(
-                              children: [
-                                prefixIcon!,
-                                const SizedBox(width: 12),
-                              ],
-                            ),
-                          Visibility(
-                            visible: isLabelVisible,
-                            child: Text(
-                              floatingLabel,
-                              textAlign: textAlign,
-                              style: ThemeStyles.innerHeadingOv(
-                                color: labelColor,
-                                fontSize: fontSize,
-                                weight: FontWeight.w400,
-                                letterSpacing: letterSpacing,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Visibility(
-                      visible: isLabelVisible,
-                      child: Text(
-                        floatingLabel,
-                        textAlign: textAlign,
-                        style: ThemeStyles.innerHeadingOv(
-                          color: labelColor,
-                          fontSize: fontSize,
-                          weight: FontWeight.w400,
-                          letterSpacing: letterSpacing,
-                        ),
-                      ),
-                    ),
-              focusedBorder: UnderlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(borderRadius),
-                ),
-                borderSide: BorderSide(
-                  color: borderRegularColor,
-                  width: 1,
-                ),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-                borderSide: BorderSide(
-                  color: borderFocusedColor,
-                  width: 1,
-                ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        if (!enabled)
+          Center(
+            child: Text(
+              controller?.text ?? "",
+              style: TextStyle(
+                color: textColor,
+                fontFamily: textFontFamily,
+                fontSize: fontSize,
+                fontWeight: FontWeight.w400,
+                decoration: TextDecoration.none,
               ),
             ),
           ),
-        ],
-      ),
+        TextField(
+          onSubmitted: (str) {
+            submitted?.call(str);
+          },
+          focusNode: textFocusNode,
+          keyboardType: restricted,
+          controller: !enabled ? TextEditingController(text: " ") : controller,
+          onChanged: (value) => onChange.call(value),
+          textAlign: TextAlign.center,
+          cursorColor: cursorColor,
+          cursorWidth: 1,
+          obscureText: isObscured,
+          enabled: enabled,
+          textAlignVertical: TextAlignVertical.center,
+          inputFormatters: formatters,
+          style: TextStyle(
+            color: textColor,
+            fontFamily: textFontFamily,
+            fontSize: fontSize,
+            fontWeight: FontWeight.w400,
+            decoration: TextDecoration.none,
+          ),
+          decoration: InputDecoration(
+            isDense: true,
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: isClickable
+                    ? ThemeStyles.theme.accent100
+                    : ThemeStyles.theme.text200.withAlpha(60),
+              ),
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
+            hintText: hint,
+            prefixIcon: prefixIcon != null && textAlign != TextAlign.center
+                ? prefixIcon
+                : null,
+            suffixIcon: innerButon,
+            filled: true,
+            fillColor: backgroundC1,
+            label: !isClickable
+                ? Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (prefixIcon != null)
+                          Row(
+                            children: [
+                              prefixIcon!,
+                              const SizedBox(width: 12),
+                            ],
+                          ),
+                        Visibility(
+                          visible: isLabelVisible,
+                          child: Text(
+                            floatingLabel,
+                            textAlign: textAlign,
+                            style: ThemeStyles.innerHeadingOv(
+                              color: labelColor,
+                              fontSize: fontSize,
+                              weight: FontWeight.w400,
+                              letterSpacing: letterSpacing,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Visibility(
+                    visible: isLabelVisible,
+                    child: Text(
+                      floatingLabel,
+                      textAlign: textAlign,
+                      style: ThemeStyles.innerHeadingOv(
+                        color: labelColor,
+                        fontSize: fontSize,
+                        weight: FontWeight.w400,
+                        letterSpacing: letterSpacing,
+                      ),
+                    ),
+                  ),
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(borderRadius),
+              ),
+              borderSide: BorderSide(
+                color: borderRegularColor,
+                width: 1,
+              ),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              borderSide: BorderSide(
+                color: borderFocusedColor,
+                width: 1,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

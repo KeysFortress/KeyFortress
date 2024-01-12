@@ -27,81 +27,88 @@ class NavMenuInner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Positioned(
-          left: 0,
-          child: Stack(
-            children: [
-              Positioned(
-                child: SvgPicture.asset(
-                  "assets/images/arrow-back.svg",
-                  package: "domain",
-                  width: 19.16,
-                  height: 37.33,
-                  fit: BoxFit.scaleDown,
-                ),
-              ),
-              Positioned(
-                left: 0,
-                child: CustomButton(
-                  callback: () => callback.call(),
-                  widget: Container(
-                    padding: EdgeInsets.fromLTRB(35, 20, 35, 20),
-                    child: Text(""),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        if (!isLabelHidden)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon != null) icon!,
-              Visibility(
-                visible: icon != null,
-                child: const SizedBox(
-                  width: 12,
-                ),
-              ),
-              SizedBox(
-                width: location.length > 20 && ignoreRestriction == false
-                    ? 250
-                    : null,
-                child: Text(
-                  location,
-                  style: ThemeStyles.innerHeadingOv(
-                    fontSize: 20,
-                    letterSpacing: 2,
-                    weight: FontWeight.w500,
-                    color: fontColor,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-        if (isLabelHidden && column != null)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                width: 50,
-              ),
-              column!
-            ],
-          ),
-        if (button != null)
+    return Container(
+      padding: EdgeInsets.fromLTRB(6, 40, 0, 6),
+      decoration: BoxDecoration(
+        color: ThemeStyles.theme.primary300,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
           Positioned(
-            right: 12,
-            child: button!,
-          )
-      ],
+            left: 0,
+            child: Stack(
+              children: [
+                Positioned(
+                  child: SvgPicture.asset(
+                    "assets/images/arrow-back.svg",
+                    package: "domain",
+                    width: 19.16,
+                    height: 37.33,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  child: CustomButton(
+                    callback: () => callback.call(),
+                    widget: Container(
+                      padding: EdgeInsets.fromLTRB(35, 20, 35, 20),
+                      child: Text(""),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (!isLabelHidden)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (icon != null) icon!,
+                Visibility(
+                  visible: icon != null,
+                  child: const SizedBox(
+                    width: 12,
+                  ),
+                ),
+                SizedBox(
+                  width: location.length > 20 && ignoreRestriction == false
+                      ? 250
+                      : null,
+                  child: Text(
+                    location,
+                    style: ThemeStyles.innerHeadingOv(
+                      fontSize: 20,
+                      letterSpacing: 2,
+                      weight: FontWeight.w500,
+                      color: fontColor,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          if (isLabelHidden && column != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: 50,
+                ),
+                column!
+              ],
+            ),
+          if (button != null)
+            Positioned(
+              right: 12,
+              child: button!,
+            )
+        ],
+      ),
     );
   }
 }

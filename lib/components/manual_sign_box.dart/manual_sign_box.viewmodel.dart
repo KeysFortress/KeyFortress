@@ -28,7 +28,7 @@ class ManualSignBoxViewModel extends PageViewModel {
 
   String _url = "";
   String _bearer = "";
-
+  late SignatureEvent _event;
   ManualSignBoxViewModel(super.context, this.identity, this.onSaveCallback) {
     _signatureService = getIt.get<ISignatureService>();
     _store = getIt.get<ISignatureStore>();
@@ -56,15 +56,13 @@ class ManualSignBoxViewModel extends PageViewModel {
     print(_signature!.publicKey);
     print(_signature!.bytes);
 
-    _store.add(
-      SignatureEvent(
-        identity.publicKey,
-        BianaryConverter.toHex(_signature!.bytes),
-        _message,
-        _data,
-      ),
+    _event = SignatureEvent(
+      identity.publicKey,
+      BianaryConverter.toHex(_signature!.bytes),
+      _message,
+      _data,
+      "",
     );
-
     notifyListeners();
   }
 
@@ -98,10 +96,14 @@ class ManualSignBoxViewModel extends PageViewModel {
   }
 
   onClose() {
+    _event.url = "Manual Signature";
+    _store.add(_event);
+
     onSaveCallback.call();
   }
 
   onSend() async {
+    _event.url = _url;
     var result = await _providerService.postRequest(
       HttpRequest(
         _url,
@@ -115,7 +117,7 @@ class ManualSignBoxViewModel extends PageViewModel {
     if (result == null || result.statusCode == 200) {
       //TODO log errors
     }
-
+    _store.add(_event);
     onSaveCallback.call();
   }
 }

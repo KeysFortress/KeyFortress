@@ -39,12 +39,19 @@ class PageRouterService implements IPageRouterService {
   @override
   backToPrevious(BuildContext context, {bool reverse = false}) {
     dismissBar();
+    PageRoutePoint point;
+    if (routes.length > 1)
+      point = routes.elementAt(routes.length - 2);
+    else
+      point = PageRoutePoint(
+        route: "/",
+      );
+
     SystemChannels.textInput.invokeMethod('TextInput.hide');
-    var page = routes.elementAt(routes.length - 2);
     routes.removeLast();
     observer.disposeAll();
     context.go(
-      page.route,
+      point.route,
       extra: TransitionData(
         next: reverse ? PageTransition.slideForward : PageTransition.slideBack,
       ),
@@ -129,14 +136,16 @@ class PageRouterService implements IPageRouterService {
         elevation: 22,
         isScrollControlled: true,
         context: context,
-        builder: (context) => Container(
-              width: width,
-              height: height,
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: IntrinsicHeight(
-                child: content,
+        builder: (context) => SingleChildScrollView(
+              child: Container(
+                width: width,
+                height: height,
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: IntrinsicHeight(
+                  child: content,
+                ),
               ),
             ));
   }

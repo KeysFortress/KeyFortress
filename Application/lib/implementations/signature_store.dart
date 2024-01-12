@@ -17,7 +17,7 @@ class SignatureStore implements ISignatureStore {
       return [];
     }
 
-    List<Map<String, dynamic>> signatures = jsonDecode(existing);
+    List<dynamic> signatures = jsonDecode(existing);
     return signatures.map((e) {
       return SignatureEvent.fromJson(e);
     }).toList();
