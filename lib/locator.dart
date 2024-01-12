@@ -7,6 +7,7 @@ import 'package:application/implementations/page_router_service.dart';
 import 'package:application/implementations/secret_manager.dart';
 import 'package:application/implementations/signature_service.dart';
 import 'package:application/implementations/identity_manager.dart';
+import 'package:application/implementations/signature_store.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infrastructure/interfaces/iconfiguration.dart';
@@ -18,6 +19,7 @@ import 'package:infrastructure/interfaces/iobserver.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:infrastructure/interfaces/isignature_service.dart';
+import 'package:infrastructure/interfaces/isignature_store.dart';
 
 GetIt getIt = GetIt.I;
 void registerDependency() async {
@@ -52,6 +54,12 @@ void registerDependency() async {
         signatureService,
         _storage,
       );
+    },
+  );
+  getIt.registerLazySingleton<ISignatureStore>(
+    () {
+      IlocalStorage _storage = getIt<IlocalStorage>();
+      return SignatureStore(_storage);
     },
   );
 }
