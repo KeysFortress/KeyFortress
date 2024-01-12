@@ -14,6 +14,7 @@ class IdentityCardViewModel extends PageViewModel {
       "/start-auth",
       pageContext,
       TransitionData(next: PageTransition.slideForward),
+      bindingData: identity,
     );
   }
 
