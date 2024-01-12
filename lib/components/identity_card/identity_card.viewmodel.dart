@@ -28,4 +28,13 @@ class IdentityCardViewModel extends PageViewModel {
       pageContext,
     );
   }
+
+  viewHistory() {
+    router.changePage(
+      "/identity-history",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+      bindingData: identity,
+    );
+  }
 }
