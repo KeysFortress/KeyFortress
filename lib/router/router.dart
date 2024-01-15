@@ -86,38 +86,47 @@ class ApplicationRouter {
           return LandingPageView();
         },
         routes: <RouteBase>[
-          ..._routes.map(
-            (e) => GoRoute(
-              path: e.$1,
-              pageBuilder: (context, state) {
-                return CustomTransitionPage(
-                  maintainState: true,
-                  key: state.pageKey,
-                  transitionDuration: e.$4,
-                  child: WillPopScope(
-                    onWillPop: () async {
-                      GetIt.I.get<IPageRouterService>().backToPrevious(context);
-                      return false;
-                    },
-                    child: e.$2,
-                  ),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) =>
-                      tranisitionController(
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                    state,
-                  ),
-                );
-              },
-            ),
-          )
+          GoRoute(
+            path: "/Authenticate/:id/:path",
+            name: "Authenticate",
+            builder: (context, state) => Placeholder(),
+          ),
+          ..._routes
+              .map(
+                (e) => GoRoute(
+                  path: e.$1,
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      maintainState: true,
+                      key: state.pageKey,
+                      transitionDuration: e.$4,
+                      child: WillPopScope(
+                        onWillPop: () async {
+                          GetIt.I
+                              .get<IPageRouterService>()
+                              .backToPrevious(context);
+                          return false;
+                        },
+                        child: e.$2,
+                      ),
+                      transitionsBuilder: (
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                      ) =>
+                          tranisitionController(
+                        context,
+                        animation,
+                        secondaryAnimation,
+                        child,
+                        state,
+                      ),
+                    );
+                  },
+                ),
+              )
+              .toList(),
         ],
       ),
     ],
