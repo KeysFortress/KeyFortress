@@ -18,6 +18,14 @@ class StartAuthViewModel extends PageViewModel {
     _identity = router.getPageBindingData() as StoredIdentity;
   }
 
+  /*
+  0:
+  "FinishChallenge" -> "https://localhost:7095/API/V1/Authentication/finish-handshake"
+  1:
+  "Initial" -> "https://localhost:7095/API/V1/Authentication/init-handshake"
+  2:
+  "ForUser" -> "47303bc6-b380-4b05-9a7e-8ccd9f16a2df"
+  */
   onScanComplete(String result) async {
     try {
       var jsonData = jsonDecode(result);
@@ -27,31 +35,7 @@ class StartAuthViewModel extends PageViewModel {
         _identity.privateKey,
       );
 
-      var signature = await _signatureService.signMessage(
-        importIdentity,
-        qrData.message,
-      );
-
-      Map<String, String> headers = qrData.bearer.isNotEmpty
-          ? {"Authorized": "Bearer ${qrData.bearer}"}
-          : {};
-      var httpResult = await _provider.postRequest(
-        HttpRequest(
-          qrData.url,
-          headers,
-          jsonEncode(
-            {
-              "signature": BianaryConverter.toHex(signature.bytes),
-            },
-          ),
-        ),
-      );
-      if (httpResult == null || httpResult.statusCode != 200) {
-        //TODO log server error
-        //TODO go to failed
-      }
-
-      //TODO go to success
+      //TODO prompt the identity menu
     } catch (ex) {
       //TODO go to failed
     }
