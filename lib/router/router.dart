@@ -75,6 +75,12 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "Authenticate/:id/:path",
+      IdentityHistoryView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
 
   static const Duration animationDuration = Duration(milliseconds: 500);
@@ -86,11 +92,6 @@ class ApplicationRouter {
           return LandingPageView();
         },
         routes: <RouteBase>[
-          GoRoute(
-            path: "/Authenticate/:id/:path",
-            name: "Authenticate",
-            builder: (context, state) => Placeholder(),
-          ),
           ..._routes
               .map(
                 (e) => GoRoute(

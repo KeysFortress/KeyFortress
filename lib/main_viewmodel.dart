@@ -9,6 +9,7 @@ import 'package:get_it/get_it.dart';
 import 'package:infrastructure/interfaces/iexception_manager.dart';
 import "package:infrastructure/interfaces/ipage_router_service.dart";
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainViewModel extends BaseViewModel {
   late BuildContext _context;
@@ -34,12 +35,7 @@ class MainViewModel extends BaseViewModel {
     ThemeStyles.height = deviceDimensions.height;
 
     registerGlobalExceptionHandler();
-    initUniLinks();
     notifyListeners();
-  }
-
-  Future<void> initUniLinks() async {
-    // Handle link when app is in warm state (front or background)
   }
 
   List<Widget> intersperse(Iterable<Widget> list, Widget item) {
