@@ -10,13 +10,14 @@ class OtpService implements IOtpService {
   OtpService(this.localStorage);
 
   @override
-  Future<OtpCode> add(String secret, String address) async {
+  Future<OtpCode> add(OtpCode current) async {
     List<OtpCode> result = await getOtpData();
-    var current = OtpCode("", address, secret);
+
     result.add(current);
     await saveData(result);
+
     var code = OTP.generateTOTPCodeString(
-      secret,
+      current.secret,
       DateTime.now().millisecondsSinceEpoch,
     );
     current.code = code;
