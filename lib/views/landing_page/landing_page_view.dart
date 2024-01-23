@@ -2,6 +2,7 @@ import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/components/identity_card/identity_card.dart';
+import 'package:presentation/components/main_navigation/main_navigation.dart';
 import 'package:presentation/components/navigation_menu/navigatioon_menu.dart';
 import 'package:presentation/components/dashboard_header/dashboard_header.dart';
 import 'package:presentation/components/secret_card/secret_card.dart';
@@ -18,35 +19,34 @@ class LandingPageView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
         color: ThemeStyles.theme.background300,
-        child: SafeArea(
-          child: Column(
-            children: [
-              DashboardHeader(
-                type: viewModel.activePage,
-                onNewPassword: viewModel.onGenerateNewPassword,
+        child: Column(
+          children: [
+            MainNavigation(),
+            DashboardHeader(
+              type: viewModel.activePage,
+              onNewPassword: viewModel.onGenerateNewPassword,
+            ),
+            Expanded(
+              flex: 1,
+              child: ListView.builder(
+                itemCount:
+                    viewModel.activePage == ActiveNavigationPage.passwords
+                        ? viewModel.secrets.length
+                        : viewModel.identities.length,
+                itemBuilder: (context, index) =>
+                    viewModel.activePage == ActiveNavigationPage.passwords
+                        ? SecretCard(
+                            secret: viewModel.secrets.elementAt(index),
+                          )
+                        : IdentityCard(
+                            identity: viewModel.identities.elementAt(index),
+                          ),
               ),
-              Expanded(
-                flex: 1,
-                child: ListView.builder(
-                  itemCount:
-                      viewModel.activePage == ActiveNavigationPage.passwords
-                          ? viewModel.secrets.length
-                          : viewModel.identities.length,
-                  itemBuilder: (context, index) =>
-                      viewModel.activePage == ActiveNavigationPage.passwords
-                          ? SecretCard(
-                              secret: viewModel.secrets.elementAt(index),
-                            )
-                          : IdentityCard(
-                              identity: viewModel.identities.elementAt(index),
-                            ),
-                ),
-              ),
-              NavigationMenu(
-                onPageChanged: viewModel.onPageChanged,
-              ),
-            ],
-          ),
+            ),
+            NavigationMenu(
+              onPageChanged: viewModel.onPageChanged,
+            ),
+          ],
         ),
       ),
     );
