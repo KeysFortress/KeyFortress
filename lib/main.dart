@@ -12,12 +12,12 @@ void main(List<String> args) async {
 
   locator.registerDependency();
   LocalJsonLocalization.delegate.directories = ['Localization'];
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final appRouter = ApplicationRouter.router;
-
   final configured = false;
 
   MyApp({super.key});
