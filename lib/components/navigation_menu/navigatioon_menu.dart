@@ -50,7 +50,7 @@ class NavigationMenu extends StatelessWidget {
               btnRadius: 0,
               expand: true,
               icon: SvgPicture.asset(
-                "assets/images/sync.svg",
+                "assets/images/timer.svg",
                 package: 'domain',
                 colorFilter: ColorFilter.mode(
                   viewModel.selected == ActiveNavigationPage.syncMode
