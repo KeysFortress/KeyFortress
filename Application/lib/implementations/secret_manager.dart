@@ -56,7 +56,7 @@ class SecretManger implements ISecretManager {
     secrets.forEach((element) {
       result.add(element);
     });
-    var json = result.map((e) => e.toJson());
+    var json = result.map((e) => e.toJson()).toList();
     var jsonData = jsonEncode(json);
     await localStorage.set("secrets", jsonData);
     return true;
@@ -82,7 +82,7 @@ class SecretManger implements ISecretManager {
     });
 
     result.add(secret);
-    var json = result.map((e) => e.toJson());
+    var json = result.map((e) => e.toJson()).toList();
     var jsonData = jsonEncode(json);
     await localStorage.set("secrets", jsonData);
     return true;
