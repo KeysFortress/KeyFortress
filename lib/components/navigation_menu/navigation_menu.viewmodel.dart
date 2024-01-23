@@ -1,4 +1,5 @@
 import 'package:domain/models/enums.dart';
+import 'package:domain/models/transition_data.dart';
 import 'package:presentation/page_view_model.dart';
 
 class NavigationMenuViewModel extends PageViewModel {
@@ -12,10 +13,16 @@ class NavigationMenuViewModel extends PageViewModel {
     notifyListeners();
   }
 
-  onSyncPressed() {}
-
   onCertificatesPressed() {
     _selected = ActiveNavigationPage.identities;
     notifyListeners();
+  }
+
+  onTotpPressed() {
+    router.changePage(
+      "/totp",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
   }
 }

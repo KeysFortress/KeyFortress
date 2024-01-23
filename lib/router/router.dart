@@ -7,6 +7,7 @@ import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/landing_page/landing_page_view.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
+import 'package:presentation/views/totp/totp_view.dart';
 
 class ApplicationRouter {
   //Animations Handles
@@ -78,6 +79,12 @@ class ApplicationRouter {
     (
       "Authenticate/:id/:path",
       IdentityHistoryView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "totp",
+      TotpView(),
       1,
       Duration(milliseconds: 500),
     ),

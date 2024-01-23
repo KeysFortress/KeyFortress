@@ -1,7 +1,7 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_identity.dart';
 import 'package:domain/models/stored_secret.dart';
-import 'package:flutter/material.dart';
+
 import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:presentation/components/identity_entry_box/identity_entry_box.dart';
 import 'package:presentation/components/password_entry_box/password_entry_box.dart';

@@ -61,7 +61,7 @@ class NavigationMenu extends StatelessWidget {
                 width: 50,
               ),
               label: "",
-              callback: viewModel.onSyncPressed,
+              callback: viewModel.onTotpPressed,
             ),
             CustomIconButton(
               buttonColor: ThemeStyles.theme.primary300,

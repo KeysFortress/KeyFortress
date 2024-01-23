@@ -3,6 +3,7 @@ import 'package:application/implementations/exception_manager.dart';
 import 'package:application/implementations/http_provider.dart';
 import 'package:application/implementations/local_storage.dart';
 import 'package:application/implementations/observer.dart';
+import 'package:application/implementations/otp_service.dart';
 import 'package:application/implementations/page_router_service.dart';
 import 'package:application/implementations/secret_manager.dart';
 import 'package:application/implementations/signature_service.dart';
@@ -16,6 +17,7 @@ import 'package:infrastructure/interfaces/ihttp_provider_service.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
 import 'package:infrastructure/interfaces/ilocal_storage.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
+import 'package:infrastructure/interfaces/iotp_service.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:infrastructure/interfaces/isecret_manager.dart';
 import 'package:infrastructure/interfaces/isignature_service.dart';
@@ -68,6 +70,13 @@ void registerDependency() async {
     () {
       IHttpProviderService _provider = getIt<IHttpProviderService>();
       return AuthenticationService(_provider);
+    },
+  );
+
+  getIt.registerLazySingleton<IOtpService>(
+    () {
+      IlocalStorage _storage = getIt<IlocalStorage>();
+      return OtpService(_storage);
     },
   );
 }
