@@ -1,3 +1,4 @@
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/otp_code.dart';
 import 'package:infrastructure/interfaces/iotp_service.dart';
 import 'package:presentation/page_view_model.dart';
@@ -10,8 +11,16 @@ class AddOtpCodeViewModel extends PageViewModel {
   }
 
   onScanComplete(String qrLink) async {
+    if (!qrLink.contains("otpauth://totp/")) {
+      throw BaseException(context: pageContext, message: "Invalid QR Link");
+    }
+
     var otpLink = OtpCode.fromQrCodeLink(qrLink);
-    var otpCode = await _otpService.add(otpLink);
-    print(otpCode.code);
+    if (otpLink.secret.isEmpty) {
+      throw BaseException(context: pageContext, message: "Invalid QR Link");
+    }
+
+    await _otpService.add(otpLink);
+    router.backToPrevious(pageContext);
   }
 }

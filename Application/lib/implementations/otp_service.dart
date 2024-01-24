@@ -6,8 +6,10 @@ import 'package:infrastructure/interfaces/iotp_service.dart';
 import 'package:otp/otp.dart';
 
 class OtpService implements IOtpService {
-  IlocalStorage localStorage;
-  OtpService(this.localStorage);
+  late IlocalStorage localStorage;
+  OtpService(IlocalStorage storage) {
+    localStorage = storage;
+  }
 
   @override
   Future<OtpCode> add(OtpCode current) async {
@@ -45,8 +47,8 @@ class OtpService implements IOtpService {
   }
 
   Future<List<OtpCode>> getOtpData() async {
-    var otpData = await localStorage.get("secrets");
-    if (otpData == null) otpData = [];
+    var otpData = await localStorage.get("otp_data");
+    if (otpData == null) return [];
 
     List<dynamic> data = jsonDecode(otpData);
     List<OtpCode> result = [];

@@ -4,15 +4,15 @@ class OtpCode {
   String address;
   String secret;
 
-  OtpCode(this.code, this.address, this.issuer, this._secret);
+  OtpCode(this.code, this.address, this.issuer, this.secret);
 
   // Convert a JSON object to a SignatureEvent instance
   factory OtpCode.fromJson(Map<String, dynamic> json) {
     return OtpCode(
       "",
-      json['address'] as String,
+      json['address'] as String? ?? "",
       json['secret'] as String,
-      json['issuer'] as String,
+      json['issuer'] as String? ?? "",
     );
   }
 
@@ -20,11 +20,22 @@ class OtpCode {
   factory OtpCode.fromQrCodeLink(String qrCodeLink) {
     Uri uri = Uri.parse(qrCodeLink);
 
-    String issuer = uri.pathSegments.first;
-    String account = uri.pathSegments.length > 1 ? uri.pathSegments[1] : '';
+    String issuerData =
+        uri.pathSegments.length > 1 ? uri.pathSegments[1] : uri.pathSegments[0];
+    var data = issuerData.split(':');
+    var user = data.length > 1 ? data[1] : data[0];
+    var issuer = data.length > 1 ? data[0] : "";
+
+    if (user.isEmpty) {
+      user = uri.queryParameters['user'] ?? '';
+    }
+    if (issuer.isEmpty) {
+      issuer = uri.queryParameters['issuer'] ?? '';
+    }
+
     String secret = uri.queryParameters['secret'] ?? '';
 
-    return OtpCode("", account, issuer, secret);
+    return OtpCode("", user, issuer, secret);
   }
 
   // Convert a SignatureEvent instance to a JSON object
