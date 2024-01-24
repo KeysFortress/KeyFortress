@@ -45,5 +45,9 @@ class TotpViewModel extends PageViewModel {
     return _otpService.getCode(elementAt.secret);
   }
 
-  onDeletePressed(OtpCode elementAt) {}
+  onDeletePressed(OtpCode elementAt) async {
+    await _otpService.remove(elementAt.secret);
+    _secrets = await _otpService.get();
+    notifyListeners();
+  }
 }
