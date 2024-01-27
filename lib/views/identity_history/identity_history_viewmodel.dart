@@ -1,7 +1,7 @@
 import 'package:domain/models/signature_event.dart';
 import 'package:domain/models/stored_identity.dart';
 import 'package:infrastructure/interfaces/isignature_store.dart';
-import 'package:presentation/page_view_model.dart';
+import '../../../KF_Shared/lib/page_view_model.dart';
 
 class IdentityHistoryViewModel extends PageViewModel {
   late ISignatureStore _signatureStore;

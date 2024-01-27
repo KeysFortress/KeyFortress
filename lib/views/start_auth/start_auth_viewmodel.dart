@@ -4,7 +4,7 @@ import 'package:domain/models/http_request.dart';
 import 'package:domain/models/stored_identity.dart';
 import 'package:infrastructure/interfaces/ihttp_provider_service.dart';
 import 'package:infrastructure/interfaces/isignature_service.dart';
-import 'package:presentation/page_view_model.dart';
+import '../../../KF_Shared/lib/page_view_model.dart';
 import 'package:domain/models/qr_code_data.dart';
 
 class StartAuthViewModel extends PageViewModel {
