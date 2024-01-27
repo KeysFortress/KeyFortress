@@ -37,11 +37,15 @@ dependencies:
   injectable_generator: ^2.1.3
   cupertino_icons: ^1.0.2
   infrastructure:
-    path: "Infrastructure"
+    path: "KF_Infrastructure"
   application:
-    path: "Application"
+    path: "KF_Application"
   domain:
-    path: "domain"
+    path: "KF_Domain"
+  shared:
+    path: "KF_Shared"
+  components:
+    path: "KF_Components"
   flutter_svg: ^2.0.4
   gradient_borders: ^1.0.0
   qr_code_scanner: ^1.0.1
@@ -112,8 +116,9 @@ flutter:
     # certificates
     #- packages/domain/assets/user_token.pub
     # localization
-    - Localization/en_US.json
-    - Localization/en_DE.json
+    - KF_Localization/en_US.json
+    - KF_Localization/en_DE.json
+    - KF_Components
     # audio
     - packages/domain/assets/alarms/alarm.mp3
     # data

@@ -4,7 +4,7 @@ import 'package:localization/localization.dart';
 import 'package:presentation/router/router.dart';
 import 'package:stacked/stacked.dart';
 
-import 'locator.dart' as locator;
+import 'package:shared/locator.dart' as locator;
 import 'main_viewmodel.dart';
 
 void main(List<String> args) async {

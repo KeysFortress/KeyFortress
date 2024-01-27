@@ -1,9 +1,9 @@
+import 'package:components/nav_menu_inner/nav_menu_inner.dart';
+import 'package:components/secret_container/secret_container.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:presentation/components/nav_menu_inner/nav_menu_inner.dart';
-import 'package:presentation/components/secret_container/secret_container.dart';
 import 'package:presentation/views/identity_history/identity_history_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 

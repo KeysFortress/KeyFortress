@@ -1,7 +1,7 @@
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/otp_code.dart';
 import 'package:infrastructure/interfaces/iotp_service.dart';
-import 'package:presentation/page_view_model.dart';
+import 'package:shared/page_view_model.dart';
 
 class AddOtpCodeViewModel extends PageViewModel {
   late IOtpService _otpService;

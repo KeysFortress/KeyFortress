@@ -1,0 +1,18 @@
+[submodule "KF_Components"]
+	path = KF_Components
+	url = git@github.com:KeysFortress/KF_Components.git
+[submodule "KF_Localization"]
+	path = KF_Localization
+	url = git@github.com:KeysFortress/KF_Localization.git
+[submodule "KF_Infrastructure"]
+	path = KF_Infrastructure
+	url = git@github.com:KeysFortress/KF_Infrastructure.git
+[submodule "KF_Application"]
+	path = KF_Application
+	url = git@github.com:KeysFortress/KF_Application.git
+[submodule "KF_Domain"]
+	path = KF_Domain
+	url = git@github.com:KeysFortress/KF_Domain.git
+[submodule "KF_Shared"]
+	path = KF_Shared
+	url = git@github.com:KeysFortress/KF_Shared.git
