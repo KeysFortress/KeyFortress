@@ -13,3 +13,6 @@
 [submodule "KF_Domain"]
 	path = KF_Domain
 	url = git@github.com:KeysFortress/KF_Domain.git
+[submodule "KF_Shared"]
+	path = KF_Shared
+	url = git@github.com:KeysFortress/KF_Shared.git
