@@ -1,6 +1,6 @@
+import 'package:components/qr_scanner/qr_scanner_view.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/components/qr_scanner/qr_scanner_view.dart';
 import 'package:presentation/views/start_auth/start_auth_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 

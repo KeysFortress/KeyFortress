@@ -1,12 +1,12 @@
+import 'package:components/identity_entry_box/identity_entry_box.dart';
+import 'package:components/password_entry_box/password_entry_box.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_identity.dart';
 import 'package:domain/models/stored_secret.dart';
 
 import 'package:infrastructure/interfaces/isecret_manager.dart';
-import 'package:presentation/components/identity_entry_box/identity_entry_box.dart';
-import 'package:presentation/components/password_entry_box/password_entry_box.dart';
 import 'package:infrastructure/interfaces/iidentity_manager.dart';
-import '../../../KF_Shared/lib/page_view_model.dart';
+import 'package:shared/page_view_model.dart';
 
 class LandingPageViewModel extends PageViewModel {
   late ISecretManager _secretManger;

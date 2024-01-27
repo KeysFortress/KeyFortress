@@ -1,10 +1,10 @@
+import 'package:components/custom_button/custom_button.dart';
+import 'package:components/horizontal_divider/horizontal_divider.dart';
+import 'package:components/nav_menu_inner/nav_menu_inner.dart';
+import 'package:components/seconds_counter/seconds_counter.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:presentation/components/custom_button/custom_button.dart';
-import 'package:presentation/components/horizontal_divider/horizontal_divider.dart';
-import 'package:presentation/components/nav_menu_inner/nav_menu_inner.dart';
-import 'package:presentation/components/seconds_counter/seconds_counter.dart';
 import 'package:presentation/views/totp/totp_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 

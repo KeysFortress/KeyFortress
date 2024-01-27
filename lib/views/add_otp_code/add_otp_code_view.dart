@@ -1,3 +1,4 @@
+import 'package:components/qr_scanner/qr_scanner_view.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_viewmodel.dart';

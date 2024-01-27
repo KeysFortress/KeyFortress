@@ -1,11 +1,11 @@
+import 'package:components/dashboard_header/dashboard_header.dart';
+import 'package:components/identity_card/identity_card.dart';
+import 'package:components/main_navigation/main_navigation.dart';
+import 'package:components/navigation_menu/navigatioon_menu.dart';
+import 'package:components/secret_card/secret_card.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/components/identity_card/identity_card.dart';
-import 'package:presentation/components/main_navigation/main_navigation.dart';
-import 'package:presentation/components/navigation_menu/navigatioon_menu.dart';
-import 'package:presentation/components/dashboard_header/dashboard_header.dart';
-import 'package:presentation/components/secret_card/secret_card.dart';
 import 'package:presentation/views/landing_page/landing_page_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
