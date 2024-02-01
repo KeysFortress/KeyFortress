@@ -41,16 +41,15 @@ class MyApp extends StatelessWidget {
             return locale;
           }
 
-          // define pt_BR as default when de language code is 'pt'
           if (locale?.languageCode == 'pt') {
             return Locale('en', 'DE');
           }
 
-          // default language
           return Locale('en', 'DE');
         },
         debugShowCheckedModeBanner: false,
         routerConfig: internalRouter.router,
+        builder: (context, child) => model.buildPageView(context, child),
       ),
       viewModelBuilder: () => MainViewModel(),
       onViewModelReady: (model) => model.initialized(
