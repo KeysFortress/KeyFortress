@@ -118,7 +118,6 @@ flutter:
     # localization
     - KF_Localization/en_US.json
     - KF_Localization/en_DE.json
-    - KF_Components
     # audio
     - packages/domain/assets/alarms/alarm.mp3
     # data
