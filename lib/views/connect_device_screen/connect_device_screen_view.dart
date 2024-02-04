@@ -1,8 +1,6 @@
 import 'package:components/custom_button/custom_button.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
-import 'package:components/dashboard_header/dashboard_header.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
-import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,109 +50,115 @@ class ConnectDeviceScreenView extends StatelessWidget {
               flex: 1,
               child: ListView.builder(
                 itemCount: viewModel.devices.length,
-                itemBuilder: (context, index) => Stack(
-                  alignment: Alignment.center,
-                  fit: StackFit.passthrough,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                      decoration: BoxDecoration(
-                        color: ThemeStyles.theme.background200,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Column(
-                        children: [
-                          SvgPicture.asset(
-                            "assets/images/computer.svg",
-                            package: "domain",
-                            width: 40,
-                            height: 80,
-                            colorFilter: ColorFilter.mode(
-                              ThemeStyles.theme.primary300,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          Text(
-                            viewModel.devices.elementAt(index).name,
-                            style: ThemeStyles.innerHeadingOv(
-                              color: ThemeStyles.theme.accent200,
-                              fontSize: 18,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 4,
-                      right: 15,
-                      child: Container(
-                        width: 90,
-                        padding: EdgeInsets.all(5),
+                itemBuilder: (context, index) => CustomButton(
+                  callback: () => viewModel.onDeviceSelected(
+                    viewModel.devices.elementAt(index),
+                  ),
+                  widget: Stack(
+                    alignment: Alignment.center,
+                    fit: StackFit.passthrough,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(15),
+                        margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
                         decoration: BoxDecoration(
-                          color: ThemeStyles.theme.primary300,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(4),
-                            topRight: Radius.circular(4),
-                          ),
+                          color: ThemeStyles.theme.background200,
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        child: Column(
                           children: [
-                            Text(
-                              viewModel.devices.elementAt(index).isOnline
-                                  ? "Online"
-                                  : "Offline",
-                              style: ThemeStyles.regularParagraphOv(
-                                color: ThemeStyles.theme.text300,
+                            SvgPicture.asset(
+                              "assets/images/computer.svg",
+                              package: "domain",
+                              width: 40,
+                              height: 80,
+                              colorFilter: ColorFilter.mode(
+                                ThemeStyles.theme.primary300,
+                                BlendMode.srcIn,
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color:
-                                    viewModel.devices.elementAt(index).isOnline
-                                        ? ThemeStyles.theme.accent100
-                                        : ThemeStyles.theme.background200,
+                            Text(
+                              viewModel.devices.elementAt(index).name,
+                              style: ThemeStyles.innerHeadingOv(
+                                color: ThemeStyles.theme.accent200,
+                                fontSize: 18,
                               ),
                             )
                           ],
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: 4,
-                      left: 15,
-                      child: Container(
-                        width: 90,
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: ThemeStyles.theme.primary300,
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(4),
-                            topLeft: Radius.circular(4),
+                      Positioned(
+                        top: 4,
+                        right: 15,
+                        child: Container(
+                          width: 90,
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: ThemeStyles.theme.primary300,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(4),
+                              topRight: Radius.circular(4),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                viewModel.devices.elementAt(index).isOnline
+                                    ? "Online"
+                                    : "Offline",
+                                style: ThemeStyles.regularParagraphOv(
+                                  color: ThemeStyles.theme.text300,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: viewModel.devices
+                                          .elementAt(index)
+                                          .isOnline
+                                      ? ThemeStyles.theme.accent100
+                                      : ThemeStyles.theme.background200,
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(
-                              Icons.connect_without_contact,
-                              size: 20,
-                              color: ThemeStyles.theme.text300,
+                      ),
+                      Positioned(
+                        top: 4,
+                        left: 15,
+                        child: Container(
+                          width: 90,
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: ThemeStyles.theme.primary300,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(4),
+                              topLeft: Radius.circular(4),
                             ),
-                            Text(
-                              "P Sync",
-                              style: ThemeStyles.regularParagraphOv(
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.connect_without_contact,
+                                size: 20,
                                 color: ThemeStyles.theme.text300,
                               ),
-                            )
-                          ],
+                              Text(
+                                "${viewModel.devices.elementAt(index).syncType.name.characters.first.toUpperCase()} Sync",
+                                style: ThemeStyles.regularParagraphOv(
+                                  color: ThemeStyles.theme.text300,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
