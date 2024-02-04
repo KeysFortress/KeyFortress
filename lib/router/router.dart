@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
+import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
@@ -105,6 +106,12 @@ class ApplicationRouter {
     (
       "identities",
       IdentititesView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "connect-devices",
+      ConnectDeviceScreenView(),
       1,
       Duration(milliseconds: 500),
     ),

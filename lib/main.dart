@@ -11,7 +11,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   locator.registerDependency();
-  LocalJsonLocalization.delegate.directories = ['Localization'];
+  LocalJsonLocalization.delegate.directories = ['KF_Localization'];
 
   runApp(MyApp());
 }
