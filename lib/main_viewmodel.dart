@@ -76,25 +76,11 @@ class MainViewModel extends BaseViewModel {
     super.dispose();
   }
 
-  buildPageView(BuildContext context, Widget? child) {
-    return Material(
-      color: ThemeStyles.theme.background300,
-      child: Column(
-        children: [
-          if (isMenuVisible) MainNavigation(),
-          if (child != null) Expanded(child: child),
-          if (isBottomMenuVisible)
-            NavigationMenu(
-              onPageChanged: () {},
-            )
-        ],
-      ),
-    );
-  }
-
   onMenuStateChanged(bool state) {
     isMenuVisible = state;
     isBottomMenuVisible = state;
-    notifyListeners();
+    Future.delayed(Duration(milliseconds: 200), () {
+      notifyListeners();
+    });
   }
 }
