@@ -1,4 +1,7 @@
+import 'package:components/main_navigation/main_navigation.dart';
+import 'package:components/navigation_menu/navigatioon_menu.dart';
 import 'package:domain/models/core_router.dart';
+import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:presentation/router/router.dart';
@@ -11,7 +14,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   locator.registerDependency();
-  LocalJsonLocalization.delegate.directories = ['Localization'];
+  LocalJsonLocalization.delegate.directories = ['KF_Localization'];
 
   runApp(MyApp());
 }
@@ -49,7 +52,19 @@ class MyApp extends StatelessWidget {
         },
         debugShowCheckedModeBanner: false,
         routerConfig: internalRouter.router,
-        builder: (context, child) => model.buildPageView(context, child),
+        builder: (context, child) => Material(
+          color: ThemeStyles.theme.background300,
+          child: Column(
+            children: [
+              if (model.isMenuVisible) MainNavigation(),
+              if (child != null) Expanded(child: child),
+              if (model.isBottomMenuVisible)
+                NavigationMenu(
+                  onPageChanged: () {},
+                )
+            ],
+          ),
+        ),
       ),
       viewModelBuilder: () => MainViewModel(),
       onViewModelReady: (model) => model.initialized(

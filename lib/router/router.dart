@@ -5,6 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
+import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
+import 'package:presentation/views/device/device_view.dart';
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
@@ -108,6 +110,18 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "connect-devices",
+      ConnectDeviceScreenView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "device",
+      DeviceView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
 
   static const Duration animationDuration = Duration(milliseconds: 500);
@@ -128,12 +142,12 @@ class ApplicationRouter {
                       maintainState: true,
                       key: state.pageKey,
                       transitionDuration: e.$4,
-                      child: WillPopScope(
-                        onWillPop: () async {
+                      child: PopScope(
+                        canPop: true,
+                        onPopInvoked: (b) async {
                           GetIt.I
                               .get<IPageRouterService>()
                               .backToPrevious(context);
-                          return false;
                         },
                         child: e.$2,
                       ),
