@@ -35,4 +35,12 @@ class ConnectDeviceScreenViewModel extends PageViewModel {
       bindingData: device,
     );
   }
+
+  onAddConnection() {
+    router.changePage(
+      "/connection-list",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
+  }
 }
