@@ -8,6 +8,7 @@ import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
 import 'package:presentation/views/connection_list/connection_list.dart';
 import 'package:presentation/views/device/device_view.dart';
+import 'package:presentation/views/establish_connection/establish_connection.dart';
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
@@ -126,6 +127,12 @@ class ApplicationRouter {
     (
       "connection-list",
       ConnectionListView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "establish-connection",
+      EstablishConnectionView(),
       1,
       Duration(milliseconds: 500),
     ),

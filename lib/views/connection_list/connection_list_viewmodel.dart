@@ -1,5 +1,6 @@
 import 'package:domain/models/device.dart';
 import 'package:domain/models/enums.dart';
+import 'package:domain/models/transition_data.dart';
 import 'package:shared/page_view_model.dart';
 
 class ConnectionListViewModel extends PageViewModel {
@@ -16,7 +17,14 @@ class ConnectionListViewModel extends PageViewModel {
   ];
   List<Device> get devices => _devices;
 
-  onDeviceSelected(elementAt) {}
+  onDeviceSelected(Device device) {
+    router.changePage(
+      "/establish-connection",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+      bindingData: device,
+    );
+  }
 
   onSearchChanged() {}
 }
