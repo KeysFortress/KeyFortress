@@ -33,7 +33,8 @@ class IdentitiesViewModel extends PageViewModel {
     );
   }
 
-  onSave() {
+  onSave() async {
     router.dismissBar();
+    await ready();
   }
 }

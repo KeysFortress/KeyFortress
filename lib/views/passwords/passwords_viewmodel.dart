@@ -15,6 +15,7 @@ class PasswordsViewModel extends PageViewModel {
   ready() async {
     _secrets = await _secretManger.getSecrets();
     observer.getObserver("on_menu_state_changed", true);
+    notifyListeners();
   }
 
   onGeneratePassword() {
