@@ -109,7 +109,16 @@ flutter:
     - packages/domain/assets/images/phone.svg
     - packages/domain/assets/images/tablet.svg
     - packages/domain/assets/images/one-time-sync.svg
-    - packages/domain/assets/images/partial-sync.svg
+    - packages/domain/assets/images/a0.svg
+    - packages/domain/assets/images/a1.svg
+    - packages/domain/assets/images/a2.svg
+    - packages/domain/assets/images/a3.svg
+    - packages/domain/assets/images/a4.svg
+    - packages/domain/assets/images/a5.svg
+    - packages/domain/assets/images/a6.svg
+    - packages/domain/assets/images/a7.svg
+    - packages/domain/assets/images/a8.svg
+    - packages/domain/assets/images/a9.svg
 
     #Configs
     - packages/domain/config.json
