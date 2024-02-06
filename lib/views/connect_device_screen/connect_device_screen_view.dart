@@ -42,7 +42,7 @@ class ConnectDeviceScreenView extends StatelessWidget {
                   color: ThemeStyles.theme.text300,
                 ),
                 label: "Add Connection",
-                callback: () {},
+                callback: viewModel.onAddConnection,
                 height: 50,
               ),
             ),
