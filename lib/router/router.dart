@@ -14,6 +14,8 @@ import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
 import 'package:presentation/views/totp/totp_view.dart';
+import 'package:shared/unlock_panel/unlock_panel_view.dart';
+import 'package:shared/unlock_panel/unlock_panel_viewmodel.dart';
 
 class ApplicationRouter {
   //Animations Handles
@@ -136,6 +138,12 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "unlock-device",
+      UnlockPanelView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
 
   static const Duration animationDuration = Duration(milliseconds: 500);
@@ -144,7 +152,7 @@ class ApplicationRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return PasswordsView();
+          return UnlockPanelView();
         },
         routes: <RouteBase>[
           ..._routes
