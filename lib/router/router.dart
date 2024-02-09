@@ -12,10 +12,10 @@ import 'package:presentation/views/establish_connection/establish_connection.dar
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
+import 'package:presentation/views/setup_locking/setup_locking.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
 import 'package:presentation/views/totp/totp_view.dart';
 import 'package:shared/unlock_panel/unlock_panel_view.dart';
-import 'package:shared/unlock_panel/unlock_panel_viewmodel.dart';
 
 class ApplicationRouter {
   //Animations Handles
@@ -141,6 +141,12 @@ class ApplicationRouter {
     (
       "unlock-device",
       UnlockPanelView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "setup-lock",
+      SetupLockingView(),
       1,
       Duration(milliseconds: 500),
     ),

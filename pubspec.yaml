@@ -120,6 +120,12 @@ flutter:
     - packages/domain/assets/images/a7.svg
     - packages/domain/assets/images/a8.svg
     - packages/domain/assets/images/a9.svg
+    - packages/domain/assets/images/face-id.svg
+    - packages/domain/assets/images/fingerprint.svg
+    - packages/domain/assets/images/fingerprint.svg
+    - packages/domain/assets/images/lock.svg
+    - packages/domain/assets/images/pattern.svg
+    - packages/domain/assets/images/totp-setup.svg
 
     #Configs
     - packages/domain/config.json

@@ -1,4 +1,6 @@
 import 'package:components/dashboard_header/dashboard_header.dart';
+import 'package:components/main_navigation/main_navigation.dart';
+import 'package:components/navigation_menu/navigatioon_menu.dart';
 import 'package:components/secret_card/secret_card.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
@@ -18,6 +20,7 @@ class PasswordsView extends StatelessWidget {
         color: ThemeStyles.theme.background300,
         child: Column(
           children: [
+            MainNavigation(),
             DashboardHeader(
               icon: "secrets.svg",
               name: "Passwords",
@@ -33,6 +36,7 @@ class PasswordsView extends StatelessWidget {
                 ),
               ),
             ),
+            NavigationMenu(onPageChanged: () {})
           ],
         ),
       ),

@@ -56,12 +56,7 @@ class MyApp extends StatelessWidget {
           color: ThemeStyles.theme.background300,
           child: Column(
             children: [
-              if (model.isMenuVisible) MainNavigation(),
               if (child != null) Expanded(child: child),
-              if (model.isBottomMenuVisible)
-                NavigationMenu(
-                  onPageChanged: () {},
-                )
             ],
           ),
         ),
