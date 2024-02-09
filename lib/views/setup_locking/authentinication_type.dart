@@ -7,12 +7,15 @@ class AuthentinicationType extends StatelessWidget {
   final String heading;
   final String description;
   final List<String> images;
+  final Function onEnablePressed;
 
-  const AuthentinicationType(
-      {super.key,
-      required this.heading,
-      required this.description,
-      required this.images});
+  const AuthentinicationType({
+    super.key,
+    required this.heading,
+    required this.description,
+    required this.images,
+    required this.onEnablePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,9 @@ class AuthentinicationType extends StatelessWidget {
               height: 50,
               buttonColor: ThemeStyles.theme.primary300,
               label: "Enabled",
-              callback: () {},
+              callback: () {
+                onEnablePressed.call();
+              },
             ),
           )
         ],
