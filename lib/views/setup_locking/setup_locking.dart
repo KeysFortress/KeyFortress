@@ -17,8 +17,8 @@ class SetupLockingView extends StatelessWidget {
             physics: PageScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: viewModel.lockOptions.length,
+            controller: viewModel.scrollController,
             itemBuilder: (context, index) {
-              viewModel.updateScrollIndex(index);
               return viewModel.lockOptions.elementAt(index);
             },
           ),
@@ -35,17 +35,20 @@ class SetupLockingView extends StatelessWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: viewModel.lockOptions.length,
-                    itemBuilder: (context, index) => Container(
-                      margin: EdgeInsets.all(2),
-                      width: 20,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: viewModel.selectedOption == index
-                            ? ThemeStyles.theme.primary100
-                            : ThemeStyles.theme.primary300,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
+                    itemBuilder: (context, index) {
+                      viewModel.changePosition(index);
+                      return Container(
+                        margin: EdgeInsets.all(2),
+                        width: 20,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: index == viewModel.selectedOption
+                              ? ThemeStyles.theme.primary100
+                              : ThemeStyles.theme.primary300,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
