@@ -19,7 +19,7 @@ Experience hassle-free authentication with KeyFortress's Passwordless Authentica
 ## Why KeyFortress?
 
 - **Security First:** Your data is encrypted end-to-end, ensuring that only you have access to your sensitive information.
-  
+
 - **User-Friendly:** Enjoy a seamless and intuitive user interface, making it easy to manage and organize your passwords securely.
 
 - **Versatile:** Whether you need strong password generation, TOTP support, or passwordless authentication, KeyFortress has you covered.
@@ -27,3 +27,46 @@ Experience hassle-free authentication with KeyFortress's Passwordless Authentica
 - **Cross-Platform Sync:** Access your passwords and data securely from multiple devices, with synchronized data that remains protected at all times.
 
 Download KeyFortress today and take control of your digital security with confidence. Safeguard your passwords, simplify authentication, and stay ahead of potential security threats. Your digital fortress is just a download away!
+
+## Prerequisites
+
+
+### Flutter Build Details
+
+For more Flutter build details, refer to the [official documentation](https://flutter.dev/docs).
+
+
+This solution is developed using the [clean architecture](hhttps://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). In order to make it as modular as possible, with the goal to make all of the code, compatible and reusable between the Desktop version and this version (mobile) a lot of the code has to be separated from the main presentation layer which is this repository.
+
+In order to do this, we have abstracted all of the different layers as submodules, before trying to build please see the section on submodule updates after cloning the repository.
+
+### Submodule Update
+
+To update submodules to the latest commit:
+
+```bash
+git submodule -init
+git submodule update --remote --recursive
+```
+
+### Build for Android
+
+```bash
+cd KeyFortress
+flutter build apk
+```
+
+### Build for iOS
+
+```bash
+cd KeyFortress
+flutter build ios
+```
+
+The iOS app is generated in the `build/ios/` directory. Further steps can be performed by opening the project in Xcode. Note that building for iOS requires a macOS machine with Xcode installed.
+
+### Build for Windows, Mac, Linux
+
+For desktop platforms, refer to the [KeyFortress Desktop Repository](https://github.com/KeysFortress/KF_Desktop) for specific build instructions on Windows, Mac, and Linux.
+
+---
