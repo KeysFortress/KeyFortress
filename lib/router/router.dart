@@ -12,6 +12,7 @@ import 'package:presentation/views/establish_connection/establish_connection.dar
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
+import 'package:presentation/views/set_pin_number/set_pin_number.dart';
 import 'package:presentation/views/setup_locking/setup_locking.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
 import 'package:presentation/views/totp/totp_view.dart';
@@ -147,6 +148,12 @@ class ApplicationRouter {
     (
       "setup-lock",
       SetupLockingView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "setup-pin",
+      SetPinNumber(),
       1,
       Duration(milliseconds: 500),
     ),
