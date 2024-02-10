@@ -8,13 +8,14 @@ class AuthentinicationType extends StatelessWidget {
   final String description;
   final List<String> images;
   final Function onEnablePressed;
-
+  final bool hideBtn;
   const AuthentinicationType({
     super.key,
     required this.heading,
     required this.description,
     required this.images,
     required this.onEnablePressed,
+    this.hideBtn = false,
   });
 
   @override
@@ -45,6 +46,7 @@ class AuthentinicationType extends StatelessWidget {
           ),
           Container(
             height: 130,
+            width: double.infinity,
             padding: EdgeInsets.all(15),
             margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
             decoration: BoxDecoration(
@@ -52,6 +54,7 @@ class AuthentinicationType extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   heading,
@@ -71,17 +74,18 @@ class AuthentinicationType extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
-            child: CustomIconButton(
-              height: 50,
-              buttonColor: ThemeStyles.theme.primary300,
-              label: "Enabled",
-              callback: () {
-                onEnablePressed.call();
-              },
-            ),
-          )
+          if (!hideBtn)
+            Container(
+              margin: EdgeInsets.fromLTRB(16, 4, 16, 0),
+              child: CustomIconButton(
+                height: 50,
+                buttonColor: ThemeStyles.theme.primary300,
+                label: "Enabled",
+                callback: () {
+                  onEnablePressed.call();
+                },
+              ),
+            )
         ],
       ),
     );
