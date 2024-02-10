@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:components/main_navigation/main_navigation.dart';
-import 'package:components/navigation_menu/navigatioon_menu.dart';
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/core_router.dart';
 import 'package:domain/styles.dart';
