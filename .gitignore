@@ -129,3 +129,11 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Ge
+
+# Ignore submodule changes
+/KF_Domain
+/KF_Application
+/KF_Components
+/KF_Infrastructure
+/KF_Localization
+/KF_Shared
