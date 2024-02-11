@@ -36,12 +36,15 @@ class SetupTotpLockViewModel extends PageViewModel {
   }
 
   onSecretChanged(String secret) async {
-    if (!secret.contains("otpauth://totp/")) {
+    _secret = secret;
+  }
+
+  onSaveChanges() async {
+    if (!_secret.contains("otpauth://totp/")) {
       throw BaseException(context: pageContext, message: "Invalid Link");
     }
 
-    var otpLink = OtpCode.fromQrCodeLink(secret);
-
+    var otpLink = OtpCode.fromQrCodeLink(_secret);
     _secret = otpLink.secret;
 
     var setLockType = await _authorizationService.setDeviceLockType(
@@ -58,6 +61,4 @@ class SetupTotpLockViewModel extends PageViewModel {
       TransitionData(next: PageTransition.easeInAndOut),
     );
   }
-
-  onSaveChanges() {}
 }
