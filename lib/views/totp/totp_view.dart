@@ -2,7 +2,7 @@ import 'package:components/custom_button/custom_button.dart';
 import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/main_navigation/main_navigation.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
-import 'package:components/navigation_menu/navigatioon_menu.dart';
+import 'package:components/navigation_menu/navigation_menu.dart';
 import 'package:components/seconds_counter/seconds_counter.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
