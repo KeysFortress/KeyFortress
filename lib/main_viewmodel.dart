@@ -94,4 +94,11 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
       notifyListeners();
     });
   }
+
+  Timer? timer;
+  void resetTimer() {
+    timer = Timer.periodic(Duration(seconds: 30), (timer) {
+      routerService.router.router.go("/");
+    });
+  }
 }

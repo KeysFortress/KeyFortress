@@ -53,10 +53,13 @@ class MyApp extends StatelessWidget {
         routerConfig: internalRouter.router,
         builder: (context, child) => Material(
           color: ThemeStyles.theme.background300,
-          child: Column(
-            children: [
-              if (child != null) Expanded(child: child),
-            ],
+          child: GestureDetector(
+            onTap: model.resetTimer,
+            child: Column(
+              children: [
+                if (child != null) Expanded(child: child),
+              ],
+            ),
           ),
         ),
       ),
