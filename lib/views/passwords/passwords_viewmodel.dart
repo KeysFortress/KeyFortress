@@ -31,7 +31,7 @@ class PasswordsViewModel extends PageViewModel {
   }
 
   onSave() async {
-    router.dismissBar();
+    router.dismissBar(pageContext);
     await ready();
   }
 }

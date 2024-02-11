@@ -36,7 +36,9 @@ class IdentititesView extends StatelessWidget {
                 ),
               ),
             ),
-            NavigationMenu(onPageChanged: () {})
+            NavigationMenu(
+              currentPage: ActiveNavigationPage.identities,
+            )
           ],
         ),
       ),
