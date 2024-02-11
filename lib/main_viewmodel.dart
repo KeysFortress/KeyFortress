@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/core_router.dart';
+import 'package:domain/models/enums.dart';
+import 'package:domain/models/transition_data.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ import "package:infrastructure/interfaces/ipage_router_service.dart";
 import 'package:stacked/stacked.dart';
 import 'package:shared/locator.dart' as locator;
 
-class MainViewModel extends BaseViewModel {
+class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   late BuildContext _context;
   GetIt getIt = locator.getIt;
   late IPageRouterService routerService;
@@ -28,7 +30,18 @@ class MainViewModel extends BaseViewModel {
   bool isMenuVisible = true;
   bool isBottomMenuVisible = true;
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // App is in the foreground
+      // Perform tasks you want to execute when the app comes to the foreground
+      print("App is in the foreground");
+      routerService.router.router.go("/");
+    }
+  }
+
   initialized(CoreRouter router, BuildContext context) async {
+    WidgetsBinding.instance.addObserver(this);
     _context = context;
     _router = router;
     _exceptionManager = getIt.get<IExceptionManager>();
@@ -70,7 +83,7 @@ class MainViewModel extends BaseViewModel {
   @override
   void dispose() {
     _linkSubscription?.cancel();
-
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

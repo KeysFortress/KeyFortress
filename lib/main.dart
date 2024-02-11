@@ -1,5 +1,3 @@
-import 'package:components/main_navigation/main_navigation.dart';
-import 'package:components/navigation_menu/navigatioon_menu.dart';
 import 'package:domain/models/core_router.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +22,7 @@ class MyApp extends StatelessWidget {
   final configured = false;
 
   MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
