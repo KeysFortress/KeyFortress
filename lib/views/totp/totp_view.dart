@@ -4,6 +4,7 @@ import 'package:components/main_navigation/main_navigation.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:components/navigation_menu/navigatioon_menu.dart';
 import 'package:components/seconds_counter/seconds_counter.dart';
+import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -102,7 +103,9 @@ class TotpView extends StatelessWidget {
                 ),
               ),
             ),
-            NavigationMenu(onPageChanged: () {})
+            NavigationMenu(
+              currentPage: ActiveNavigationPage.totp,
+            )
           ],
         ),
       ),

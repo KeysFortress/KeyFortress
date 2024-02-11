@@ -36,7 +36,9 @@ class PasswordsView extends StatelessWidget {
                 ),
               ),
             ),
-            NavigationMenu(onPageChanged: () {})
+            NavigationMenu(
+              currentPage: ActiveNavigationPage.passwords,
+            )
           ],
         ),
       ),

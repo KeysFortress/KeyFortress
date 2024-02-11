@@ -194,9 +194,9 @@ class ApplicationRouter {
                       child: PopScope(
                         canPop: true,
                         onPopInvoked: (b) async {
-                          GetIt.I
-                              .get<IPageRouterService>()
-                              .backToPrevious(context);
+                          // GetIt.I
+                          //     .get<IPageRouterService>()
+                          //     .backToPrevious(context);
                         },
                         child: e.$2,
                       ),
