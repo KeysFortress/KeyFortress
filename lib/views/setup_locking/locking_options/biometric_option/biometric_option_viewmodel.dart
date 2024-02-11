@@ -1,7 +1,6 @@
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
-import 'package:flutter/material.dart';
 import 'package:infrastructure/interfaces/iauthorization_service.dart';
 import 'package:shared/page_view_model.dart';
 
