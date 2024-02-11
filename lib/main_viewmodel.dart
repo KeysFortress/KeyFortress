@@ -97,6 +97,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
 
   Timer? timer;
   void resetTimer() {
+    timer?.cancel();
     timer = Timer.periodic(Duration(seconds: 30), (timer) {
       routerService.router.router.go("/");
     });
