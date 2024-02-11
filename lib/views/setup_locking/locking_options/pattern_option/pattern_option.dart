@@ -11,7 +11,7 @@ class PatternOption extends StatelessWidget {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => PatternOptionViewModel(context),
       builder: (context, viewModel, child) => AuthentinicationType(
-        heading: "Pin number",
+        heading: "Draw a Pattern",
         description:
             "Create a unique pattern to safeguard your digital space. Your personalized design becomes the key to seamless and protected access",
         images: [
