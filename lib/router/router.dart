@@ -15,6 +15,7 @@ import 'package:presentation/views/passwords/passwords_view.dart';
 import 'package:presentation/views/set_pin_number/set_pin_number.dart';
 import 'package:presentation/views/setup_locking/setup_locking.dart';
 import 'package:presentation/views/setup_pattern/setup_pattern.dart';
+import 'package:presentation/views/setup_totp_lock/setup_totp_lock.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
 import 'package:presentation/views/totp/totp_view.dart';
 import 'package:shared/unlock_panel/unlock_panel_view.dart';
@@ -161,6 +162,12 @@ class ApplicationRouter {
     (
       "setup-pattern",
       SetupPattern(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "setup-totp-lock",
+      SetupTotpLock(),
       1,
       Duration(milliseconds: 500),
     ),
