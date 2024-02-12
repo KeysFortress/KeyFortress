@@ -131,9 +131,16 @@ app.*.symbols
 !/dev/ci/**/Ge
 
 # Ignore submodule changes
-KF_Domain/
-KF_Application/
-KF_Components/
-KF_Infrastructure/
-KF_Localization/
-KF_Shared/
+KF_Domain/*
+KF_Application/*
+KF_Components/*
+KF_Infrastructure/*
+KF_Localization/*
+KF_Shared/*
+
+KF_Domain
+KF_Application
+KF_Components
+KF_Infrastructure
+KF_Localization
+KF_Shared
