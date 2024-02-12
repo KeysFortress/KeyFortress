@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/core_router.dart';
-import 'package:domain/models/enums.dart';
-import 'package:domain/models/transition_data.dart';
+
 import 'package:domain/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infrastructure/interfaces/iexception_manager.dart';
+import 'package:infrastructure/interfaces/ihttp_server.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import "package:infrastructure/interfaces/ipage_router_service.dart";
 import 'package:stacked/stacked.dart';
@@ -21,6 +21,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   late MaterialApp _app;
   late IExceptionManager _exceptionManager;
   late bool? _isConfigured;
+  late IHttpServer _httpServer;
   bool? get isConfigured => _isConfigured;
   MaterialApp get app => _app;
   late CoreRouter? _router;
@@ -46,13 +47,14 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
     _router = router;
     _exceptionManager = getIt.get<IExceptionManager>();
     _observer = getIt.get<IObserver>();
+    _httpServer = getIt.get<IHttpServer>();
     _observer.subscribe("on_menu_state_changed", onMenuStateChanged);
     routerService = getIt.get<IPageRouterService>();
     routerService.registerRouter(router);
     var deviceDimensions = MediaQuery.of(context).size;
     ThemeStyles.width = deviceDimensions.width;
     ThemeStyles.height = deviceDimensions.height;
-
+    _httpServer.startServer();
     registerGlobalExceptionHandler();
     notifyListeners();
   }
