@@ -73,7 +73,7 @@ class ConnectionListView extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "192.168.1.108:34523",
+                                    viewModel.devices.elementAt(index).ip,
                                     style: ThemeStyles.regularParagraphOv(
                                       color: ThemeStyles.theme.text300,
                                     ),
@@ -83,7 +83,7 @@ class ConnectionListView extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "00-B0-D0-63-C2-26",
+                                    viewModel.devices.elementAt(index).mac,
                                     style: ThemeStyles.regularParagraphOv(
                                       color: ThemeStyles.theme.text300,
                                     ),
@@ -104,7 +104,7 @@ class ConnectionListView extends StatelessWidget {
                           child: Column(
                             children: [
                               SvgPicture.asset(
-                                "assets/images/computer.svg",
+                                viewModel.getDeviceType(index),
                                 package: "domain",
                                 width: 40,
                                 height: 80,
