@@ -136,6 +136,8 @@ flutter:
 
 
     # certificates
+    - lib/certificates/cert.pem
+    - lib/certificates/key.pem
     #- packages/domain/assets/user_token.pub
     # localization
     - KF_Localization/en_US.json
