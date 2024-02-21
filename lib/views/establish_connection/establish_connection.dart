@@ -13,6 +13,7 @@ class EstablishConnectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => EstablishConnectionViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
         color: ThemeStyles.theme.background300,
         child: Column(
