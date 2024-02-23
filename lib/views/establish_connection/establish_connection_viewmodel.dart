@@ -18,7 +18,7 @@ class EstablishConnectionViewModel extends PageViewModel {
     _challange = await _networkService.requestChallange(_device);
   }
 
-  onPairPressed() {
-    _networkService.connectToDevice(_device, _challange);
+  onPairPressed() async {
+    await _networkService.connectToDevice(_device, _challange);
   }
 }
