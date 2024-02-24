@@ -1,18 +1,20 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
+import 'package:infrastructure/interfaces/idevices_service.dart';
 import 'package:shared/page_view_model.dart';
 import 'package:domain/models/device.dart';
 
 class ConnectDeviceScreenViewModel extends PageViewModel {
-  ConnectDeviceScreenViewModel(super.context);
-
+  late IDevicesService _devicesService;
   List<Device> _devices = [];
   List<Device> get devices => _devices;
 
-  onConnectNewDevice() {}
+  ConnectDeviceScreenViewModel(super.context) {
+    _devicesService = getIt.get<IDevicesService>();
+  }
 
-  ready() {
-    observer.getObserver("on_menu_state_changed", false);
+  ready() async {
+    _devices = await _devicesService.all();
   }
 
   onAddPressed() {}
@@ -33,4 +35,6 @@ class ConnectDeviceScreenViewModel extends PageViewModel {
       TransitionData(next: PageTransition.slideForward),
     );
   }
+
+  onConnectNewDevice() {}
 }
