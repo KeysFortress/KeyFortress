@@ -7,6 +7,7 @@ import 'package:domain/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:infrastructure/interfaces/iconfiguration.dart';
 import 'package:infrastructure/interfaces/iexception_manager.dart';
 import 'package:infrastructure/interfaces/ihttp_server.dart';
 import 'package:infrastructure/interfaces/ilogging_service.dart';
@@ -23,6 +24,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   late IExceptionManager _exceptionManager;
   late bool? _isConfigured;
   late IHttpServer _httpServer;
+  late IConfiguration _configuration;
   bool? get isConfigured => _isConfigured;
   MaterialApp get app => _app;
   late CoreRouter? _router;
@@ -48,6 +50,8 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
       WidgetsBinding.instance.addObserver(this);
       _context = context;
       _router = router;
+      _configuration = getIt.get<IConfiguration>();
+      await _configuration.load();
       _exceptionManager = getIt.get<IExceptionManager>();
       _observer = getIt.get<IObserver>();
       _httpServer = getIt.get<IHttpServer>();
