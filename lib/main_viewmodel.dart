@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infrastructure/interfaces/iexception_manager.dart';
 import 'package:infrastructure/interfaces/ihttp_server.dart';
+import 'package:infrastructure/interfaces/ilogging_service.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import "package:infrastructure/interfaces/ipage_router_service.dart";
 import 'package:stacked/stacked.dart';
@@ -30,6 +31,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   late IObserver _observer;
   bool isMenuVisible = true;
   bool isBottomMenuVisible = true;
+  late ILoggingService _loggingService = locator.getIt.get<ILoggingService>();
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -42,21 +44,25 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   }
 
   initialized(CoreRouter router, BuildContext context) async {
-    WidgetsBinding.instance.addObserver(this);
-    _context = context;
-    _router = router;
-    _exceptionManager = getIt.get<IExceptionManager>();
-    _observer = getIt.get<IObserver>();
-    _httpServer = getIt.get<IHttpServer>();
-    _observer.subscribe("on_menu_state_changed", onMenuStateChanged);
-    routerService = getIt.get<IPageRouterService>();
-    routerService.registerRouter(router);
-    var deviceDimensions = MediaQuery.of(context).size;
-    ThemeStyles.width = deviceDimensions.width;
-    ThemeStyles.height = deviceDimensions.height;
-    _httpServer.startServer();
-    registerGlobalExceptionHandler();
-    notifyListeners();
+    try {
+      WidgetsBinding.instance.addObserver(this);
+      _context = context;
+      _router = router;
+      _exceptionManager = getIt.get<IExceptionManager>();
+      _observer = getIt.get<IObserver>();
+      _httpServer = getIt.get<IHttpServer>();
+      _observer.subscribe("on_menu_state_changed", onMenuStateChanged);
+      routerService = getIt.get<IPageRouterService>();
+      routerService.registerRouter(router);
+      var deviceDimensions = MediaQuery.of(context).size;
+      ThemeStyles.width = deviceDimensions.width;
+      ThemeStyles.height = deviceDimensions.height;
+      _httpServer.startServer();
+      registerGlobalExceptionHandler();
+      notifyListeners();
+    } catch (ex) {
+      _loggingService.exception(ex.toString());
+    }
   }
 
   List<Widget> intersperse(Iterable<Widget> list, Widget item) {
