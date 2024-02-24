@@ -15,6 +15,7 @@ class ConnectDeviceScreenViewModel extends PageViewModel {
 
   ready() async {
     _devices = await _devicesService.all();
+    notifyListeners();
   }
 
   onAddPressed() {}
