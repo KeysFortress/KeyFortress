@@ -1,9 +1,7 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
 import 'package:presentation/views/connection_list/connection_list.dart';
