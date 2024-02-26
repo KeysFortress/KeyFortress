@@ -61,7 +61,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
       var deviceDimensions = MediaQuery.of(context).size;
       ThemeStyles.width = deviceDimensions.width;
       ThemeStyles.height = deviceDimensions.height;
-      _httpServer.startServer();
+      await _httpServer.startServer();
       registerGlobalExceptionHandler();
       notifyListeners();
     } catch (ex) {
@@ -112,6 +112,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
     timer?.cancel();
     timer = Timer.periodic(Duration(seconds: 30), (timer) {
       routerService.router.router.go("/");
+      timer.cancel();
     });
   }
 }
