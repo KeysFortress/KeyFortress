@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/core_router.dart';
@@ -13,6 +14,7 @@ import 'package:infrastructure/interfaces/ihttp_server.dart';
 import 'package:infrastructure/interfaces/ilogging_service.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import "package:infrastructure/interfaces/ipage_router_service.dart";
+import 'package:presentation/activity_observer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared/locator.dart' as locator;
 
@@ -34,7 +36,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   bool isMenuVisible = true;
   bool isBottomMenuVisible = true;
   late ILoggingService _loggingService = locator.getIt.get<ILoggingService>();
-
+  late ActivityObserver _activityObserver;
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -62,6 +64,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
       ThemeStyles.width = deviceDimensions.width;
       ThemeStyles.height = deviceDimensions.height;
       await _httpServer.startServer();
+      _activityObserver = ActivityObserver();
       registerGlobalExceptionHandler();
       notifyListeners();
     } catch (ex) {
@@ -104,15 +107,6 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
     isBottomMenuVisible = state;
     Future.delayed(Duration(milliseconds: 200), () {
       notifyListeners();
-    });
-  }
-
-  Timer? timer;
-  void resetTimer() {
-    timer?.cancel();
-    timer = Timer.periodic(Duration(seconds: 30), (timer) {
-      routerService.router.router.go("/");
-      timer.cancel();
     });
   }
 }
