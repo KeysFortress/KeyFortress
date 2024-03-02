@@ -1,14 +1,20 @@
+import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/device.dart';
+import 'package:domain/models/enums.dart';
+import 'package:domain/models/transition_data.dart';
 import 'package:infrastructure/interfaces/ilocal_network_service.dart';
+import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:shared/page_view_model.dart';
 
 class EstablishConnectionViewModel extends PageViewModel {
   late ILocalNetworkService _networkService;
+  late IPageRouterService _routerService;
   String _pairCode = "21345";
   String get pairCode => _pairCode;
   String _challange = "";
   EstablishConnectionViewModel(super.context) {
     _networkService = getIt.get<ILocalNetworkService>();
+    _routerService = getIt.get<IPageRouterService>();
   }
 
   late Device _device;
@@ -19,6 +25,21 @@ class EstablishConnectionViewModel extends PageViewModel {
   }
 
   onPairPressed() async {
-    await _networkService.connectToDevice(_device, _challange);
+    var result = await _networkService.connectToDevice(_device, _challange);
+
+    if (!result)
+      throw BaseException(
+        context: pageContext,
+        message: "Failed to pair with device or device already connected!",
+      );
+
+    _routerService.changePage(
+      "/connect-devices",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+      slice: true,
+      sliceCount: 2,
+      saveRoute: false,
+    );
   }
 }
