@@ -33,7 +33,7 @@ class DeviceView extends StatelessWidget {
                     context,
                     "assets/images/sync.svg",
                     "Full Sync",
-                    () {},
+                    viewModel.fullSyncPreessed,
                   ),
                 ),
                 DashboardToggle(
