@@ -3,6 +3,7 @@ import 'package:domain/models/transition_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
+import 'package:presentation/views/add_otp_secret/add_otp_secret.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
 import 'package:presentation/views/connection_list/connection_list.dart';
 import 'package:presentation/views/device/device_view.dart';
@@ -100,6 +101,12 @@ class ApplicationRouter {
     (
       "add-totp",
       AddOtpCodeView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "add-manual-totp",
+      AddOtpSecret(),
       1,
       Duration(milliseconds: 500),
     ),
