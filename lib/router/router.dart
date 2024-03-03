@@ -2,6 +2,7 @@ import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
 import 'package:presentation/views/add_otp_secret/add_otp_secret.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
@@ -10,6 +11,7 @@ import 'package:presentation/views/device/device_view.dart';
 import 'package:presentation/views/establish_connection/establish_connection.dart';
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
+import 'package:presentation/views/initialization_page/initialization.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
 import 'package:presentation/views/set_pin_number/set_pin_number.dart';
 import 'package:presentation/views/setup_locking/setup_locking.dart';
@@ -17,6 +19,7 @@ import 'package:presentation/views/setup_pattern/setup_pattern.dart';
 import 'package:presentation/views/setup_totp_lock/setup_totp_lock.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
 import 'package:presentation/views/totp/totp_view.dart';
+import 'package:shared/locator.dart';
 import 'package:shared/unlock_panel/unlock_panel_view.dart';
 
 class ApplicationRouter {
@@ -176,7 +179,14 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "lock",
+      UnlockPanelView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
+  static IPageRouterService _routerService = getIt.get<IPageRouterService>();
 
   static const Duration animationDuration = Duration(milliseconds: 500);
   static final GoRouter router = GoRouter(
@@ -184,7 +194,7 @@ class ApplicationRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return UnlockPanelView();
+          return InitializationView();
         },
         routes: <RouteBase>[
           ..._routes
@@ -193,15 +203,13 @@ class ApplicationRouter {
                   path: e.$1,
                   pageBuilder: (context, state) {
                     return CustomTransitionPage(
-                      maintainState: true,
+                      maintainState: false,
                       key: state.pageKey,
                       transitionDuration: e.$4,
                       child: PopScope(
-                        canPop: true,
+                        canPop: false,
                         onPopInvoked: (b) async {
-                          // GetIt.I
-                          //     .get<IPageRouterService>()
-                          //     .backToPrevious(context);
+                          _routerService.backToPrevious(context);
                         },
                         child: e.$2,
                       ),
@@ -234,8 +242,14 @@ class ApplicationRouter {
       Animation<double> secondaryAnimation,
       Widget child,
       GoRouterState state) {
-    var caller = state.extra as TransitionData;
+    var caller = state.extra as TransitionData?;
     print(state.path);
+
+    if (caller == null) {
+      return fadeTransision(
+          context, animation, secondaryAnimation, child, true);
+    }
+
     if (caller.next == PageTransition.easeInAndOut) {
       return fadeTransision(
           context, animation, secondaryAnimation, child, true);
