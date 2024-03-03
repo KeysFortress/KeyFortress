@@ -31,6 +31,16 @@ class TotpViewModel extends PageViewModel {
     notifyListeners();
   }
 
+  onAddPressed() {
+    router.changePage(
+      "/add-topt-secret",
+      pageContext,
+      TransitionData(
+        next: PageTransition.slideForward,
+      ),
+    );
+  }
+
   onScanPressed() {
     router.changePage(
       "/add-totp",
@@ -50,6 +60,4 @@ class TotpViewModel extends PageViewModel {
     _secrets = await _otpService.get();
     notifyListeners();
   }
-
-  onAddPressed() {}
 }
