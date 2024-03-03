@@ -31,7 +31,7 @@ class TotpViewModel extends PageViewModel {
     notifyListeners();
   }
 
-  onAddPressed() {
+  onScanPressed() {
     router.changePage(
       "/add-totp",
       pageContext,
@@ -50,4 +50,6 @@ class TotpViewModel extends PageViewModel {
     _secrets = await _otpService.get();
     notifyListeners();
   }
+
+  onAddPressed() {}
 }
