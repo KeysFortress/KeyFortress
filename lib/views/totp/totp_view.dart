@@ -1,4 +1,5 @@
 import 'package:components/custom_button/custom_button.dart';
+import 'package:components/dashboard_toggle/dasboard_toggle.dart';
 import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/main_navigation/main_navigation.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
@@ -9,6 +10,7 @@ import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:presentation/views/totp/totp_viewmodel.dart';
+import 'package:shared/base_component_toggle.dart';
 import 'package:stacked/stacked.dart';
 
 class TotpView extends StatelessWidget {
@@ -24,20 +26,31 @@ class TotpView extends StatelessWidget {
         child: Column(
           children: [
             MainNavigation(),
-            NavMenuInner(
-              location: "TOTP",
-              callback: () => viewModel.router.backToPrevious(context),
-              button: CustomButton(
-                callback: viewModel.onAddPressed,
-                widget: SvgPicture.asset(
-                  'assets/images/scan.svg',
-                  package: 'domain',
-                  colorFilter: ColorFilter.mode(
-                    ThemeStyles.theme.accent100,
-                    BlendMode.srcIn,
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                DashboardToggle(
+                  height: 100,
+                  viewModel: BaseComponentToggle(
+                    context,
+                    "assets/images/scan.svg",
+                    "Scan QR Code",
+                    viewModel.onScanPressed,
                   ),
                 ),
-              ),
+                DashboardToggle(
+                  height: 100,
+                  viewModel: BaseComponentToggle(
+                    context,
+                    "assets/images/add-square.svg",
+                    "Add Secret",
+                    viewModel.onAddPressed,
+                  ),
+                )
+              ],
             ),
             Expanded(
               flex: 1,

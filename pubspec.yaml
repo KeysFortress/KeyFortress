@@ -127,6 +127,7 @@ flutter:
     - packages/domain/assets/images/lock.svg
     - packages/domain/assets/images/pattern.svg
     - packages/domain/assets/images/totp-setup.svg
+    - packages/domain/assets/images/add-square.svg
 
     #Configs
     - packages/domain/config.json
