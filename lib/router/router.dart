@@ -105,7 +105,7 @@ class ApplicationRouter {
       Duration(milliseconds: 500),
     ),
     (
-      "add-manual-totp",
+      "add-topt-secret",
       AddOtpSecret(),
       1,
       Duration(milliseconds: 500),
