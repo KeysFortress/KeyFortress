@@ -37,15 +37,6 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
   bool isBottomMenuVisible = true;
   late ILoggingService _loggingService = locator.getIt.get<ILoggingService>();
   late ActivityObserver _activityObserver;
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      // App is in the foreground
-      // Perform tasks you want to execute when the app comes to the foreground
-      print("App is in the foreground");
-      routerService.router.router.go("/");
-    }
-  }
 
   initialized(CoreRouter router, BuildContext context) async {
     try {

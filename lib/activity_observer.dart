@@ -11,7 +11,7 @@ class ActivityObserver with WidgetsBindingObserver {
   late IPageRouterService _routerService;
 
   ActivityObserver() {
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     GestureBinding.instance.pointerRouter
         .addGlobalRoute(_globalUserInteractionHandler);
 
@@ -23,7 +23,8 @@ class ActivityObserver with WidgetsBindingObserver {
     _inactivityTimer = Timer.periodic(
       Duration(seconds: _inactivityThresholdSeconds),
       (timer) {
-        _routerService.router.router.go("/");
+        if (_routerService.router.router.location == "/lock") return;
+        _routerService.router.router.replace("/lock");
       },
     );
   }
@@ -39,7 +40,9 @@ class ActivityObserver with WidgetsBindingObserver {
 
     switch (state) {
       case AppLifecycleState.resumed:
-        _resetInactivityTimer();
+        if (_routerService.router.router.location == "/lock") return;
+
+        _routerService.router.router.replace("/lock");
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
@@ -54,7 +57,7 @@ class ActivityObserver with WidgetsBindingObserver {
   }
 
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _inactivityTimer.cancel();
   }
 }

@@ -1,6 +1,5 @@
 import 'package:domain/models/core_router.dart';
 import 'package:domain/styles.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:presentation/router/router.dart';
@@ -23,12 +22,6 @@ class MyApp extends StatelessWidget {
   final configured = false;
 
   MyApp({super.key});
-  @override
-  void initState() {}
-
-  _globalUserInteractionHandler(PointerEvent event) {
-    print("user interaction detected. $event");
-  }
 
   // This widget is the root of your application.
   @override
