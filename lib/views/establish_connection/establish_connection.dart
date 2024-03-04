@@ -1,7 +1,6 @@
 import 'package:components/custom_icon_button/custom_icon_button.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:domain/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -57,7 +56,7 @@ class EstablishConnectionView extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
-                                      "192.168.1.108:34523",
+                                      viewModel.device?.ip ?? "",
                                       style: ThemeStyles.regularParagraphOv(
                                         color: ThemeStyles.theme.text300,
                                       ),
@@ -67,7 +66,7 @@ class EstablishConnectionView extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "00-B0-D0-63-C2-26",
+                                      viewModel.device?.mac ?? "",
                                       style: ThemeStyles.regularParagraphOv(
                                         color: ThemeStyles.theme.text300,
                                       ),
@@ -88,7 +87,7 @@ class EstablishConnectionView extends StatelessWidget {
                             child: Column(
                               children: [
                                 SvgPicture.asset(
-                                  "assets/images/computer.svg",
+                                  viewModel.getDeviceImage(),
                                   package: "domain",
                                   width: 40,
                                   height: 80,
@@ -98,7 +97,7 @@ class EstablishConnectionView extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "Workstation",
+                                  viewModel.device?.name ?? "",
                                   style: ThemeStyles.innerHeadingOv(
                                     color: ThemeStyles.theme.accent200,
                                     fontSize: 18,
@@ -246,11 +245,11 @@ class EstablishConnectionView extends StatelessWidget {
                                   size: 35,
                                 ),
                                 const SizedBox(width: 8),
-                                Flexible(
+                                Expanded(
                                   child: Column(
                                     children: [
                                       Text(
-                                        "awdk=dwaddawd-dawdawd-awd-ddwa",
+                                        viewModel.device?.ip ?? "",
                                         style: ThemeStyles.regularParagraphOv(
                                           size: 14,
                                           color: ThemeStyles.theme.text300,
