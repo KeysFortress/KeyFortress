@@ -18,6 +18,7 @@ class EstablishConnectionViewModel extends PageViewModel {
   }
 
   late Device _device;
+  Device? get device => _device;
 
   ready() async {
     _device = router.getPageBindingData() as Device;
@@ -41,5 +42,16 @@ class EstablishConnectionViewModel extends PageViewModel {
       sliceCount: 2,
       saveRoute: false,
     );
+  }
+
+  String getDeviceImage() {
+    switch (_device.deviceType) {
+      case DeviceTypes.mobile:
+        return "assets/images/mobile.svg";
+      case DeviceTypes.desktop:
+        return "assets/images/computer.svg";
+      case DeviceTypes.tablet:
+        return "assets/images/tablet.svg";
+    }
   }
 }
