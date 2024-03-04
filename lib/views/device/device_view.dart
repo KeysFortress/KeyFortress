@@ -24,28 +24,36 @@ class DeviceView extends StatelessWidget {
               callback: () => viewModel.router.backToPrevious(context),
             ),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                DashboardToggle(
-                  height: 100,
-                  viewModel: BaseComponentToggle(
-                    context,
-                    "assets/images/sync.svg",
-                    "Full Sync",
-                    viewModel.fullSyncPreessed,
+            Container(
+              margin: EdgeInsets.only(left: 4, right: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: DashboardToggle(
+                      height: 100,
+                      viewModel: BaseComponentToggle(
+                        context,
+                        "assets/images/sync.svg",
+                        "Full Sync",
+                        viewModel.fullSyncPreessed,
+                      ),
+                    ),
                   ),
-                ),
-                DashboardToggle(
-                  height: 100,
-                  viewModel: BaseComponentToggle(
-                    context,
-                    "assets/images/partial-sync.svg",
-                    "Partial Sync",
-                    () {},
-                  ),
-                )
-              ],
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: DashboardToggle(
+                      height: 100,
+                      viewModel: BaseComponentToggle(
+                        context,
+                        "assets/images/checklist.svg",
+                        "Partial Sync",
+                        () {},
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.all(4),
@@ -62,7 +70,7 @@ class DeviceView extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.fromLTRB(4, 4, 4, 8),
+              margin: EdgeInsets.fromLTRB(4, 4, 4, 0),
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: ThemeStyles.theme.background100,
@@ -75,122 +83,125 @@ class DeviceView extends StatelessWidget {
               ),
             ),
             Expanded(
-                child: ListView.builder(
-              itemBuilder: (context, index) => Stack(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
-                    decoration: BoxDecoration(
-                      color: ThemeStyles.theme.background200,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          "Transaction public key",
-                          style: ThemeStyles.regularInnerHeading,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.public,
-                              color: ThemeStyles.theme.primary300,
-                              size: 35,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              "dawdawd awd d awd ad wad ad ",
-                              style: ThemeStyles.regularParagraphOv(
-                                color: ThemeStyles.theme.primary300,
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.date_range,
-                                  color: ThemeStyles.theme.primary300,
-                                  size: 35,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  "10/05/2024",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              "12:24",
-                              style: ThemeStyles.regularParagraphOv(
-                                color: ThemeStyles.theme.primary300,
-                              ),
-                            )
-                          ],
-                        ),
-                        CustomButton(
-                          widget: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+              child: ListView.builder(
+                itemCount: 12,
+                shrinkWrap: true,
+                itemBuilder: (context, index) => Stack(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+                      decoration: BoxDecoration(
+                        color: ThemeStyles.theme.background200,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            "Transaction public key",
+                            style: ThemeStyles.regularInnerHeading,
+                          ),
+                          Row(
                             children: [
                               Icon(
-                                Icons.arrow_downward,
-                                color: ThemeStyles.theme.accent200,
-                                size: 15,
+                                Icons.public,
+                                color: ThemeStyles.theme.primary300,
+                                size: 35,
                               ),
+                              const SizedBox(width: 8),
                               Text(
-                                "View Details",
-                                style: ThemeStyles.regularParagraph,
+                                "dawdawd awd d awd ad wad ad ",
+                                style: ThemeStyles.regularParagraphOv(
+                                  color: ThemeStyles.theme.primary300,
+                                ),
                               )
                             ],
                           ),
-                          callback: () {},
-                        )
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: 4,
-                    left: 8,
-                    child: Container(
-                      width: 120,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: ThemeStyles.theme.primary300,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(4),
-                          topLeft: Radius.circular(4),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                            Icons.connect_without_contact,
-                            size: 20,
-                            color: ThemeStyles.theme.text300,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.date_range,
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 35,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    "10/05/2024",
+                                    style: ThemeStyles.regularParagraphOv(
+                                      color: ThemeStyles.theme.primary300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "12:24",
+                                style: ThemeStyles.regularParagraphOv(
+                                  color: ThemeStyles.theme.primary300,
+                                ),
+                              )
+                            ],
                           ),
-                          Text(
-                            "OTC Sync",
-                            style: ThemeStyles.regularParagraphOv(
-                              color: ThemeStyles.theme.text300,
+                          CustomButton(
+                            widget: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.arrow_downward,
+                                  color: ThemeStyles.theme.accent200,
+                                  size: 15,
+                                ),
+                                Text(
+                                  "View Details",
+                                  style: ThemeStyles.regularParagraph,
+                                )
+                              ],
                             ),
+                            callback: () {},
                           )
                         ],
                       ),
                     ),
-                  )
-                ],
+                    Positioned(
+                      top: 4,
+                      left: 8,
+                      child: Container(
+                        width: 120,
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: ThemeStyles.theme.primary300,
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(4),
+                            topLeft: Radius.circular(4),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.connect_without_contact,
+                              size: 20,
+                              color: ThemeStyles.theme.text300,
+                            ),
+                            Text(
+                              "OTC Sync",
+                              style: ThemeStyles.regularParagraphOv(
+                                color: ThemeStyles.theme.text300,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ))
+            ),
           ],
         ),
       ),
