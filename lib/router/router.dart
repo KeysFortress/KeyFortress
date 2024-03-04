@@ -209,7 +209,7 @@ class ApplicationRouter {
                       child: PopScope(
                         canPop: false,
                         onPopInvoked: (b) async {
-                          _routerService.backToPrevious(context);
+                          if (!b) _routerService.backToPrevious(context);
                         },
                         child: e.$2,
                       ),
