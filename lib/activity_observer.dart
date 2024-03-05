@@ -62,7 +62,6 @@ class ActivityObserver with WidgetsBindingObserver {
         var lockType = await _authorizationService.getDeviceLockType();
         if (lockType == DeviceLockType.none) return;
 
-        _observer.getObserver("woken-up", null);
         if (_routerService.router.router.location == "/lock") return;
         _routerService.isLocked = true;
         _routerService.router.router.replace("/lock");
