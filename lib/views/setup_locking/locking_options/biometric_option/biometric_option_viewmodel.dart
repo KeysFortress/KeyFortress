@@ -21,7 +21,7 @@ class BiometricOptionViewModel extends PageViewModel {
       );
 
     router.changePage(
-      "/",
+      "/lock",
       pageContext,
       TransitionData(next: PageTransition.easeInAndOut),
     );
