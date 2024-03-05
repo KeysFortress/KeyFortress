@@ -1,5 +1,3 @@
-import 'package:domain/models/enums.dart';
-import 'package:domain/models/transition_data.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:shared/page_view_model.dart';
 
@@ -11,11 +9,7 @@ class InitializationViewModel extends PageViewModel {
 
   ready() {
     Future.delayed(Duration(milliseconds: 200), () {
-      _pageRouterService.changePage(
-        "/lock",
-        pageContext,
-        TransitionData(next: PageTransition.easeInAndOut),
-      );
+      _pageRouterService.router.router.go("/lock");
     });
   }
 }
