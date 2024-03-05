@@ -40,15 +40,15 @@ class ActivityObserver with WidgetsBindingObserver {
 
     switch (state) {
       case AppLifecycleState.resumed:
-        if (_routerService.router.router.location == "/lock") return;
-
-        _routerService.router.router.replace("/lock");
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
         break;
       case AppLifecycleState.hidden:
+        if (_routerService.router.router.location == "/lock") return;
+
+        _routerService.router.router.replace("/lock");
     }
   }
 

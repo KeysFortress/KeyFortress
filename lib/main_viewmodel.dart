@@ -40,17 +40,17 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
 
   initialized(CoreRouter router, BuildContext context) async {
     try {
-      WidgetsBinding.instance.addObserver(this);
       _context = context;
       _router = router;
       _configuration = getIt.get<IConfiguration>();
+      routerService = getIt.get<IPageRouterService>();
+      routerService.registerRouter(router);
+      WidgetsBinding.instance.addObserver(this);
       await _configuration.load();
       _exceptionManager = getIt.get<IExceptionManager>();
       _observer = getIt.get<IObserver>();
       _httpServer = getIt.get<IHttpServer>();
       _observer.subscribe("on_menu_state_changed", onMenuStateChanged);
-      routerService = getIt.get<IPageRouterService>();
-      routerService.registerRouter(router);
       var deviceDimensions = MediaQuery.of(context).size;
       ThemeStyles.width = deviceDimensions.width;
       ThemeStyles.height = deviceDimensions.height;
