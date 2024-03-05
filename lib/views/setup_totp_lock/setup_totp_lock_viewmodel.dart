@@ -27,12 +27,7 @@ class SetupTotpLockViewModel extends PageViewModel {
     if (!setLockType) {
       throw BaseException(context: pageContext, message: "Invalid QR Link");
     }
-
-    router.changePage(
-      "/passwords",
-      pageContext,
-      TransitionData(next: PageTransition.easeInAndOut),
-    );
+    router.router.router.go("/lock");
   }
 
   onSecretChanged(String secret) async {
@@ -55,10 +50,6 @@ class SetupTotpLockViewModel extends PageViewModel {
       throw BaseException(context: pageContext, message: "Invalid Link");
     }
 
-    router.changePage(
-      "/passwords",
-      pageContext,
-      TransitionData(next: PageTransition.easeInAndOut),
-    );
+    router.router.router.go("/lock");
   }
 }
