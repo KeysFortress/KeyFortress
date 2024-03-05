@@ -45,12 +45,8 @@ class SetupPatternViewModel extends PageViewModel {
 
         //TODO raise excepotion in case it fails
         if (!lockCreated) return;
+        router.router.router.go("/lock");
 
-        router.changePage(
-          "/passwords",
-          pageContext,
-          TransitionData(next: PageTransition.easeInAndOut),
-        );
         break;
     }
   }
