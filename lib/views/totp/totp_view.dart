@@ -7,7 +7,9 @@ import 'package:components/navigation_menu/navigation_menu.dart';
 import 'package:components/seconds_counter/seconds_counter.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:presentation/views/totp/totp_viewmodel.dart';
 import 'package:shared/base_component_toggle.dart';
@@ -29,28 +31,38 @@ class TotpView extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                DashboardToggle(
-                  height: 100,
-                  viewModel: BaseComponentToggle(
-                    context,
-                    "assets/images/scan.svg",
-                    "Scan QR Code",
-                    viewModel.onScanPressed,
+            Container(
+              margin: EdgeInsets.only(left: 4, right: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: DashboardToggle(
+                      height: 100,
+                      viewModel: BaseComponentToggle(
+                        context,
+                        "assets/images/scan.svg",
+                        "Scan QR Code",
+                        viewModel.onScanPressed,
+                      ),
+                    ),
                   ),
-                ),
-                DashboardToggle(
-                  height: 100,
-                  viewModel: BaseComponentToggle(
-                    context,
-                    "assets/images/add-square.svg",
-                    "Add Secret",
-                    viewModel.onAddPressed,
+                  const SizedBox(
+                    width: 8,
                   ),
-                )
-              ],
+                  Expanded(
+                    child: DashboardToggle(
+                      height: 100,
+                      viewModel: BaseComponentToggle(
+                        context,
+                        "assets/images/add-square.svg",
+                        "Add Secret",
+                        viewModel.onAddPressed,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             Expanded(
               flex: 1,
