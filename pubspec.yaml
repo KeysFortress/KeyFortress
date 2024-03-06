@@ -129,6 +129,8 @@ flutter:
     - packages/domain/assets/images/totp-setup.svg
     - packages/domain/assets/images/add-square.svg
     - packages/domain/assets/images/checklist.svg
+    - packages/domain/assets/images/exclamation-triangle.svg
+
 
     #Configs
     - packages/domain/config.json
