@@ -29,7 +29,9 @@ class SetPinNumberViewModel extends PageViewModel {
         DeviceLockType.password,
         value: _password,
       );
-      router.router.router.go("/lock");
+      router.isLocked = false;
+
+      router.router.router.go("/passwords");
     }
 
     if (_password.length == 6 && !_isConfirm) {
