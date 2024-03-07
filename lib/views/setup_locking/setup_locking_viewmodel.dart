@@ -5,7 +5,6 @@ import 'package:presentation/views/setup_locking/locking_options/biometric_not_s
 import 'package:presentation/views/setup_locking/locking_options/biometric_option/biometric_option.dart';
 import 'package:presentation/views/setup_locking/locking_options/pattern_option/pattern_option.dart';
 import 'package:presentation/views/setup_locking/locking_options/pin_option/pin_option.dart';
-import 'package:presentation/views/setup_locking/locking_options/totp_option/totp_option.dart';
 import 'package:shared/page_view_model.dart';
 
 class SetupLockingViewModel extends PageViewModel {
@@ -21,12 +20,15 @@ class SetupLockingViewModel extends PageViewModel {
   ScrollController get scrollController => _scrollController;
 
   ready() async {
-    var biometricSupported = await auth.isDeviceSupported();
+    var biometricSupported = await auth.getAvailableBiometrics();
+
     _lockOptions = [
-      biometricSupported ? BiometricOption() : BiometricNotSupported(),
+      biometricSupported.isNotEmpty &&
+              biometricSupported.any((element) => element.name == "strong")
+          ? BiometricOption()
+          : BiometricNotSupported(),
       PinOption(),
       PatternOption(),
-      TotpOption(),
     ];
   }
 
