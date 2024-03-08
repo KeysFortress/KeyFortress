@@ -1,11 +1,12 @@
 import 'package:components/custom_button/custom_button.dart';
+import 'package:components/simple_toggle/simple_toggle.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
+import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/views/device/device_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:components/dashboard_toggle/dasboard_toggle.dart';
-import 'package:shared/base_component_toggle.dart';
 
 class DeviceView extends StatelessWidget {
   const DeviceView({super.key});
@@ -30,42 +31,36 @@ class DeviceView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: DashboardToggle(
-                      height: 100,
-                      viewModel: BaseComponentToggle(
-                        context,
-                        "assets/images/sync.svg",
-                        "Full Sync",
-                        viewModel.fullSyncPreessed,
-                      ),
+                    child: SimpleToggle(
+                      height: 110,
+                      isActive: viewModel.activeType == SyncTypes.full,
+                      icon: "assets/images/sync.svg",
+                      title: "Full Sync",
+                      onPressed: viewModel.fullSyncPreessed,
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: DashboardToggle(
-                      height: 100,
-                      viewModel: BaseComponentToggle(
-                        context,
-                        "assets/images/checklist.svg",
-                        "Partial Sync",
-                        () {},
-                      ),
+                    child: SimpleToggle(
+                      height: 110,
+                      isActive: viewModel.activeType == SyncTypes.partial,
+                      icon: "assets/images/checklist.svg",
+                      title: "Partial Sync",
+                      onPressed: viewModel.fullSyncPreessed,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             Container(
+              width: double.infinity,
               margin: EdgeInsets.all(4),
-              child: DashboardToggle(
-                width: double.infinity,
-                height: 100,
-                viewModel: BaseComponentToggle(
-                  context,
-                  "assets/images/one-time-sync.svg",
-                  "One time connection",
-                  () {},
-                ),
+              child: SimpleToggle(
+                height: 110,
+                isActive: viewModel.activeType == SyncTypes.otc,
+                icon: "assets/images/one-time-sync.svg",
+                title: "One time connection",
+                onPressed: viewModel.fullSyncPreessed,
               ),
             ),
             Container(
