@@ -9,13 +9,18 @@ class DeviceViewModel extends PageViewModel {
   get deviceName => _deviceName;
   late Device _device;
 
+  SyncTypes _activeType = SyncTypes.otc;
+  SyncTypes get activeType => _activeType;
+
   DeviceViewModel(super.context) {
     _syncService = getIt.get<ISyncService>();
   }
 
-  ready() {
+  ready() async {
     _device = router.getPageBindingData() as Device;
     _deviceName = _device.name;
+    _activeType = await _syncService.getSyncType(_device.mac);
+
     notifyListeners();
   }
 
