@@ -6,7 +6,6 @@ import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/views/device/device_viewmodel.dart';
 import 'package:stacked/stacked.dart';
-import 'package:components/dashboard_toggle/dasboard_toggle.dart';
 
 class DeviceView extends StatelessWidget {
   const DeviceView({super.key});
@@ -46,7 +45,7 @@ class DeviceView extends StatelessWidget {
                       isActive: viewModel.activeType == SyncTypes.partial,
                       icon: "assets/images/checklist.svg",
                       title: "Partial Sync",
-                      onPressed: viewModel.fullSyncPreessed,
+                      onPressed: viewModel.onPartialSync,
                     ),
                   ),
                 ],

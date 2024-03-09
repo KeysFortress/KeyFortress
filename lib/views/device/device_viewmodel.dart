@@ -1,6 +1,7 @@
 import 'package:domain/models/device.dart';
 import 'package:domain/models/enums.dart';
 import 'package:shared/page_view_model.dart';
+import 'package:components/sync_data_picker/sync_data_picker.dart';
 import 'package:infrastructure/interfaces/isync_service.dart';
 
 class DeviceViewModel extends PageViewModel {
@@ -26,7 +27,20 @@ class DeviceViewModel extends PageViewModel {
 
   fullSyncPreessed() {
     _device.syncType = SyncTypes.full;
+    _activeType = SyncTypes.full;
+
     _syncService.setSyncType(_device.mac, SyncTypes.full);
     _syncService.synchronize(_device);
   }
+
+  onPartialSync() {
+    router.openBar(SyncDataPicker(onSelected: onSyncDataSelected), pageContext);
+    _device.syncType = SyncTypes.partial;
+    _activeType = SyncTypes.partial;
+
+    _syncService.setSyncType(_device.mac, SyncTypes.full);
+    notifyListeners();
+  }
+
+  onSyncDataSelected() {}
 }
