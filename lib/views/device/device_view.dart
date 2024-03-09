@@ -93,11 +93,7 @@ class DeviceView extends StatelessWidget {
                       child: Column(
                         children: [
                           const SizedBox(
-                            height: 16,
-                          ),
-                          Text(
-                            "Transaction public key",
-                            style: ThemeStyles.regularInnerHeading,
+                            height: 32,
                           ),
                           Row(
                             children: [
