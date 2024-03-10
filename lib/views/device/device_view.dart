@@ -59,7 +59,7 @@ class DeviceView extends StatelessWidget {
                 isActive: viewModel.activeType == SyncTypes.otc,
                 icon: "assets/images/one-time-sync.svg",
                 title: "One time connection",
-                onPressed: viewModel.fullSyncPreessed,
+                onPressed: viewModel.onOneTimeSelected,
               ),
             ),
             Container(
