@@ -34,13 +34,20 @@ class DeviceViewModel extends PageViewModel {
   }
 
   onPartialSync() {
-    router.openBar(SyncDataPicker(onSelected: onSyncDataSelected), pageContext);
+    router.openBar(
+      SyncDataPicker(
+        deviceId: _device.mac,
+        onSelected: onSyncDataSelected,
+      ),
+      pageContext,
+    );
+  }
+
+  onSyncDataSelected() {
     _device.syncType = SyncTypes.partial;
     _activeType = SyncTypes.partial;
 
-    _syncService.setSyncType(_device.mac, SyncTypes.full);
+    _syncService.setSyncType(_device.mac, SyncTypes.partial);
     notifyListeners();
   }
-
-  onSyncDataSelected() {}
 }
