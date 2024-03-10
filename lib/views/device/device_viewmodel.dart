@@ -52,11 +52,12 @@ class DeviceViewModel extends PageViewModel {
     );
   }
 
-  onSyncDataSelected() {
+  onSyncDataSelected() async {
     _device.syncType = SyncTypes.partial;
     _activeType = SyncTypes.partial;
 
-    _syncService.setSyncType(_device.mac, SyncTypes.partial);
+    await _syncService.setSyncType(_device.mac, SyncTypes.partial);
+    await _syncService.synchronize(_device);
     notifyListeners();
   }
 
@@ -69,7 +70,7 @@ class DeviceViewModel extends PageViewModel {
     );
   }
 
-  onOneTimePicked(dynamic data) {
+  onOneTimePicked(dynamic data) async {
     var type = data['type'];
     var content = "";
     switch (type) {
@@ -86,6 +87,7 @@ class DeviceViewModel extends PageViewModel {
         break;
     }
 
+    await _syncService.oneTimeSync(_device, content);
     router.dismissBar(pageContext);
   }
 }
