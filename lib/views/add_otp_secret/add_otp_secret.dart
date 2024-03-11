@@ -6,6 +6,7 @@ import 'package:components/seconds_counter/seconds_counter.dart';
 import 'package:components/topt_entry_box/totp_entry_box_viewmodel.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 
 class AddOtpSecret extends StatelessWidget {
@@ -15,90 +16,99 @@ class AddOtpSecret extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => TotpEntryBoxViewModel(context, null),
-      builder: (context, viewModel, child) => Column(
-        children: [
-          NavMenuInner(
-            location: "",
-            callback: () => viewModel.router.backToPrevious(context),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                  decoration: BoxDecoration(
-                    color: ThemeStyles.theme.background200,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: CustomTextField(
-                    floatingLabel: "TOTP Link",
-                    onChange: viewModel.onLinkChanged,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                  decoration: BoxDecoration(
-                    color: ThemeStyles.theme.background200,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Stack(
-                    children: [
-                      Column(
+      builder: (context, viewModel, child) => Container(
+        color: ThemeStyles.theme.primary300,
+        child: Column(
+          children: [
+            SafeArea(
+              child: NavMenuInner(
+                location: "",
+                callback: () => viewModel.router.backToPrevious(context),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: ThemeStyles.theme.background300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                      decoration: BoxDecoration(
+                        color: ThemeStyles.theme.background200,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: CustomTextField(
+                        floatingLabel: "TOTP Link",
+                        onChange: viewModel.onLinkChanged,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                      decoration: BoxDecoration(
+                        color: ThemeStyles.theme.background200,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Stack(
                         children: [
-                          Text(
-                            viewModel.getCode(),
-                            style: ThemeStyles.regularHeading,
-                          ),
-                          const HorizontalDivider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Column(
                             children: [
                               Text(
-                                viewModel.code == null
-                                    ? "--"
-                                    : viewModel.code!.address,
-                                style: ThemeStyles.regularParagraphOv(
-                                  size: 12,
-                                  color: ThemeStyles.theme.primary300,
-                                ),
+                                viewModel.getCode(),
+                                style: ThemeStyles.regularHeading,
                               ),
-                              Text(
-                                viewModel.code == null
-                                    ? "--"
-                                    : viewModel.code!.issuer,
-                                style: ThemeStyles.regularParagraphOv(
-                                  size: 12,
-                                  color: ThemeStyles.theme.primary300,
-                                ),
-                              )
+                              const HorizontalDivider(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    viewModel.code == null
+                                        ? "--"
+                                        : viewModel.code!.address,
+                                    style: ThemeStyles.regularParagraphOv(
+                                      size: 12,
+                                      color: ThemeStyles.theme.primary300,
+                                    ),
+                                  ),
+                                  Text(
+                                    viewModel.code == null
+                                        ? "--"
+                                        : viewModel.code!.issuer,
+                                    style: ThemeStyles.regularParagraphOv(
+                                      size: 12,
+                                      color: ThemeStyles.theme.primary300,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
+                          if (viewModel.code != null)
+                            const Positioned(
+                              left: 10,
+                              child: SecoondsCounter(),
+                            ),
                         ],
                       ),
-                      if (viewModel.code != null)
-                        const Positioned(
-                          left: 10,
-                          child: SecoondsCounter(),
-                        ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                      child: CustomIconButton(
+                        buttonColor: ThemeStyles.theme.primary300,
+                        height: 50,
+                        label: "Save",
+                        callback: viewModel.onSave,
+                      ),
+                    ),
+                  ],
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-                  child: CustomIconButton(
-                    buttonColor: ThemeStyles.theme.primary300,
-                    height: 50,
-                    label: "Save",
-                    callback: viewModel.onSave,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
