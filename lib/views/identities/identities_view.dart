@@ -17,27 +17,36 @@ class IdentititesView extends StatelessWidget {
       viewModelBuilder: () => IdentitiesViewModel(context),
       onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
-        color: ThemeStyles.theme.background300,
+        color: ThemeStyles.theme.primary300,
         child: Column(
           children: [
-            MainNavigation(),
-            DashboardHeader(
-              icon: "certificate.svg",
-              name: "Certificates",
-              type: ActiveNavigationPage.identities,
-              onNewPassword: viewModel.onGenerateCertificate,
-            ),
+            SafeArea(child: MainNavigation()),
             Expanded(
-              flex: 1,
-              child: ListView.builder(
-                itemCount: viewModel.identities.length,
-                itemBuilder: (context, index) => IdentityCard(
-                  identity: viewModel.identities.elementAt(index),
+              child: Container(
+                color: ThemeStyles.theme.background300,
+                child: Column(
+                  children: [
+                    DashboardHeader(
+                      icon: "certificate.svg",
+                      name: "Certificates",
+                      type: ActiveNavigationPage.identities,
+                      onNewPassword: viewModel.onGenerateCertificate,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ListView.builder(
+                        itemCount: viewModel.identities.length,
+                        itemBuilder: (context, index) => IdentityCard(
+                          identity: viewModel.identities.elementAt(index),
+                        ),
+                      ),
+                    ),
+                    NavigationMenu(
+                      currentPage: ActiveNavigationPage.identities,
+                    )
+                  ],
                 ),
               ),
-            ),
-            NavigationMenu(
-              currentPage: ActiveNavigationPage.identities,
             )
           ],
         ),
