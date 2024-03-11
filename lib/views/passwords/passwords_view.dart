@@ -4,9 +4,7 @@ import 'package:components/navigation_menu/navigation_menu.dart';
 import 'package:components/secret_card/secret_card.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:presentation/views/passwords/passwords_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
