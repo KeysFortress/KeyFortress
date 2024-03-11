@@ -1,6 +1,7 @@
 import 'package:domain/models/core_router.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:localization/localization.dart';
 import 'package:presentation/router/router.dart';
 import 'package:stacked/stacked.dart';
@@ -13,8 +14,10 @@ void main(List<String> args) async {
 
   locator.registerDependency();
   LocalJsonLocalization.delegate.directories = ['KF_Localization'];
-
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
