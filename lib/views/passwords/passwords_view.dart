@@ -17,27 +17,38 @@ class PasswordsView extends StatelessWidget {
       viewModelBuilder: () => PasswordsViewModel(context),
       onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
-        color: ThemeStyles.theme.background300,
+        color: ThemeStyles.theme.primary300,
         child: Column(
           children: [
-            MainNavigation(),
-            DashboardHeader(
-              icon: "secrets.svg",
-              name: "Passwords",
-              type: ActiveNavigationPage.passwords,
-              onNewPassword: viewModel.onGeneratePassword,
+            SafeArea(
+              child: MainNavigation(),
             ),
             Expanded(
-              flex: 1,
-              child: ListView.builder(
-                itemCount: viewModel.secrets.length,
-                itemBuilder: (context, index) => SecretCard(
-                  secret: viewModel.secrets.elementAt(index),
+              child: Container(
+                color: ThemeStyles.theme.background300,
+                child: Column(
+                  children: [
+                    DashboardHeader(
+                      icon: "secrets.svg",
+                      name: "Passwords",
+                      type: ActiveNavigationPage.passwords,
+                      onNewPassword: viewModel.onGeneratePassword,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ListView.builder(
+                        itemCount: viewModel.secrets.length,
+                        itemBuilder: (context, index) => SecretCard(
+                          secret: viewModel.secrets.elementAt(index),
+                        ),
+                      ),
+                    ),
+                    NavigationMenu(
+                      currentPage: ActiveNavigationPage.passwords,
+                    )
+                  ],
                 ),
               ),
-            ),
-            NavigationMenu(
-              currentPage: ActiveNavigationPage.passwords,
             )
           ],
         ),

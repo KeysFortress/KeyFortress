@@ -2,7 +2,6 @@ import 'package:components/custom_icon_button/custom_icon_button.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:presentation/views/establish_connection/establish_connection_viewmodel.dart';
 import 'package:stacked/stacked.dart';
@@ -285,7 +284,7 @@ class EstablishConnectionView extends StatelessWidget {
                                   size: 35,
                                 ),
                                 const SizedBox(width: 8),
-                                Flexible(
+                                Expanded(
                                   child: Column(
                                     children: [
                                       Text(
