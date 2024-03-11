@@ -34,12 +34,13 @@ class DeviceViewModel extends PageViewModel {
     notifyListeners();
   }
 
-  fullSyncPreessed() {
+  fullSyncPreessed() async {
     _device.syncType = SyncTypes.full;
     _activeType = SyncTypes.full;
 
-    _syncService.setSyncType(_device.mac, SyncTypes.full);
-    _syncService.synchronize(_device);
+    await _syncService.setSyncType(_device.mac, SyncTypes.full);
+    await _syncService.synchronize(_device);
+    notifyListeners();
   }
 
   onPartialSync() {
