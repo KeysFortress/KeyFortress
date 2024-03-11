@@ -18,57 +18,66 @@ class TotpView extends StatelessWidget {
       viewModelBuilder: () => TotpViewModel(context),
       onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
-        color: ThemeStyles.theme.background300,
+        color: ThemeStyles.theme.primary300,
         child: Column(
           children: [
-            MainNavigation(),
-            const SizedBox(
-              height: 8,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 4, right: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: DashboardToggle(
-                      height: 100,
-                      viewModel: BaseComponentToggle(
-                        context,
-                        "assets/images/scan.svg",
-                        "Scan QR Code",
-                        viewModel.onScanPressed,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                    child: DashboardToggle(
-                      height: 100,
-                      viewModel: BaseComponentToggle(
-                        context,
-                        "assets/images/add-square.svg",
-                        "Add Secret",
-                        viewModel.onAddPressed,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            SafeArea(child: MainNavigation()),
             Expanded(
-              flex: 1,
-              child: ListView.builder(
-                itemCount: viewModel.secrets.length,
-                itemBuilder: (context, index) => TotpCard(
-                  otpCode: viewModel.secrets.elementAt(index),
+              child: Container(
+                color: ThemeStyles.theme.background300,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 4, right: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: DashboardToggle(
+                              height: 100,
+                              viewModel: BaseComponentToggle(
+                                context,
+                                "assets/images/scan.svg",
+                                "Scan QR Code",
+                                viewModel.onScanPressed,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: DashboardToggle(
+                              height: 100,
+                              viewModel: BaseComponentToggle(
+                                context,
+                                "assets/images/add-square.svg",
+                                "Add Secret",
+                                viewModel.onAddPressed,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ListView.builder(
+                        itemCount: viewModel.secrets.length,
+                        itemBuilder: (context, index) => TotpCard(
+                          otpCode: viewModel.secrets.elementAt(index),
+                        ),
+                      ),
+                    ),
+                    NavigationMenu(
+                      currentPage: ActiveNavigationPage.totp,
+                    )
+                  ],
                 ),
               ),
-            ),
-            NavigationMenu(
-              currentPage: ActiveNavigationPage.totp,
             )
           ],
         ),
