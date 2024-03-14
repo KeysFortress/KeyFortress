@@ -46,6 +46,9 @@ class ActivityObserver with WidgetsBindingObserver {
 
         if (_routerService.router.router.location == "/lock") return;
         _routerService.isLocked = true;
+        if (_routerService.isBoxOpen)
+          _routerService.dismissBar(_routerService.lastContext);
+
         _routerService.router.router.replace("/lock");
       },
     );
@@ -82,6 +85,9 @@ class ActivityObserver with WidgetsBindingObserver {
 
         if (_routerService.router.router.location == "/lock") return;
         _routerService.isLocked = true;
+        if (_routerService.isBoxOpen)
+          _routerService.dismissBar(_routerService.lastContext);
+
         _routerService.router.router.replace("/lock");
     }
   }
