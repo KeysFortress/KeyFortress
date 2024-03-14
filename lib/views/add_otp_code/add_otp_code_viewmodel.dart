@@ -21,6 +21,8 @@ class AddOtpCodeViewModel extends PageViewModel {
     }
 
     await _otpService.add(otpLink);
+
+    observer.getObserver("on_sync_event", null);
     router.backToPrevious(pageContext);
   }
 }
