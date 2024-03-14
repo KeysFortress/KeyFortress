@@ -12,7 +12,9 @@ import 'package:shared/locator.dart';
 
 class ActivityObserver with WidgetsBindingObserver {
   static const int _inactivityThresholdSeconds = 60;
+  static const int _syncThresholdSeconds = 60;
   late Timer _inactivityTimer;
+  late Timer _syncTimer;
   late IPageRouterService _routerService;
   late IAuthorizationService _authorizationService;
   late ISyncService _syncService;
@@ -32,6 +34,7 @@ class ActivityObserver with WidgetsBindingObserver {
     _devicesService = getIt.get<IDevicesService>();
     _observer.subscribe("on_sync_event", onSyncEvent);
     _startInactivityTimer();
+    _startSyncTimer();
   }
 
   void _startInactivityTimer() {
@@ -44,6 +47,15 @@ class ActivityObserver with WidgetsBindingObserver {
         if (_routerService.router.router.location == "/lock") return;
         _routerService.isLocked = true;
         _routerService.router.router.replace("/lock");
+      },
+    );
+  }
+
+  void _startSyncTimer() {
+    _syncTimer = Timer.periodic(
+      Duration(seconds: _syncThresholdSeconds),
+      (timer) async {
+        await onSyncEvent();
       },
     );
   }
@@ -78,11 +90,6 @@ class ActivityObserver with WidgetsBindingObserver {
     _resetInactivityTimer();
   }
 
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    _inactivityTimer.cancel();
-  }
-
   onSyncEvent() {
     //TODO add check if sync on action is enabled once the settings are done.
     Future.microtask(() async {
@@ -91,5 +98,11 @@ class ActivityObserver with WidgetsBindingObserver {
         await _syncService.synchronize(element);
       }
     });
+  }
+
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _inactivityTimer.cancel();
+    _syncTimer.cancel();
   }
 }
