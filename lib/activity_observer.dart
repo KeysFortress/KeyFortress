@@ -4,8 +4,10 @@ import 'package:domain/models/enums.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:infrastructure/interfaces/iauthorization_service.dart';
+import 'package:infrastructure/interfaces/idevices_service.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
+import 'package:infrastructure/interfaces/isync_service.dart';
 import 'package:shared/locator.dart';
 
 class ActivityObserver with WidgetsBindingObserver {
@@ -13,6 +15,8 @@ class ActivityObserver with WidgetsBindingObserver {
   late Timer _inactivityTimer;
   late IPageRouterService _routerService;
   late IAuthorizationService _authorizationService;
+  late ISyncService _syncService;
+  late IDevicesService _devicesService;
 
   late IObserver _observer;
 
@@ -24,7 +28,9 @@ class ActivityObserver with WidgetsBindingObserver {
     _routerService = getIt.get<IPageRouterService>();
     _observer = getIt.get<IObserver>();
     _authorizationService = getIt.get<IAuthorizationService>();
-
+    _syncService = getIt.get<ISyncService>();
+    _devicesService = getIt.get<IDevicesService>();
+    _observer.subscribe("on_sync_event", onSyncEvent);
     _startInactivityTimer();
   }
 
@@ -75,5 +81,15 @@ class ActivityObserver with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _inactivityTimer.cancel();
+  }
+
+  onSyncEvent() {
+    //TODO add check if sync on action is enabled once the settings are done.
+    Future.microtask(() async {
+      var devices = await _devicesService.all();
+      for (var element in devices) {
+        await _syncService.synchronize(element);
+      }
+    });
   }
 }
