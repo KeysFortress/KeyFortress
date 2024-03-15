@@ -59,6 +59,7 @@ dependencies:
   url_launcher: ^6.2.3
   local_auth: ^2.1.8
   pattern_lock: ^2.0.0
+  charts_painter: ^3.1.1
 
 
 
