@@ -7,6 +7,7 @@ import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
 import 'package:presentation/views/add_otp_secret/add_otp_secret.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
 import 'package:presentation/views/connection_list/connection_list.dart';
+import 'package:presentation/views/dashboard/dashboard_view.dart';
 import 'package:presentation/views/device/device_view.dart';
 import 'package:presentation/views/establish_connection/establish_connection.dart';
 import 'package:presentation/views/identities/identities_view.dart';
@@ -192,6 +193,12 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "dashboard",
+      (),
+      1,
+      Duration(milliseconds: 500),
+    ),
   ];
   static IPageRouterService _routerService = getIt.get<IPageRouterService>();
 
@@ -201,7 +208,7 @@ class ApplicationRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return InitializationView();
+          return DashboardView();
         },
         routes: <RouteBase>[
           ..._routes
