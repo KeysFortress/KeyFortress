@@ -131,6 +131,10 @@ flutter:
     - packages/domain/assets/images/checklist.svg
     - packages/domain/assets/images/exclamation-triangle.svg
 
+    #Logo
+    - packages/domain/assets/logo/Logo.svg
+    - packages/domain/assets/logo/KeyFortress Icon.svg
+
 
     #Configs
     - packages/domain/config.json
