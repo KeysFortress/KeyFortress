@@ -1,5 +1,5 @@
 import 'package:components/dashboard_header/dashboard_header.dart';
-import 'package:components/main_navigation/main_navigation.dart';
+import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:components/navigation_menu/navigation_menu.dart';
 import 'package:components/secret_card/secret_card.dart';
 import 'package:domain/models/enums.dart';
@@ -21,7 +21,10 @@ class PasswordsView extends StatelessWidget {
         child: Column(
           children: [
             SafeArea(
-              child: MainNavigation(),
+              child: NavMenuInner(
+                location: "Passwords",
+                callback: () => viewModel.router.backToPrevious(context),
+              ),
             ),
             Expanded(
               child: Container(
