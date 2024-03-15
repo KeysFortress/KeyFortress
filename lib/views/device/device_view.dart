@@ -86,7 +86,7 @@ class DeviceView extends StatelessWidget {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: 12,
+                        itemCount: viewModel.syncEvents.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) => Stack(
                           children: [
@@ -111,7 +111,9 @@ class DeviceView extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        "dawdawd awd d awd ad wad ad ",
+                                        viewModel.syncEvents
+                                            .elementAt(index)
+                                            .ip,
                                         style: ThemeStyles.regularParagraphOv(
                                           color: ThemeStyles.theme.primary300,
                                         ),
@@ -131,7 +133,7 @@ class DeviceView extends StatelessWidget {
                                           ),
                                           const SizedBox(width: 8),
                                           Text(
-                                            "10/05/2024",
+                                            "${viewModel.syncEvents.elementAt(index).dateTime.day}/${viewModel.syncEvents.elementAt(index).dateTime.month}/${viewModel.syncEvents.elementAt(index).dateTime.year}",
                                             style:
                                                 ThemeStyles.regularParagraphOv(
                                               color:
@@ -141,7 +143,7 @@ class DeviceView extends StatelessWidget {
                                         ],
                                       ),
                                       Text(
-                                        "12:24",
+                                        "${viewModel.syncEvents.elementAt(index).dateTime.hour}:${viewModel.syncEvents.elementAt(index).dateTime.minute}",
                                         style: ThemeStyles.regularParagraphOv(
                                           color: ThemeStyles.theme.primary300,
                                         ),
@@ -192,7 +194,7 @@ class DeviceView extends StatelessWidget {
                                       color: ThemeStyles.theme.text300,
                                     ),
                                     Text(
-                                      "OTC Sync",
+                                      "${viewModel.getSyncType(viewModel.syncEvents.elementAt(index).type)} Sync",
                                       style: ThemeStyles.regularParagraphOv(
                                         color: ThemeStyles.theme.text300,
                                       ),

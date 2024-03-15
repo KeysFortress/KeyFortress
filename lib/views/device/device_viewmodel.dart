@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:domain/models/device.dart';
+import 'package:domain/models/device_sync_event.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/otp_code.dart';
 import 'package:domain/models/stored_identity.dart';
@@ -21,6 +22,9 @@ class DeviceViewModel extends PageViewModel {
   SyncTypes _activeType = SyncTypes.otc;
   SyncTypes get activeType => _activeType;
 
+  List<DeviceSyncEvent> _syncEvents = [];
+  List<DeviceSyncEvent> get syncEvents => _syncEvents;
+
   DeviceViewModel(super.context) {
     _syncService = getIt.get<ISyncService>();
     _otpService = getIt.get<IOtpService>();
@@ -30,6 +34,7 @@ class DeviceViewModel extends PageViewModel {
     _device = router.getPageBindingData() as Device;
     _deviceName = _device.name;
     _activeType = await _syncService.getSyncType(_device.mac);
+    _syncEvents = await _syncService.getSyncLog(_device.mac);
 
     notifyListeners();
   }
@@ -90,5 +95,16 @@ class DeviceViewModel extends PageViewModel {
 
     await _syncService.oneTimeSync(_device, content);
     router.dismissBar(pageContext);
+  }
+
+  getSyncType(int type) {
+    switch (type) {
+      case 1:
+        return "Full";
+      case 2:
+        return "Partial";
+      case 3:
+        return "OTC";
+    }
   }
 }
