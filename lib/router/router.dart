@@ -14,6 +14,7 @@ import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/initialization_page/initialization.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
 import 'package:presentation/views/set_pin_number/set_pin_number.dart';
+import 'package:presentation/views/settings/settings_view.dart';
 import 'package:presentation/views/setup_locking/setup_locking.dart';
 import 'package:presentation/views/setup_pattern/setup_pattern.dart';
 import 'package:presentation/views/setup_totp_lock/setup_totp_lock.dart';
@@ -182,6 +183,12 @@ class ApplicationRouter {
     (
       "lock",
       UnlockPanelView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "settings",
+      SettingsView(),
       1,
       Duration(milliseconds: 500),
     ),
