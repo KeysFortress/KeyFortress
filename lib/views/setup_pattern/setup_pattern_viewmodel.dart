@@ -47,7 +47,7 @@ class SetupPatternViewModel extends PageViewModel {
         if (!lockCreated) return;
         router.isLocked = false;
 
-        router.router.router.go("/passwords");
+        router.router.router.go("/dashboard");
 
         break;
     }

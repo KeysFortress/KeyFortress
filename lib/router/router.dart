@@ -195,7 +195,7 @@ class ApplicationRouter {
     ),
     (
       "dashboard",
-      (),
+      DashboardView(),
       1,
       Duration(milliseconds: 500),
     ),
@@ -208,7 +208,7 @@ class ApplicationRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return DashboardView();
+          return InitializationView();
         },
         routes: <RouteBase>[
           ..._routes

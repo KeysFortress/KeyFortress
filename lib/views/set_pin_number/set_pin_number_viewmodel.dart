@@ -1,5 +1,4 @@
 import 'package:domain/models/enums.dart';
-import 'package:domain/models/transition_data.dart';
 import 'package:infrastructure/interfaces/iauthorization_service.dart';
 import 'package:shared/page_view_model.dart';
 
@@ -31,7 +30,7 @@ class SetPinNumberViewModel extends PageViewModel {
       );
       router.isLocked = false;
 
-      router.router.router.go("/passwords");
+      router.router.router.go("/dashboard");
     }
 
     if (_password.length == 6 && !_isConfirm) {
