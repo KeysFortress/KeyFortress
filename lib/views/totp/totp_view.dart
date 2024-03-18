@@ -1,5 +1,5 @@
 import 'package:components/dashboard_toggle/dasboard_toggle.dart';
-import 'package:components/main_navigation/main_navigation.dart';
+import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:components/navigation_menu/navigation_menu.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
@@ -21,7 +21,12 @@ class TotpView extends StatelessWidget {
         color: ThemeStyles.theme.primary300,
         child: Column(
           children: [
-            SafeArea(child: MainNavigation()),
+            SafeArea(
+              child: NavMenuInner(
+                location: "TOTP/OTP",
+                callback: () => viewModel.router.backToPrevious(context),
+              ),
+            ),
             Expanded(
               child: Container(
                 color: ThemeStyles.theme.background300,
