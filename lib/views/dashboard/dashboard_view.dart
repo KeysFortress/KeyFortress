@@ -19,103 +19,106 @@ class DashboardView extends StatelessWidget {
         child: Column(
           children: [
             SafeArea(child: MainNavigation()),
-            Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: ThemeStyles.theme.background200,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Column(
-                children: [
-                  Chart(
-                    state: ChartState<void>(
-                      data: ChartData.fromList(
-                        [10, 5, 8, 2, 3, 6]
-                            .map(
-                              (e) => ChartItem<void>(
-                                e.toDouble(),
-                                value: "test",
-                              ),
-                            )
-                            .toList(),
-                      ),
-                      itemOptions: BarItemOptions(
-                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                        barItemBuilder: (_) => BarItem(
-                          color: ThemeStyles.theme.primary300,
-                        ),
-                      ),
-                      foregroundDecorations: [],
-                    ),
-                  ),
-                  Divider(
-                    thickness: 1,
-                    color: ThemeStyles.theme.primary300,
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "10 Passwords",
-                          style: ThemeStyles.regularParagraphOv(
-                            color: ThemeStyles.theme.primary300,
-                            size: 10,
-                          ),
-                        ),
-                        Text(
-                          "5 TOTP",
-                          style: ThemeStyles.regularParagraphOv(
-                            color: ThemeStyles.theme.primary300,
-                            size: 10,
-                          ),
-                        ),
-                        Text(
-                          "8 Identities",
-                          style: ThemeStyles.regularParagraphOv(
-                            color: ThemeStyles.theme.primary300,
-                            size: 10,
-                          ),
-                        ),
-                        Text(
-                          "2 RAC",
-                          style: ThemeStyles.regularParagraphOv(
-                            color: ThemeStyles.theme.primary300,
-                            size: 10,
-                          ),
-                        ),
-                        Text(
-                          "3 RLC",
-                          style: ThemeStyles.regularParagraphOv(
-                            color: ThemeStyles.theme.primary300,
-                            size: 10,
-                          ),
-                        ),
-                        Text(
-                          "3 Secrets",
-                          style: ThemeStyles.regularParagraphOv(
-                            color: ThemeStyles.theme.primary300,
-                            size: 10,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
             Expanded(
-              child: Container(
-                margin: EdgeInsets.only(top: 8),
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: ThemeStyles.theme.background200,
-                  borderRadius: BorderRadius.circular(4),
+              flex: 1,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: ThemeStyles.theme.background200,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Column(
+                        children: [
+                          Chart(
+                            state: ChartState<void>(
+                              data: ChartData.fromList(
+                                [10, 5, 8, 2, 3, 6]
+                                    .map(
+                                      (e) => ChartItem<void>(
+                                        e.toDouble(),
+                                        value: "test",
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                              itemOptions: BarItemOptions(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2.0),
+                                barItemBuilder: (_) => BarItem(
+                                  color: ThemeStyles.theme.primary300,
+                                ),
+                              ),
+                              foregroundDecorations: [],
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            color: ThemeStyles.theme.primary300,
+                          ),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "10 Passwords",
+                                  style: ThemeStyles.regularParagraphOv(
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 10,
+                                  ),
+                                ),
+                                Text(
+                                  "5 TOTP",
+                                  style: ThemeStyles.regularParagraphOv(
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 10,
+                                  ),
+                                ),
+                                Text(
+                                  "8 Identities",
+                                  style: ThemeStyles.regularParagraphOv(
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 10,
+                                  ),
+                                ),
+                                Text(
+                                  "2 RAC",
+                                  style: ThemeStyles.regularParagraphOv(
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 10,
+                                  ),
+                                ),
+                                Text(
+                                  "3 RLC",
+                                  style: ThemeStyles.regularParagraphOv(
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 10,
+                                  ),
+                                ),
+                                Text(
+                                  "3 Secrets",
+                                  style: ThemeStyles.regularParagraphOv(
+                                    color: ThemeStyles.theme.primary300,
+                                    size: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 200,
+                      child: ConnectedDevicesCarousel(),
+                    ),
+                    KeyboardMenu()
+                  ],
                 ),
-                child: ConnectedDevicesCarousel(),
               ),
             ),
-            Expanded(child: KeyboardMenu()),
           ],
         ),
       ),
