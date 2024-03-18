@@ -1,17 +1,14 @@
-import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/main_navigation/main_navigation.dart';
+import 'package:components/missing_connections/missing_connections.dart';
 import 'package:components/secret_card/secret_card.dart';
-import 'package:components/simple_toggle/simple_toggle.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/stored_secret.dart';
 import 'package:domain/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:presentation/views/dashboard/dashboard_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:charts_painter/chart.dart';
+import 'package:components/keyboard_menu/keyboard_menu.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -112,39 +109,14 @@ class DashboardView extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: 16),
+                margin: EdgeInsets.only(top: 8),
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: ThemeStyles.theme.background200,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: viewModel.connectedDevices.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            "assets/images/computer.svg",
-                            package: 'domain',
-                            fit: BoxFit.contain,
-                            height: 80,
-                            colorFilter: ColorFilter.mode(
-                              ThemeStyles.theme.primary300,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Text(
-                            "Oops. it appears that there are no nearby devices connected, please check if you're connected over wifi network as the device you're trying to reach.",
-                            style: ThemeStyles.regularParagraphOv(
-                              size: 12,
-                              color: ThemeStyles.theme.primary300,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      )
+                    ? MissingConnections()
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -173,103 +145,7 @@ class DashboardView extends StatelessWidget {
                       ),
               ),
             ),
-            Expanded(
-              child: Container(
-                color: ThemeStyles.theme.background300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 8, right: 8, top: 8),
-                      decoration: BoxDecoration(
-                        color: ThemeStyles.theme.background200,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SimpleToggle(
-                                  height: 120,
-                                  width: double.infinity,
-                                  icon: "assets/images/website-password.svg",
-                                  title: "Passwords",
-                                  isActive: false,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: SimpleToggle(
-                                  height: 120,
-                                  width: double.infinity,
-                                  icon: "assets/images/timer.svg",
-                                  title: "TOTP/OTP",
-                                  isActive: false,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: SimpleToggle(
-                                  height: 120,
-                                  width: double.infinity,
-                                  icon: "assets/images/certificate.svg",
-                                  title: "Identities",
-                                  isActive: false,
-                                  onPressed: () {},
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SimpleToggle(
-                                  height: 120,
-                                  width: double.infinity,
-                                  icon: "assets/images/rac.svg",
-                                  title: "RAC",
-                                  isActive: false,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: SimpleToggle(
-                                  height: 120,
-                                  width: double.infinity,
-                                  icon: "assets/images/rlc.svg",
-                                  title: "RLC",
-                                  isActive: false,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: SimpleToggle(
-                                  height: 120,
-                                  width: double.infinity,
-                                  icon: "assets/images/sync.svg",
-                                  title: "Pair",
-                                  isActive: false,
-                                  onPressed: () {},
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
+            Expanded(child: KeyboardMenu()),
           ],
         ),
       ),
