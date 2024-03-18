@@ -1,8 +1,6 @@
-import 'package:components/dashboard_header/dashboard_header.dart';
+import 'package:components/custom_button/custom_button.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
-import 'package:components/navigation_menu/navigation_menu.dart';
 import 'package:components/secret_card/secret_card.dart';
-import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/views/passwords/passwords_viewmodel.dart';
@@ -24,32 +22,28 @@ class PasswordsView extends StatelessWidget {
               child: NavMenuInner(
                 location: "Passwords",
                 callback: () => viewModel.router.backToPrevious(context),
+                button: CustomButton(
+                  widget: Row(
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: ThemeStyles.theme.accent100,
+                        size: 37.33,
+                      )
+                    ],
+                  ),
+                  callback: viewModel.onGeneratePassword,
+                ),
               ),
             ),
             Expanded(
               child: Container(
                 color: ThemeStyles.theme.background300,
-                child: Column(
-                  children: [
-                    DashboardHeader(
-                      icon: "secrets.svg",
-                      name: "Passwords",
-                      type: ActiveNavigationPage.passwords,
-                      onNewPassword: viewModel.onGeneratePassword,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: ListView.builder(
-                        itemCount: viewModel.secrets.length,
-                        itemBuilder: (context, index) => SecretCard(
-                          secret: viewModel.secrets.elementAt(index),
-                        ),
-                      ),
-                    ),
-                    NavigationMenu(
-                      currentPage: ActiveNavigationPage.passwords,
-                    )
-                  ],
+                child: ListView.builder(
+                  itemCount: viewModel.secrets.length,
+                  itemBuilder: (context, index) => SecretCard(
+                    secret: viewModel.secrets.elementAt(index),
+                  ),
                 ),
               ),
             )

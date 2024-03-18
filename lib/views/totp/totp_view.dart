@@ -1,7 +1,5 @@
 import 'package:components/dashboard_toggle/dasboard_toggle.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
-import 'package:components/navigation_menu/navigation_menu.dart';
-import 'package:domain/models/enums.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:components/totp_card/totp_card.dart';
@@ -77,9 +75,6 @@ class TotpView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    NavigationMenu(
-                      currentPage: ActiveNavigationPage.totp,
-                    )
                   ],
                 ),
               ),
