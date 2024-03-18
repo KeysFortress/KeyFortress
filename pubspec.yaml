@@ -133,6 +133,7 @@ flutter:
     - packages/domain/assets/images/exclamation-triangle.svg
     - packages/domain/assets/images/rac.svg
     - packages/domain/assets/images/rlc.svg
+    - packages/domain/assets/images/secrets_fill.svg
 
     #Logo
     - packages/domain/assets/logo/Logo.svg
