@@ -1,14 +1,11 @@
 import 'package:components/main_navigation/main_navigation.dart';
-import 'package:components/missing_connections/missing_connections.dart';
-import 'package:components/secret_card/secret_card.dart';
-import 'package:domain/models/enums.dart';
-import 'package:domain/models/stored_secret.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/views/dashboard/dashboard_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:charts_painter/chart.dart';
 import 'package:components/keyboard_menu/keyboard_menu.dart';
+import 'package:components/connected_devices_carousel/connected_devices_carousel.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -115,34 +112,7 @@ class DashboardView extends StatelessWidget {
                   color: ThemeStyles.theme.background200,
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: viewModel.connectedDevices.isEmpty
-                    ? MissingConnections()
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Connected Devices",
-                            style: ThemeStyles.regularParagraph,
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: 25,
-                              itemBuilder: (context, index) => SecretCard(
-                                secret: StoredSecret(
-                                  id: "",
-                                  name: "dawdwa",
-                                  username: "",
-                                  content: "",
-                                  lastUsed: DateTime.now(),
-                                  secretType: SecretType.password,
-                                ),
-                                copyEnabled: false,
-                                onActionCallback: () {},
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                child: ConnectedDevicesCarousel(),
               ),
             ),
             Expanded(child: KeyboardMenu()),
