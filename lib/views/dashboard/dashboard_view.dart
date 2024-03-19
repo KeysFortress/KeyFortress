@@ -1,6 +1,7 @@
 import 'package:components/main_navigation/main_navigation.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:presentation/views/dashboard/dashboard_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:charts_painter/chart.dart';
@@ -59,49 +60,62 @@ class DashboardView extends StatelessWidget {
                             color: ThemeStyles.theme.primary300,
                           ),
                           Container(
+                            margin: EdgeInsets.only(left: 30, right: 30),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "10 Passwords",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                    size: 10,
+                                SvgPicture.asset(
+                                  "assets/images/website-password.svg",
+                                  package: 'domain',
+                                  width: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
-                                Text(
-                                  "5 TOTP",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                    size: 10,
+                                SvgPicture.asset(
+                                  "assets/images/timer.svg",
+                                  package: 'domain',
+                                  width: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
-                                Text(
-                                  "8 Identities",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                    size: 10,
+                                SvgPicture.asset(
+                                  "assets/images/certificate.svg",
+                                  package: 'domain',
+                                  width: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
-                                Text(
-                                  "2 RAC",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                    size: 10,
+                                SvgPicture.asset(
+                                  "assets/images/rac.svg",
+                                  package: 'domain',
+                                  width: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
-                                Text(
-                                  "3 RLC",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                    size: 10,
+                                SvgPicture.asset(
+                                  "assets/images/rlc.svg",
+                                  package: 'domain',
+                                  width: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
-                                Text(
-                                  "3 Secrets",
-                                  style: ThemeStyles.regularParagraphOv(
-                                    color: ThemeStyles.theme.primary300,
-                                    size: 10,
+                                SvgPicture.asset(
+                                  "assets/images/secrets_fill.svg",
+                                  package: 'domain',
+                                  width: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
                               ],
