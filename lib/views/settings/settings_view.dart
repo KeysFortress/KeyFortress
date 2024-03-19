@@ -14,6 +14,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => SettingsViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
         color: ThemeStyles.theme.primary300,
         child: Column(
@@ -66,6 +67,7 @@ class SettingsView extends StatelessWidget {
                                       Icons.phone_android_rounded,
                                       color: ThemeStyles.theme.primary300,
                                     ),
+                                    const SizedBox(width: 8),
                                     Text(
                                       "Name: ",
                                       style: ThemeStyles.regularHeading,
@@ -90,6 +92,7 @@ class SettingsView extends StatelessWidget {
                                       Icons.wifi,
                                       color: ThemeStyles.theme.primary300,
                                     ),
+                                    const SizedBox(width: 8),
                                     Text(
                                       "Local address: ",
                                       style: ThemeStyles.regularHeading,
@@ -97,7 +100,7 @@ class SettingsView extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                  "192.168.0.103",
+                                  viewModel.localAddress,
                                   style: ThemeStyles.regularHeading,
                                 ),
                               ],

@@ -1,8 +1,10 @@
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
+import 'package:infrastructure/interfaces/ilocal_network_service.dart';
 import 'package:shared/page_view_model.dart';
 
 class SettingsViewModel extends PageViewModel {
+  late ILocalNetworkService _localNetworkService;
   bool _isQrPessed = false;
   bool get isQrPressed => _isQrPessed;
   String getConnectionString = """
@@ -20,7 +22,17 @@ class SettingsViewModel extends PageViewModel {
 }
 """;
 
-  SettingsViewModel(super.context);
+  String _localAddress = "--";
+  String get localAddress => _localAddress;
+
+  SettingsViewModel(super.context) {
+    _localNetworkService = getIt.get<ILocalNetworkService>();
+  }
+
+  ready() async {
+    _localAddress = await _localNetworkService.getLocalAddress();
+    notifyListeners();
+  }
 
   onSyncPressed() {}
 
