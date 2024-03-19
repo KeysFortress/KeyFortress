@@ -15,6 +15,7 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => DashboardViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
         color: ThemeStyles.theme.background300,
         child: Column(
@@ -36,7 +37,14 @@ class DashboardView extends StatelessWidget {
                           Chart(
                             state: ChartState<void>(
                               data: ChartData.fromList(
-                                [10, 5, 8, 2, 3, 6]
+                                [
+                                  viewModel.secrets,
+                                  viewModel.optSecrets,
+                                  viewModel.identities,
+                                  viewModel.rac,
+                                  viewModel.rlc,
+                                  viewModel.personalSecrets,
+                                ]
                                     .map(
                                       (e) => ChartItem<void>(
                                         e.toDouble(),
