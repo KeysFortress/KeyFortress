@@ -1,3 +1,5 @@
+import 'package:domain/models/enums.dart';
+import 'package:domain/models/transition_data.dart';
 import 'package:shared/page_view_model.dart';
 
 class SettingsViewModel extends PageViewModel {
@@ -25,5 +27,13 @@ class SettingsViewModel extends PageViewModel {
   onQrPressed() {
     _isQrPessed = !_isQrPessed;
     notifyListeners();
+  }
+
+  onLockOptionsPressed() {
+    router.changePage(
+      "/lock-options",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
   }
 }

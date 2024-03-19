@@ -152,7 +152,7 @@ class SettingsView extends StatelessWidget {
                             ),
                             CustomIconButton(
                               label: "Lock options",
-                              callback: viewModel.onSyncPressed,
+                              callback: viewModel.onLockOptionsPressed,
                               height: 50,
                               buttonColor: ThemeStyles.theme.primary300,
                             ),
