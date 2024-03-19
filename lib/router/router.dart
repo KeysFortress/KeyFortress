@@ -13,9 +13,11 @@ import 'package:presentation/views/establish_connection/establish_connection.dar
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
 import 'package:presentation/views/initialization_page/initialization.dart';
+import 'package:presentation/views/lock_options/lock_options.dart';
 import 'package:presentation/views/passwords/passwords_view.dart';
 import 'package:presentation/views/set_pin_number/set_pin_number.dart';
 import 'package:presentation/views/settings/settings_view.dart';
+import 'package:presentation/views/setup_locking/locking_options/biometric_option/biometric_option.dart';
 import 'package:presentation/views/setup_locking/setup_locking.dart';
 import 'package:presentation/views/setup_pattern/setup_pattern.dart';
 import 'package:presentation/views/setup_totp_lock/setup_totp_lock.dart';
@@ -164,6 +166,12 @@ class ApplicationRouter {
       Duration(milliseconds: 500),
     ),
     (
+      "setup-biometric",
+      BiometricOption(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
       "setup-pin",
       SetPinNumber(),
       1,
@@ -196,6 +204,12 @@ class ApplicationRouter {
     (
       "dashboard",
       DashboardView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "lock-options",
+      LockOptions(),
       1,
       Duration(milliseconds: 500),
     ),
