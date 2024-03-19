@@ -65,12 +65,14 @@ class LockOptionsViewModel extends PageViewModel {
   void onTimeBasedLockChanged(bool value) async {
     await _authorizationService.setLockTimeEnabled(value);
     _isTimeLockEnabled = value;
+    observer.getObserver("timer_disabled", value);
     notifyListeners();
   }
 
   void onMinimizeLockChanged(bool value) async {
     await _authorizationService.setMinimizeLockEnabled(value);
     _isMinimizeLockEnabled = value;
+    observer.getObserver("minimize_disabled", value);
     notifyListeners();
   }
 

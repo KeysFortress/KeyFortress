@@ -11,16 +11,19 @@ import 'package:infrastructure/interfaces/isync_service.dart';
 import 'package:shared/locator.dart';
 
 class ActivityObserver with WidgetsBindingObserver {
-  static const int _inactivityThresholdSeconds = 60;
-  static const int _syncThresholdSeconds = 60;
   late Timer _inactivityTimer;
   late Timer _syncTimer;
   late IPageRouterService _routerService;
   late IAuthorizationService _authorizationService;
   late ISyncService _syncService;
   late IDevicesService _devicesService;
-
   late IObserver _observer;
+
+  bool _isTimerLockEnabled = true;
+  bool _lockOnMinimize = false;
+
+  static const int _inactivityThresholdSeconds = 60;
+  static const int _syncThresholdSeconds = 60;
 
   ActivityObserver() {
     WidgetsBinding.instance.addObserver(this);
@@ -32,8 +35,22 @@ class ActivityObserver with WidgetsBindingObserver {
     _authorizationService = getIt.get<IAuthorizationService>();
     _syncService = getIt.get<ISyncService>();
     _devicesService = getIt.get<IDevicesService>();
+
     _observer.subscribe("on_sync_event", onSyncEvent);
-    _startInactivityTimer();
+    _observer.subscribe("timer_disabled", onTimerChanged);
+    _observer.subscribe("minimize_disabled", onMinimizeChanged);
+    _authorizationService.isTimeLockEnabled().then(
+      (value) {
+        _isTimerLockEnabled = value;
+        if (value) _startInactivityTimer();
+      },
+    );
+
+    _authorizationService.isMinimizeLockEnabled().then(
+      (value) {
+        _lockOnMinimize = value;
+      },
+    );
     _startSyncTimer();
   }
 
@@ -41,6 +58,8 @@ class ActivityObserver with WidgetsBindingObserver {
     _inactivityTimer = Timer.periodic(
       Duration(seconds: _inactivityThresholdSeconds),
       (timer) async {
+        if (!_isTimerLockEnabled) return;
+
         var lockType = await _authorizationService.getDeviceLockType();
         if (lockType == DeviceLockType.none) return;
 
@@ -80,6 +99,8 @@ class ActivityObserver with WidgetsBindingObserver {
       case AppLifecycleState.detached:
         break;
       case AppLifecycleState.hidden:
+        if (!_lockOnMinimize) return;
+
         var lockType = await _authorizationService.getDeviceLockType();
         if (lockType == DeviceLockType.none) return;
 
@@ -106,9 +127,27 @@ class ActivityObserver with WidgetsBindingObserver {
     });
   }
 
+  onTimerDisabled() {}
+
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _inactivityTimer.cancel();
     _syncTimer.cancel();
+  }
+
+  onTimerChanged(bool state) {
+    if (state) {
+      _inactivityTimer.cancel();
+      _isTimerLockEnabled = true;
+      _startInactivityTimer();
+
+      return;
+    }
+    _isTimerLockEnabled = false;
+    _inactivityTimer.cancel();
+  }
+
+  onMinimizeChanged(bool state) {
+    _lockOnMinimize = state;
   }
 }
