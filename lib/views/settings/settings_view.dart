@@ -75,7 +75,7 @@ class SettingsView extends StatelessWidget {
                                   ],
                                 ),
                                 Text(
-                                  "Galaxy S20",
+                                  viewModel.deviceName,
                                   style: ThemeStyles.regularHeading,
                                 ),
                               ],
@@ -110,7 +110,7 @@ class SettingsView extends StatelessWidget {
                             ),
                             CustomIconButton(
                               label: "Device",
-                              callback: viewModel.onSyncPressed,
+                              callback: viewModel.onDeviceSettingPressed,
                               height: 50,
                               buttonColor: ThemeStyles.theme.primary300,
                             ),

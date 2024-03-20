@@ -8,19 +8,19 @@ class SettingsViewModel extends PageViewModel {
   bool _isQrPessed = false;
   bool get isQrPressed => _isQrPessed;
   String getConnectionString = """
-{
-  publicKey: {
-    challenge: new Uint8Array([117, 61, 252, 231, 191, 241, ...]),
-    rp: { id: "acme.com", name: "ACME Corporation" },
-    user: {
-      id: new Uint8Array([79, 252, 83, 72, 214, 7, 89, 26]),
-      name: "jamiedoe",
-      displayName: "Jamie Doe"
-    },
-    pubKeyCredParams: [ {type: "public-key", alg: -7} ]
+  {
+    publicKey: {
+      challenge: new Uint8Array([117, 61, 252, 231, 191, 241, ...]),
+      rp: { id: "acme.com", name: "ACME Corporation" },
+      user: {
+        id: new Uint8Array([79, 252, 83, 72, 214, 7, 89, 26]),
+        name: "jamiedoe",
+        displayName: "Jamie Doe"
+      },
+      pubKeyCredParams: [ {type: "public-key", alg: -7} ]
+    }
   }
-}
-""";
+  """;
 
   String _localAddress = "--";
   String get localAddress => _localAddress;
@@ -29,8 +29,13 @@ class SettingsViewModel extends PageViewModel {
     _localNetworkService = getIt.get<ILocalNetworkService>();
   }
 
+  String _deviceName = "--";
+  String get deviceName => _deviceName;
+
   ready() async {
     _localAddress = await _localNetworkService.getLocalAddress();
+    var deviceData = await _localNetworkService.getNetworkData();
+    _deviceName = deviceData.name;
     notifyListeners();
   }
 
@@ -39,6 +44,14 @@ class SettingsViewModel extends PageViewModel {
   onQrPressed() {
     _isQrPessed = !_isQrPessed;
     notifyListeners();
+  }
+
+  onDeviceSettingPressed() {
+    router.changePage(
+      "/device-setting",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
   }
 
   onLockOptionsPressed() {
