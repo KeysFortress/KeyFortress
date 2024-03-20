@@ -23,6 +23,7 @@ import 'package:presentation/views/setup_locking/setup_locking.dart';
 import 'package:presentation/views/setup_pattern/setup_pattern.dart';
 import 'package:presentation/views/setup_totp_lock/setup_totp_lock.dart';
 import 'package:presentation/views/start_auth/start_auth_view.dart';
+import 'package:presentation/views/sync_settings/sync_settings.dart';
 import 'package:presentation/views/totp/totp_view.dart';
 import 'package:shared/locator.dart';
 import 'package:shared/unlock_panel/unlock_panel_view.dart';
@@ -217,6 +218,12 @@ class ApplicationRouter {
     (
       "lock-options",
       LockOptions(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "sync-settings",
+      SyncSettings(),
       1,
       Duration(milliseconds: 500),
     ),

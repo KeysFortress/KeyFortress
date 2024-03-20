@@ -39,8 +39,6 @@ class SettingsViewModel extends PageViewModel {
     notifyListeners();
   }
 
-  onSyncPressed() {}
-
   onQrPressed() {
     _isQrPessed = !_isQrPessed;
     notifyListeners();
@@ -49,6 +47,14 @@ class SettingsViewModel extends PageViewModel {
   onDeviceSettingPressed() {
     router.changePage(
       "/device-setting",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
+  }
+
+  onSyncPressed() {
+    router.changePage(
+      "/sync-settings",
       pageContext,
       TransitionData(next: PageTransition.slideForward),
     );

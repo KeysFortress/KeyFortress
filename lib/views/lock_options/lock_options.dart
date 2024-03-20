@@ -157,9 +157,6 @@ class LockOptions extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: 16,
-                            ),
                             Container(
                               width: ThemeStyles.width,
                               padding: const EdgeInsets.all(12),
