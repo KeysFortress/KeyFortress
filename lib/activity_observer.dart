@@ -114,7 +114,7 @@ class ActivityObserver with WidgetsBindingObserver {
   }
 
   void _globalUserInteractionHandler(PointerEvent event) {
-    _resetInactivityTimer();
+    if (_isTimerLockEnabled) _resetInactivityTimer();
   }
 
   onSyncEvent() {

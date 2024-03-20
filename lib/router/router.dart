@@ -9,6 +9,7 @@ import 'package:presentation/views/connect_device_screen/connect_device_screen_v
 import 'package:presentation/views/connection_list/connection_list.dart';
 import 'package:presentation/views/dashboard/dashboard_view.dart';
 import 'package:presentation/views/device/device_view.dart';
+import 'package:presentation/views/device_setting/device_setting.dart';
 import 'package:presentation/views/establish_connection/establish_connection.dart';
 import 'package:presentation/views/identities/identities_view.dart';
 import 'package:presentation/views/identity_history/identity_history_view.dart';
@@ -138,6 +139,12 @@ class ApplicationRouter {
     (
       "device",
       DeviceView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "device-setting",
+      DeviceSetting(),
       1,
       Duration(milliseconds: 500),
     ),
