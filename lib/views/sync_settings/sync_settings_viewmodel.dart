@@ -61,12 +61,30 @@ class SyncSettingsViewModel extends PageViewModel {
   void onSyncStateChanged(bool value) async {
     _enabled = value;
     await _syncService.setServiceState(value);
+    _syncOnAction = value;
+    _afterPasswordActionEnabled = value;
+    _onAfterIdentityActionEnabled = value;
+    _onAfterSecretActionEnabled = value;
+    _onAfterRacActionEnabled = value;
+    _onAfterRlcActionEnabled = value;
+    _onAfterTotpActionEnabled = value;
+    _onSyncOnConnectionEnabled = value;
+
+    _onTimeBasedEnabled = value;
+
     notifyListeners();
   }
 
   void onSyncOnActionChanged(bool value) async {
     _syncOnAction = value;
     await _syncService.setSyncOnAction(value);
+    _afterPasswordActionEnabled = value;
+    _onAfterIdentityActionEnabled = value;
+    _onAfterSecretActionEnabled = value;
+    _onAfterRacActionEnabled = value;
+    _onAfterRlcActionEnabled = value;
+    _onAfterTotpActionEnabled = value;
+
     notifyListeners();
   }
 

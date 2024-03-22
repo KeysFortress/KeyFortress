@@ -20,7 +20,6 @@ class PasswordsViewModel extends PageViewModel {
 
   onGeneratePassword() {
     var password = _secretManger.generateSecret();
-    print(password);
     router.openBar(
       PasswordEntryBox(
         password: password,

@@ -12,6 +12,7 @@ class SyncSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => SyncSettingsViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Material(
         color: ThemeStyles.theme.primary300,
         child: Column(
@@ -85,9 +86,9 @@ class SyncSettings extends StatelessWidget {
                                         ThemeStyles.theme.primary100,
                                     inactiveTrackColor:
                                         ThemeStyles.theme.primary300,
-                                    value: false,
+                                    value: viewModel.enabled,
                                     activeColor: ThemeStyles.theme.primary300,
-                                    onChanged: (state) {},
+                                    onChanged: viewModel.onSyncStateChanged,
                                   )
                                 ],
                               ),
@@ -125,10 +126,11 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value: viewModel.syncOnAction,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onSyncOnActionChanged,
                                       )
                                     ],
                                   ),
@@ -161,10 +163,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value: viewModel
+                                            .afterPasswordActionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged: viewModel
+                                            .onAfterPasswordActionChanged,
                                       )
                                     ],
                                   ),
@@ -184,10 +188,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value: viewModel
+                                            .onAfterIdentityActionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onAfterIdentityChanged,
                                       )
                                     ],
                                   ),
@@ -207,10 +213,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value: viewModel
+                                            .onAfterSecretActionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onAfterSecretAction,
                                       )
                                     ],
                                   ),
@@ -230,10 +238,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value:
+                                            viewModel.onAfterRlcActionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onAfterRlcActionChanged,
                                       )
                                     ],
                                   ),
@@ -253,10 +263,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value:
+                                            viewModel.onAfterRacActionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onAfterRacActionChanged,
                                       )
                                     ],
                                   ),
@@ -276,10 +288,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value:
+                                            viewModel.onAfterTotpActionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onAfteToTpActinChanged,
                                       )
                                     ],
                                   ),
@@ -312,10 +326,12 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value:
+                                            viewModel.onSyncOnConnectionEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged: viewModel
+                                            .onSyncOnCoonnectionChanged,
                                       )
                                     ],
                                   ),
@@ -348,10 +364,11 @@ class SyncSettings extends StatelessWidget {
                                             ThemeStyles.theme.primary100,
                                         inactiveTrackColor:
                                             ThemeStyles.theme.primary300,
-                                        value: false,
+                                        value: viewModel.onTimeBasedEnabled,
                                         activeColor:
                                             ThemeStyles.theme.primary300,
-                                        onChanged: (state) {},
+                                        onChanged:
+                                            viewModel.onTimeBasedActionChanged,
                                       )
                                     ],
                                   ),
