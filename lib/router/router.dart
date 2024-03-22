@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:presentation/views/add_otp_code/add_otp_code_view.dart';
 import 'package:presentation/views/add_otp_secret/add_otp_secret.dart';
+import 'package:presentation/views/pair_settings/pair_settings.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_view.dart';
 import 'package:presentation/views/connection_list/connection_list.dart';
 import 'package:presentation/views/dashboard/dashboard_view.dart';
@@ -227,6 +228,12 @@ class ApplicationRouter {
       1,
       Duration(milliseconds: 500),
     ),
+    (
+      "pair-settings",
+      PairSettings(),
+      1,
+      Duration(milliseconds: 500),
+    )
   ];
   static IPageRouterService _routerService = getIt.get<IPageRouterService>();
 

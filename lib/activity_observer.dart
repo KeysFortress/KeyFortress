@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:domain/models/enums.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -158,7 +156,7 @@ class ActivityObserver with WidgetsBindingObserver {
   }
 
   onSyncStateTimeUpdated(int timeToSync) {
-    _syncTimer.call();
+    _syncTimer.cancel();
     _syncThresholdSeconds = timeToSync;
 
     _startSyncTimer();

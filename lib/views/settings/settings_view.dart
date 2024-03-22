@@ -136,8 +136,8 @@ class SettingsView extends StatelessWidget {
                               height: 16,
                             ),
                             CustomIconButton(
-                              label: "Communication Settings",
-                              callback: viewModel.onSyncPressed,
+                              label: "Pair Settings",
+                              callback: viewModel.onPairSettingPressing,
                               height: 50,
                               buttonColor: ThemeStyles.theme.primary300,
                             ),
