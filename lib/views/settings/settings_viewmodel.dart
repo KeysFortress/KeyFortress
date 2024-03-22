@@ -67,4 +67,12 @@ class SettingsViewModel extends PageViewModel {
       TransitionData(next: PageTransition.slideForward),
     );
   }
+
+  onPairSettingPressing() {
+    router.changePage(
+      "/pair-settings",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
+  }
 }

@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:application/implementations/device_service.dart';
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/core_router.dart';
 
@@ -17,7 +15,6 @@ import 'package:infrastructure/interfaces/ilogging_service.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import "package:infrastructure/interfaces/ipage_router_service.dart";
 import 'package:infrastructure/interfaces/isync_service.dart';
-import 'package:injectable/injectable.dart';
 import 'package:presentation/activity_observer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared/locator.dart' as locator;
