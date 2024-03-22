@@ -13,6 +13,7 @@ class PairSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => PairSettingsViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.read(),
       builder: (context, viewModel, child) => Material(
         color: ThemeStyles.theme.primary300,
         child: Column(
@@ -94,6 +95,15 @@ class PairSettings extends StatelessWidget {
                                     height: 50,
                                     buttonColor: ThemeStyles.theme.primary300,
                                   ),
+                                  if (viewModel.certificateData != null)
+                                    ...viewModel.certificateData!
+                                        .map(
+                                          (e) => Text(
+                                            e.tbsCertificate!.issuer.toString(),
+                                            style: ThemeStyles.regularParagraph,
+                                          ),
+                                        )
+                                        .toList()
                                 ],
                               ),
                             ),
