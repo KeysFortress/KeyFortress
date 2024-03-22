@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:domain/models/enums.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:infrastructure/interfaces/iauthorization_service.dart';
-import 'package:infrastructure/interfaces/idevices_service.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import 'package:infrastructure/interfaces/ipage_router_service.dart';
 import 'package:infrastructure/interfaces/isync_service.dart';
@@ -16,14 +16,14 @@ class ActivityObserver with WidgetsBindingObserver {
   late IPageRouterService _routerService;
   late IAuthorizationService _authorizationService;
   late ISyncService _syncService;
-  late IDevicesService _devicesService;
   late IObserver _observer;
 
   bool _isTimerLockEnabled = true;
   bool _lockOnMinimize = false;
+  bool _isTimeSyncEnabled = true;
 
   static const int _inactivityThresholdSeconds = 60;
-  static const int _syncThresholdSeconds = 60;
+  static int _syncThresholdSeconds = 60;
 
   ActivityObserver() {
     WidgetsBinding.instance.addObserver(this);
@@ -34,9 +34,9 @@ class ActivityObserver with WidgetsBindingObserver {
     _observer = getIt.get<IObserver>();
     _authorizationService = getIt.get<IAuthorizationService>();
     _syncService = getIt.get<ISyncService>();
-    _devicesService = getIt.get<IDevicesService>();
 
-    _observer.subscribe("on_sync_event", onSyncEvent);
+    _observer.subscribe("sync_timer_time_changed", onSyncStateTimeUpdated);
+    _observer.subscribe("sync_timer_state_changed", onSyncTimeStateChanged);
     _observer.subscribe("timer_disabled", onTimerChanged);
     _observer.subscribe("minimize_disabled", onMinimizeChanged);
     _authorizationService.isTimeLockEnabled().then(
@@ -51,7 +51,16 @@ class ActivityObserver with WidgetsBindingObserver {
         _lockOnMinimize = value;
       },
     );
-    _startSyncTimer();
+
+    _syncService.getGlobalSettings().then(
+      (value) {
+        _isTimeSyncEnabled = value['OnAction'] && value["timeBasedSync"];
+        if (_isTimeSyncEnabled) {
+          _syncThresholdSeconds = value["updateTime"];
+          _startSyncTimer();
+        }
+      },
+    );
   }
 
   void _startInactivityTimer() {
@@ -77,7 +86,7 @@ class ActivityObserver with WidgetsBindingObserver {
     _syncTimer = Timer.periodic(
       Duration(seconds: _syncThresholdSeconds),
       (timer) async {
-        await onSyncEvent();
+        _observer.getObserver("sync_changes", null);
       },
     );
   }
@@ -117,16 +126,6 @@ class ActivityObserver with WidgetsBindingObserver {
     if (_isTimerLockEnabled) _resetInactivityTimer();
   }
 
-  onSyncEvent() {
-    //TODO add check if sync on action is enabled once the settings are done.
-    Future.microtask(() async {
-      var devices = await _devicesService.all();
-      for (var element in devices) {
-        await _syncService.synchronize(element);
-      }
-    });
-  }
-
   onTimerDisabled() {}
 
   void dispose() {
@@ -149,5 +148,19 @@ class ActivityObserver with WidgetsBindingObserver {
 
   onMinimizeChanged(bool state) {
     _lockOnMinimize = state;
+  }
+
+  onSyncTimeStateChanged(bool value) {
+    _isTimeSyncEnabled = value;
+    _syncTimer.cancel();
+
+    _startSyncTimer();
+  }
+
+  onSyncStateTimeUpdated(int timeToSync) {
+    _syncTimer.call();
+    _syncThresholdSeconds = timeToSync;
+
+    _startSyncTimer();
   }
 }

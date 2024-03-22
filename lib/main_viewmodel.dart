@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:application/implementations/device_service.dart';
 import 'package:domain/exceptions/base_exception.dart';
 import 'package:domain/models/core_router.dart';
 
@@ -9,11 +10,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infrastructure/interfaces/iconfiguration.dart';
+import 'package:infrastructure/interfaces/idevices_service.dart';
 import 'package:infrastructure/interfaces/iexception_manager.dart';
 import 'package:infrastructure/interfaces/ihttp_server.dart';
 import 'package:infrastructure/interfaces/ilogging_service.dart';
 import 'package:infrastructure/interfaces/iobserver.dart';
 import "package:infrastructure/interfaces/ipage_router_service.dart";
+import 'package:infrastructure/interfaces/isync_service.dart';
+import 'package:injectable/injectable.dart';
 import 'package:presentation/activity_observer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared/locator.dart' as locator;
@@ -51,6 +55,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
       _observer = getIt.get<IObserver>();
       _httpServer = getIt.get<IHttpServer>();
       _observer.subscribe("on_menu_state_changed", onMenuStateChanged);
+      _observer.subscribe("sync_changes", onSyncChanges);
       var deviceDimensions = MediaQuery.of(context).size;
       ThemeStyles.width = deviceDimensions.width;
       ThemeStyles.height = deviceDimensions.height;
@@ -99,5 +104,17 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
     Future.delayed(Duration(milliseconds: 200), () {
       notifyListeners();
     });
+  }
+
+  onSyncChanges() async {
+    IDevicesService devicesService = getIt.get<IDevicesService>();
+    ISyncService syncService = getIt.get<ISyncService>();
+    var devices = await devicesService.all();
+    for (var device in devices) {
+      var connected = await devicesService.isDeviceConnected(device);
+      if (connected) {
+        await syncService.synchronize(device);
+      }
+    }
   }
 }
