@@ -16,6 +16,7 @@ class AddOtpSecret extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => TotpEntryBoxViewModel(context, null),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Container(
         color: ThemeStyles.theme.primary300,
         child: Column(

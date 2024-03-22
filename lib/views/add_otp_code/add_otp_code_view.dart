@@ -11,6 +11,7 @@ class AddOtpCodeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => AddOtpCodeViewModel(context),
+      onViewModelReady: (viewModel) => viewModel.ready(),
       builder: (context, viewModel, child) => Container(
         width: ThemeStyles.width,
         height: ThemeStyles.height,

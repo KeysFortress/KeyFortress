@@ -133,6 +133,7 @@ class SyncSettingsViewModel extends PageViewModel {
   void onTimeBasedActionChanged(bool value) async {
     _onTimeBasedEnabled = value;
     await _syncService.setTimeBasedSyncAction(value);
+    observer.getObserver("sync_timer_state_changed", value);
   }
 
   onSubstractTime() async {
@@ -140,10 +141,12 @@ class SyncSettingsViewModel extends PageViewModel {
 
     _syncTime = _syncTime - 15;
     await _syncService.updateTimeToSync(_syncTime);
+    observer.getObserver("sync_timer_time_changed", _syncTime);
   }
 
   onIncrementTime() async {
     _syncTime = _syncTime + 15;
     await _syncService.updateTimeToSync(_syncTime);
+    observer.getObserver("sync_timer_time_changed", _syncTime);
   }
 }
