@@ -1,8 +1,11 @@
+import 'package:components/certificate_information/certificate_information.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
 import 'package:components/custom_text_field/custom_text_field.dart';
+import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:presentation/views/pair_settings/pair_settings_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -95,18 +98,15 @@ class PairSettings extends StatelessWidget {
                                     height: 50,
                                     buttonColor: ThemeStyles.theme.primary300,
                                   ),
-                                  if (viewModel.certificateData != null)
-                                    ...viewModel.certificateData!
-                                        .map(
-                                          (e) => Text(
-                                            e.tbsCertificate!.issuer.toString(),
-                                            style: ThemeStyles.regularParagraph,
-                                          ),
-                                        )
-                                        .toList()
                                 ],
                               ),
                             ),
+                            if (viewModel.certificateData != null)
+                              ...viewModel.certificateData!
+                                  .map(
+                                    (e) => CertificateInformation(e: e),
+                                  )
+                                  .toList()
                           ],
                         ),
                       ),
