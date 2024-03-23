@@ -79,7 +79,11 @@ class PairSettings extends StatelessWidget {
                               child: CustomTextField(
                                 floatingLabel: "Port",
                                 hint: "22345",
+                                controller: TextEditingController(
+                                  text: viewModel.currentPort.toString(),
+                                ),
                                 onChange: viewModel.onPortNumberChanged,
+                                restricted: TextInputType.number,
                               ),
                             ),
                             Container(
