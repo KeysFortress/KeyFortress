@@ -52,7 +52,7 @@ class TotpViewModel extends PageViewModel {
   }
 
   String getCode(OtpCode elementAt) {
-    return _otpService.getCode(elementAt.secret);
+    return _otpService.getCode(elementAt.secret, elementAt.interval ?? 30);
   }
 
   onDeletePressed(OtpCode elementAt) async {

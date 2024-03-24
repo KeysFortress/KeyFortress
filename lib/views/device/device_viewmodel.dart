@@ -84,8 +84,11 @@ class DeviceViewModel extends PageViewModel {
         content = (data['data'] as StoredSecret).content;
         break;
       case 2:
-        var secret = (data['data'] as OtpCode).secret;
-        var code = _otpService.getCode(secret);
+        var codeData = (data['data'] as OtpCode);
+        var code = _otpService.getCode(
+          codeData.secret,
+          codeData.interval ?? 30,
+        );
         content = code;
         break;
       case 3:
