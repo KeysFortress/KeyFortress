@@ -107,6 +107,10 @@ class ActivityObserver with WidgetsBindingObserver {
         break;
       case AppLifecycleState.hidden:
         if (!_lockOnMinimize) return;
+        if (_authorizationService.ignoreLock) {
+          _authorizationService.cancelIgnoreLockState();
+          return;
+        }
 
         var lockType = await _authorizationService.getDeviceLockType();
         if (lockType == DeviceLockType.none) return;
