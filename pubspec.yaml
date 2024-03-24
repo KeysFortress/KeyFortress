@@ -61,6 +61,7 @@ dependencies:
   pattern_lock: ^2.0.0
   charts_painter: ^3.1.1
   basic_utils: ^5.7.0
+  file_picker: ^8.0.0+1
 
 
 

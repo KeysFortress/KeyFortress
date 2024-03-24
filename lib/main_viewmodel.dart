@@ -53,6 +53,7 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
       _httpServer = getIt.get<IHttpServer>();
       _observer.subscribe("on_menu_state_changed", onMenuStateChanged);
       _observer.subscribe("sync_changes", onSyncChanges);
+      _observer.subscribe("internal_exception", onInternalException);
       var deviceDimensions = MediaQuery.of(context).size;
       ThemeStyles.width = deviceDimensions.width;
       ThemeStyles.height = deviceDimensions.height;
@@ -113,5 +114,13 @@ class MainViewModel extends BaseViewModel with WidgetsBindingObserver {
         await syncService.synchronize(device);
       }
     }
+  }
+
+  onInternalException(dynamic exceptionDetails) {
+    throw BaseException(
+      context: _context,
+      title: exceptionDetails['title'],
+      message: exceptionDetails['message'],
+    );
   }
 }
