@@ -146,7 +146,7 @@ class SettingsView extends StatelessWidget {
                             ),
                             CustomIconButton(
                               label: "Autofill settings",
-                              callback: viewModel.onSyncPressed,
+                              callback: viewModel.onAutoFillPressed,
                               height: 50,
                               buttonColor: ThemeStyles.theme.primary300,
                             ),

@@ -75,4 +75,12 @@ class SettingsViewModel extends PageViewModel {
       TransitionData(next: PageTransition.slideForward),
     );
   }
+
+  onAutoFillPressed() {
+    router.changePage(
+      "/auto-fill-settings",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
+  }
 }
