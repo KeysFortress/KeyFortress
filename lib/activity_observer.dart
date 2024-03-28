@@ -52,7 +52,7 @@ class ActivityObserver with WidgetsBindingObserver {
 
     _syncService.getGlobalSettings().then(
       (value) {
-        _isTimeSyncEnabled = value['OnAction'] && value["timeBasedSync"];
+        _isTimeSyncEnabled = value['onAction'] && value["timeBasedSync"];
         if (_isTimeSyncEnabled) {
           _syncThresholdSeconds = value["updateTime"];
           _startSyncTimer();
