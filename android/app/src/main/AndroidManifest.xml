@@ -12,7 +12,18 @@
                 <action android:name="androidx.security.identity.CredentialService"/>
             </intent-filter>
         </service>
-
+  <!-- Declare your Autofill service -->
+        <!-- <service
+            android:name=".AutofillService"
+            android:permission="android.permission.BIND_AUTOFILL_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.autofill"
+                android:resource="@xml/autofill_service" />
+        </service> -->
 
         <activity
             android:name=".MainActivity"
