@@ -13,7 +13,7 @@
             </intent-filter>
         </service>
   <!-- Declare your Autofill service -->
-        <service
+        <!-- <service
             android:name=".AutofillService"
             android:permission="android.permission.BIND_AUTOFILL_SERVICE"
             android:exported="true">
@@ -23,7 +23,7 @@
             <meta-data
                 android:name="android.autofill"
                 android:resource="@xml/autofill_service" />
-        </service>
+        </service> -->
 
         <activity
             android:name=".MainActivity"
