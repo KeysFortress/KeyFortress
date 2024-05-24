@@ -24,7 +24,6 @@ class TotpViewModel extends PageViewModel {
       _seconds = 60 - DateTime.now().second;
       if (_seconds == 60) {
         _secrets = await _otpService.get();
-        notifyListeners();
       }
     });
 

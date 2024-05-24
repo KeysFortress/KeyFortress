@@ -8,6 +8,8 @@ class AddOtpCodeViewModel extends PageViewModel {
   late IOtpService _otpService;
   late ISyncService _syncService;
   bool _isSyncOnTotpEnabled = true;
+  bool _scanProcessing = false;
+
   AddOtpCodeViewModel(super.context) {
     _otpService = getIt.get<IOtpService>();
     _syncService = getIt.get<ISyncService>();
@@ -19,19 +21,26 @@ class AddOtpCodeViewModel extends PageViewModel {
   }
 
   onScanComplete(String qrLink) async {
-    if (!qrLink.contains("otpauth://totp/")) {
-      throw BaseException(context: pageContext, message: "Invalid QR Link");
+    if (_scanProcessing) return;
+    try {
+      _scanProcessing = true;
+
+      if (!qrLink.contains("otpauth://totp/")) {
+        throw BaseException(context: pageContext, message: "Invalid QR Link");
+      }
+
+      var otpLink = OtpCode.fromQrCodeLink(qrLink);
+      if (otpLink.secret.isEmpty) {
+        throw BaseException(context: pageContext, message: "Invalid QR Link");
+      }
+
+      await _otpService.add(otpLink);
+
+      if (_isSyncOnTotpEnabled) observer.getObserver("sync_changes", null);
+
+      router.backToPrevious(pageContext);
+    } catch (ex) {
+      _scanProcessing = false;
     }
-
-    var otpLink = OtpCode.fromQrCodeLink(qrLink);
-    if (otpLink.secret.isEmpty) {
-      throw BaseException(context: pageContext, message: "Invalid QR Link");
-    }
-
-    await _otpService.add(otpLink);
-
-    if (_isSyncOnTotpEnabled) observer.getObserver("sync_changes", null);
-
-    router.backToPrevious(pageContext);
   }
 }

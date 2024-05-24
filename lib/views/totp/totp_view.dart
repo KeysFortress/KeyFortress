@@ -71,7 +71,11 @@ class TotpView extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: viewModel.secrets.length,
                         itemBuilder: (context, index) => TotpCard(
+                          canDelete: true,
                           otpCode: viewModel.secrets.elementAt(index),
+                          onDelete: () => viewModel.onDeletePressed(
+                            viewModel.secrets.elementAt(index),
+                          ),
                         ),
                       ),
                     ),
