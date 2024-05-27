@@ -1,10 +1,10 @@
 import 'package:components/custom_button/custom_button.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
+import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:components/connected_device_card/connected_device_card.dart';
 import 'package:domain/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:presentation/views/connect_device_screen/connect_device_screen_viewmodel.dart';
 import 'package:stacked/stacked.dart';
@@ -23,7 +23,7 @@ class ConnectDeviceScreenView extends StatelessWidget {
           children: [
             SafeArea(
               child: NavMenuInner(
-                location: "Connected Devices",
+                location: "Synchronization",
                 callback: () => viewModel.router.backToPrevious(context),
                 button: CustomButton(
                   callback: viewModel.onAddPressed,
@@ -50,9 +50,55 @@ class ConnectDeviceScreenView extends StatelessWidget {
                         Icons.connect_without_contact,
                         color: ThemeStyles.theme.text300,
                       ),
-                      label: "Add Connection",
+                      label: "Wifi Connection",
                       callback: viewModel.onAddConnection,
                       height: 50,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+                    decoration: BoxDecoration(
+                      color: ThemeStyles.theme.background200,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/images/cloud-not-connected.svg",
+                              package: "domain",
+                              width: 40,
+                              height: 80,
+                              colorFilter: ColorFilter.mode(
+                                ThemeStyles.theme.primary300,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                            Text(
+                              "Cloud connection state",
+                              style: ThemeStyles.innerHeadingOv(
+                                color: ThemeStyles.theme.accent200,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Divider(
+                              height: 10,
+                              thickness: 1,
+                              color: ThemeStyles.theme.primary300,
+                            ),
+                            Text(
+                              "Disconnected",
+                              style: ThemeStyles.innerHeadingOv(
+                                color: ThemeStyles.theme.accent200,
+                                fontSize: 14,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
