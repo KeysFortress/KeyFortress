@@ -1,3 +1,4 @@
+import 'package:components/cloud_connect/cloud_connect.dart';
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/transition_data.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,12 @@ class ApplicationRouter {
     (
       "start-auth",
       StartAuthView(),
+      1,
+      Duration(milliseconds: 500),
+    ),
+    (
+      "cloud-connect",
+      CloudConnect(),
       1,
       Duration(milliseconds: 500),
     ),

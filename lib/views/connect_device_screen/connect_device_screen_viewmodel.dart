@@ -18,7 +18,13 @@ class ConnectDeviceScreenViewModel extends PageViewModel {
     notifyListeners();
   }
 
-  onAddPressed() {}
+  onAddPressed() {
+    router.changePage(
+      "/cloud-connect",
+      pageContext,
+      TransitionData(next: PageTransition.slideForward),
+    );
+  }
 
   onDeviceSelected(Device device) {
     router.changePage(

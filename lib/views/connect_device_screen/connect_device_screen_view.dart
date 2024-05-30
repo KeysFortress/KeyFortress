@@ -1,6 +1,5 @@
 import 'package:components/custom_button/custom_button.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
-import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:components/connected_device_card/connected_device_card.dart';
 import 'package:domain/styles.dart';
