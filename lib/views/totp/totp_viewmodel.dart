@@ -20,12 +20,23 @@ class TotpViewModel extends PageViewModel {
     _secrets = await _otpService.get();
 
     _seconds = DateTime.now().second;
-    Timer.periodic(Duration(seconds: 1), (timer) async {
-      _seconds = 60 - DateTime.now().second;
-      if (_seconds == 60) {
-        _secrets = await _otpService.get();
-      }
-    });
+
+    _secrets.forEach(
+      (element) {
+        Timer.periodic(Duration(seconds: 1), (timer) async {
+          _seconds = 60 - DateTime.now().second;
+          if (_seconds == element.interval) {
+            var code = await _otpService.getCode(
+              element.secret,
+              element.interval ?? 60,
+              element.algorithm,
+            );
+            _secrets.first.code = code;
+            notifyListeners();
+          }
+        });
+      },
+    );
 
     notifyListeners();
   }
@@ -51,7 +62,11 @@ class TotpViewModel extends PageViewModel {
   }
 
   String getCode(OtpCode elementAt) {
-    return _otpService.getCode(elementAt.secret, elementAt.interval ?? 30);
+    return _otpService.getCode(
+      elementAt.secret,
+      elementAt.interval ?? 30,
+      elementAt.algorithm,
+    );
   }
 
   onDeletePressed(OtpCode elementAt) async {

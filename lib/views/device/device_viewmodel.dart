@@ -88,6 +88,7 @@ class DeviceViewModel extends PageViewModel {
         var code = _otpService.getCode(
           codeData.secret,
           codeData.interval ?? 30,
+          codeData.algorithm,
         );
         content = code;
         break;
