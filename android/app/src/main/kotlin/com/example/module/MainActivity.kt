@@ -1,4 +1,4 @@
-package com.securo.app
+package com.keysfotress.app
 
 import io.flutter.embedding.android.FlutterActivity
 

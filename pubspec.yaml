@@ -61,7 +61,8 @@ dependencies:
   charts_painter: ^3.1.1
   basic_utils: ^5.7.0
   file_picker: ^8.0.0+1
-
+  firebase_core: ^2.32.0
+  firebase_messaging: ^14.9.4
 
 
 dev_dependencies:

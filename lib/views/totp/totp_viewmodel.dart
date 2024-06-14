@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:domain/models/enums.dart';
 import 'package:domain/models/otp_code.dart';
 import 'package:domain/models/transition_data.dart';
@@ -20,12 +18,6 @@ class TotpViewModel extends PageViewModel {
     _secrets = await _otpService.get();
 
     _seconds = DateTime.now().second;
-    Timer.periodic(Duration(seconds: 1), (timer) async {
-      _seconds = 60 - DateTime.now().second;
-      if (_seconds == 60) {
-        _secrets = await _otpService.get();
-      }
-    });
 
     notifyListeners();
   }
@@ -48,10 +40,6 @@ class TotpViewModel extends PageViewModel {
         next: PageTransition.slideForward,
       ),
     );
-  }
-
-  String getCode(OtpCode elementAt) {
-    return _otpService.getCode(elementAt.secret, elementAt.interval ?? 30);
   }
 
   onDeletePressed(OtpCode elementAt) async {

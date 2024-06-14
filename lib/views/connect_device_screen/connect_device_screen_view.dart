@@ -1,6 +1,5 @@
 import 'package:components/custom_button/custom_button.dart';
 import 'package:components/custom_icon_button/custom_icon_button.dart';
-import 'package:components/horizontal_divider/horizontal_divider.dart';
 import 'package:components/nav_menu_inner/nav_menu_inner.dart';
 import 'package:components/connected_device_card/connected_device_card.dart';
 import 'package:domain/styles.dart';
@@ -55,52 +54,106 @@ class ConnectDeviceScreenView extends StatelessWidget {
                       height: 50,
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
-                    decoration: BoxDecoration(
-                      color: ThemeStyles.theme.background200,
-                      borderRadius: BorderRadius.circular(4),
+                  if (viewModel.cloudConnections.length == 0)
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+                      decoration: BoxDecoration(
+                        color: ThemeStyles.theme.background200,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/images/cloud-not-connected.svg",
+                                package: "domain",
+                                width: 40,
+                                height: 80,
+                                colorFilter: ColorFilter.mode(
+                                  ThemeStyles.theme.primary300,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              Text(
+                                "Cloud connection state",
+                                style: ThemeStyles.innerHeadingOv(
+                                  color: ThemeStyles.theme.accent200,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Divider(
+                                height: 10,
+                                thickness: 1,
+                                color: ThemeStyles.theme.primary300,
+                              ),
+                              Text(
+                                "Disconnected",
+                                style: ThemeStyles.innerHeadingOv(
+                                  color: ThemeStyles.theme.accent200,
+                                  fontSize: 14,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
+                  if (viewModel.cloudConnections.length > 0)
+                    ...viewModel.cloudConnections.map(
+                      (e) => Container(
+                        padding: const EdgeInsets.all(15),
+                        margin: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+                        decoration: BoxDecoration(
+                          color: ThemeStyles.theme.background200,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(
-                              "assets/images/cloud-not-connected.svg",
-                              package: "domain",
-                              width: 40,
-                              height: 80,
-                              colorFilter: ColorFilter.mode(
-                                ThemeStyles.theme.primary300,
-                                BlendMode.srcIn,
-                              ),
+                            Column(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/images/cloud-connected.svg",
+                                  package: "domain",
+                                  width: 40,
+                                  height: 80,
+                                  colorFilter: ColorFilter.mode(
+                                    ThemeStyles.theme.primary300,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                                Text(
+                                  "Online",
+                                  style: ThemeStyles.innerHeadingOv(
+                                    color: ThemeStyles.theme.accent200,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Divider(
+                                  height: 10,
+                                  thickness: 1,
+                                  color: ThemeStyles.theme.primary300,
+                                ),
+                                Text(
+                                  "Connected",
+                                  style: ThemeStyles.innerHeadingOv(
+                                    color: ThemeStyles.theme.accent200,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                CustomIconButton(
+                                  label: "Remote Authentication",
+                                  callback: viewModel.onRemoteConnection,
+                                )
+                              ],
                             ),
-                            Text(
-                              "Cloud connection state",
-                              style: ThemeStyles.innerHeadingOv(
-                                color: ThemeStyles.theme.accent200,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Divider(
-                              height: 10,
-                              thickness: 1,
-                              color: ThemeStyles.theme.primary300,
-                            ),
-                            Text(
-                              "Disconnected",
-                              style: ThemeStyles.innerHeadingOv(
-                                color: ThemeStyles.theme.accent200,
-                                fontSize: 14,
-                              ),
-                            )
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
                   Expanded(
                     flex: 1,
                     child: ListView.builder(
